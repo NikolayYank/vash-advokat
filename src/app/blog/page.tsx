@@ -29,26 +29,6 @@ const articles = [
     date: "Квітень 2026",
     readTime: "10 хв читання",
   },
-  {
-    slug: "shcho-robyty-pry-zatrymannya",
-    image: asset("/images/blog_criminal.jpeg"),
-    tag: "Кримінальний захист",
-    title: "Що робити при затриманні: перші 24 години",
-    excerpt:
-      "Покроковий алгоритм дій від моменту затримання. Ваші права, обов'язки поліції, і коли обов'язково потрібен адвокат.",
-    date: "Скоро",
-    readTime: "10 хв читання",
-  },
-  {
-    slug: "cheklist-pokuptsya-neruhomosti",
-    image: asset("/images/blog_realestate.jpeg"),
-    tag: "Нерухомість",
-    title: "Чекліст покупця нерухомості: 10 пасток",
-    excerpt:
-      "На що звертати увагу перед підписанням договору купівлі-продажу. Реальні схеми, через які люди втрачають квартири та гроші.",
-    date: "Скоро",
-    readTime: "7 хв читання",
-  },
 ];
 
 export default function BlogPage() {

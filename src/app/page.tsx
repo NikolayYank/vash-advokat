@@ -208,9 +208,8 @@ const steps = [
 ];
 
 const blogCards = [
-  { href: "/blog/5-oznak-shahrajstva", img: asset("/images/blog_fraud.jpeg"), tag: "Шахрайство", title: "5 ознак того, що вас намагаються обманути: перевірте себе", meta: "12 травня 2026 \u00b7 7 хв читання" },
-  { href: "/blog/prava-pry-zatrymannya", img: asset("/images/blog_criminal.jpeg"), tag: "Кримінальний захист", title: "Вас затримали: 7 прав, які ви маєте знати з першої хвилини", meta: "10 травня 2026 \u00b7 5 хв читання" },
-  { href: "/blog/perevirka-neruhomosti", img: asset("/images/blog_realestate.jpeg"), tag: "Нерухомість", title: "Купуєте квартиру? 12 пунктів перевірки перед підписанням", meta: "8 травня 2026 \u00b7 6 хв читання" },
+  { href: "/blog/7-oznak-shahrajstva", img: asset("/images/blog_fraud.jpeg"), tag: "Шахрайство", title: "7 ознак шахрайства: як розпізнати і що робити", meta: "Квітень 2026 \u00b7 8 хв читання" },
+  { href: "/blog/abonement-yak-pratsuye", img: asset("/images/b2b_shield.jpeg"), tag: "Абонементний договір", title: "Свій адвокат на рік: коли абонементний договір окуповує себе одним дзвінком", meta: "Квітень 2026 \u00b7 10 хв читання" },
 ];
 
 const footerServices = [
