@@ -29,6 +29,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { asset } from "@/lib/asset";
 
 /* ===== Scroll reveal hook ===== */
 function useReveal() {
@@ -207,9 +208,9 @@ const steps = [
 ];
 
 const blogCards = [
-  { href: "/blog/5-oznak-shahrajstva", img: "/images/blog_fraud.jpeg", tag: "Шахрайство", title: "5 ознак того, що вас намагаються обманути: перевірте себе", meta: "12 травня 2026 \u00b7 7 хв читання" },
-  { href: "/blog/prava-pry-zatrymannya", img: "/images/blog_criminal.jpeg", tag: "Кримінальний захист", title: "Вас затримали: 7 прав, які ви маєте знати з першої хвилини", meta: "10 травня 2026 \u00b7 5 хв читання" },
-  { href: "/blog/perevirka-neruhomosti", img: "/images/blog_realestate.jpeg", tag: "Нерухомість", title: "Купуєте квартиру? 12 пунктів перевірки перед підписанням", meta: "8 травня 2026 \u00b7 6 хв читання" },
+  { href: "/blog/5-oznak-shahrajstva", img: asset("/images/blog_fraud.jpeg"), tag: "Шахрайство", title: "5 ознак того, що вас намагаються обманути: перевірте себе", meta: "12 травня 2026 \u00b7 7 хв читання" },
+  { href: "/blog/prava-pry-zatrymannya", img: asset("/images/blog_criminal.jpeg"), tag: "Кримінальний захист", title: "Вас затримали: 7 прав, які ви маєте знати з першої хвилини", meta: "10 травня 2026 \u00b7 5 хв читання" },
+  { href: "/blog/perevirka-neruhomosti", img: asset("/images/blog_realestate.jpeg"), tag: "Нерухомість", title: "Купуєте квартиру? 12 пунктів перевірки перед підписанням", meta: "8 травня 2026 \u00b7 6 хв читання" },
 ];
 
 const footerServices = [
@@ -591,7 +592,7 @@ export default function HomePage() {
           <div className="founder">
             <div className="founder-photo">
               <img
-                src="/images/ava.jpg"
+                src={asset("/images/ava.jpg")}
                 alt="Сергій Сергійович Веприцький — засновник Фундації адвокатів"
                 style={{
                   width: "100%",
@@ -1046,7 +1047,7 @@ export default function HomePage() {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-brand">
-              <img src="/images/logo_mini.png" alt="Фундація адвокатів України" />
+              <img src={asset("/images/logo_mini.png")} alt="Фундація адвокатів України" />
               <p>
                 Адвокатське об&apos;єднання «Фундація адвокатів України». Захист
                 та надійність з 2010 року.

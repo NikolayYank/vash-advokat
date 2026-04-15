@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "Корисні матеріали — Фундація адвокатів України",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 const articles = [
   {
     slug: "7-oznak-shahrajstva",
-    image: "/images/blog_fraud.jpeg",
+    image: asset("/images/blog_fraud.jpeg"),
     tag: "Шахрайство",
     title: "7 ознак шахрайства: як розпізнати і що робити",
     excerpt:
@@ -20,7 +21,7 @@ const articles = [
   },
   {
     slug: "abonement-yak-pratsuye",
-    image: "/images/b2b_shield.jpeg",
+    image: asset("/images/b2b_shield.jpeg"),
     tag: "Абонементний договір",
     title: "Свій адвокат на рік: коли абонементний договір окуповує себе одним дзвінком",
     excerpt:
@@ -30,7 +31,7 @@ const articles = [
   },
   {
     slug: "shcho-robyty-pry-zatrymannya",
-    image: "/images/blog_criminal.jpeg",
+    image: asset("/images/blog_criminal.jpeg"),
     tag: "Кримінальний захист",
     title: "Що робити при затриманні: перші 24 години",
     excerpt:
@@ -40,7 +41,7 @@ const articles = [
   },
   {
     slug: "cheklist-pokuptsya-neruhomosti",
-    image: "/images/blog_realestate.jpeg",
+    image: asset("/images/blog_realestate.jpeg"),
     tag: "Нерухомість",
     title: "Чекліст покупця нерухомості: 10 пасток",
     excerpt:
@@ -57,7 +58,7 @@ export default function BlogPage() {
       <header className="header-minimal">
         <div className="container">
           <Link href="/" className="header-logo">
-            <img src="/images/logo_mini.png" alt="Фундація адвокатів України" />
+            <img src={asset("/images/logo_mini.png")} alt="Фундація адвокатів України" />
             <div className="header-logo-text">
               Фундація адвокатів
               <small>Захист та надійність</small>

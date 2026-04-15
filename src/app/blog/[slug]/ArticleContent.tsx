@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 interface ArticleProps {
   article: {
@@ -51,7 +52,7 @@ export default function ArticleContent({ article }: ArticleProps) {
       <header className="header-article">
         <div className="container">
           <Link href="/" className="header-logo">
-            <img src="/images/logo_mini.png" alt="Фундація адвокатів України" />
+            <img src={asset("/images/logo_mini.png")} alt="Фундація адвокатів України" />
             <div className="header-logo-text">
               Фундація адвокатів
               <small>Захист та надійність</small>
@@ -360,7 +361,7 @@ export default function ArticleContent({ article }: ArticleProps) {
           {/* ===== END BLOCK ===== */}
           {article.slug === "7-oznak-shahrajstva" && (
             <div className="article-end">
-              <img src="/images/logo_mini.png" alt="Фундація адвокатів" className="article-end-logo" />
+              <img src={asset("/images/logo_mini.png")} alt="Фундація адвокатів" className="article-end-logo" />
               <p>
                 <strong>Уже стикнулись з шахрайством?</strong>
                 <br />
@@ -375,7 +376,7 @@ export default function ArticleContent({ article }: ArticleProps) {
 
           {article.slug === "abonement-yak-pratsuye" && (
             <div className="article-end">
-              <img src="/images/logo_mini.png" alt="Фундація адвокатів" className="article-end-logo" />
+              <img src={asset("/images/logo_mini.png")} alt="Фундація адвокатів" className="article-end-logo" />
               <p>
                 <strong>Готові отримати свого адвоката на рік?</strong>
                 <br />

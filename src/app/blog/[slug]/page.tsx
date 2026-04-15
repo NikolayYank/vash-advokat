@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ArticleContent from "./ArticleContent";
+import { asset } from "@/lib/asset";
 
 /* ===== Article data (will be replaced with MDX later) ===== */
 interface Article {
@@ -22,7 +23,7 @@ const articles: Record<string, Article> = {
     date: "Квітень 2026",
     readTime: "8 хв читання",
     author: "Фундація адвокатів",
-    image: "/images/blog_fraud.jpeg",
+    image: asset("/images/blog_fraud.jpeg"),
     toc: [
       { id: "signs", label: "7 ознак шахрайства" },
       { id: "online", label: "Актуальні схеми 2026" },
@@ -38,7 +39,7 @@ const articles: Record<string, Article> = {
     date: "Квітень 2026",
     readTime: "10 хв читання",
     author: "Фундація адвокатів",
-    image: "/images/b2b_shield.jpeg",
+    image: asset("/images/b2b_shield.jpeg"),
     toc: [
       { id: "mechanics", label: "Що це і як працює" },
       { id: "cases", label: "5 ситуацій, де він окуповується" },
