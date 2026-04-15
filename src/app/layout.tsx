@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { EB_Garamond, Lato } from "next/font/google";
 import "./globals.css";
+import { asset } from "@/lib/asset";
 
 const ebGaramond = EB_Garamond({
   variable: "--font-eb-garamond",
@@ -25,10 +26,10 @@ export const metadata: Metadata = {
     "Адвокатське об'єднання «Фундація адвокатів України». Захист та надійність з 2010 року. Безкоштовна перша консультація.",
   icons: {
     icon: [
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: asset("/favicon-32x32.png"), sizes: "32x32", type: "image/png" },
+      { url: asset("/favicon-16x16.png"), sizes: "16x16", type: "image/png" },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: asset("/apple-touch-icon.png"),
   },
 };
 
