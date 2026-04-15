@@ -402,7 +402,7 @@ export default function HomePage() {
             >
               <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", height: 0 }}>
                 <iframe
-                  src="https://www.youtube.com/embed/pIEGja7pkdQ"
+                  src="https://www.youtube.com/embed/pIEGja7pkdQ?vq=hd1080&hd=1&modestbranding=1&rel=0&playsinline=1"
                   title="Фундація адвокатів України"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
