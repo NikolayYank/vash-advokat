@@ -283,7 +283,7 @@ export default function HomePage() {
         <div className="container">
           <Link href="/" className="header-logo">
             <Image
-              src="/images/logo_mini.png"
+              src={asset("/images/logo_mini.png")}
               alt="Фундація адвокатів України"
               width={48}
               height={48}

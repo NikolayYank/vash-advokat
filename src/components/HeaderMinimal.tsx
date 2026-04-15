@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { asset } from "@/lib/asset";
 
 interface HeaderMinimalProps {
   backHref: string;
@@ -20,7 +21,7 @@ export default function HeaderMinimal({
       <div className="max-w-[1100px] mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 no-underline">
           <Image
-            src="/images/logo_mini.png"
+            src={asset("/images/logo_mini.png")}
             alt="Фундація адвокатів України"
             width={36}
             height={36}

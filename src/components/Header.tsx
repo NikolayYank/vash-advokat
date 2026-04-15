@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { asset } from "@/lib/asset";
 
 const navLinks = [
   { href: "/#poslugy", label: "Послуги" },
@@ -22,7 +23,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 no-underline">
           <Image
-            src="/images/logo_mini.png"
+            src={asset("/images/logo_mini.png")}
             alt="Фундація адвокатів України"
             width={48}
             height={48}

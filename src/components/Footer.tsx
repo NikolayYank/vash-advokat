@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   FileBadge,
 } from "lucide-react";
+import { asset } from "@/lib/asset";
 
 const services = [
   { href: "/poslugy/shahrajstvo", label: "Шахрайство" },
@@ -84,7 +85,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-4">
             <Image
-              src="/images/logo_mini.png"
+              src={asset("/images/logo_mini.png")}
               alt="Фундація адвокатів України"
               width={64}
               height={64}
