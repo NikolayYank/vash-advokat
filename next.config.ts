@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   basePath: isProd ? "/vash-advokat" : "",
   assetPrefix: isProd ? "/vash-advokat" : "",
+  allowedDevOrigins: ["192.168.0.204"],
   env: {
     NEXT_PUBLIC_BASE_PATH: isProd ? "/vash-advokat" : "",
   },

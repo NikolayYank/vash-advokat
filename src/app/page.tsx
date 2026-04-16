@@ -208,9 +208,9 @@ const steps = [
 ];
 
 const blogCards = [
-  { href: "/blog/7-oznak-shahrajstva", img: asset("/images/blog_fraud.jpeg"), tag: "Шахрайство", title: "7 ознак шахрайства: як розпізнати і що робити", meta: "Квітень 2026 \u00b7 8 хв читання" },
-  { href: "/blog/abonement-yak-pratsuye", img: asset("/images/b2b_shield.jpeg"), tag: "Абонементний договір", title: "Свій адвокат на рік: коли абонементний договір окуповує себе одним дзвінком", meta: "Квітень 2026 \u00b7 10 хв читання" },
-  { href: "/blog/obshuk-shcho-robyty", img: asset("/images/blog_criminal.jpeg"), tag: "Кримінальне право", title: "Обшук: покрокова інструкція до, під час і після", meta: "Квітень 2026 \u00b7 12 хв читання" },
+  { href: "/blog/7-oznak-shahrajstva", img: asset("/images/blog_fraud.jpeg"), tag: "Шахрайство", title: "7 ознак шахрайства: як розпізнати і що робити", excerpt: "Чекліст red\u00A0flags, актуальні схеми 2026 і\u00A0покрокові дії, якщо вже обдурили.", meta: "8 хв", metaFull: "Квітень 2026 \u00b7 8 хв читання" },
+  { href: "/blog/abonement-yak-pratsuye", img: asset("/images/b2b_shield.jpeg"), tag: "Абонементний договір", title: "Свій адвокат на рік: коли абонемент окуповує себе одним дзвінком", excerpt: "5\u00A0ситуацій, де\u00A0абонемент окуповується одразу. Кому НЕ\u00A0потрібен. Конкретний розрахунок.", meta: "10 хв", metaFull: "Квітень 2026 \u00b7 10 хв читання" },
+  { href: "/blog/obshuk-shcho-robyty", img: asset("/images/blog_criminal.jpeg"), tag: "Кримінальне право", title: "Обшук: покрокова інструкція до, під час і після", excerpt: "Що\u00A0зробити заздалегідь, 7\u00A0правил під\u00A0час, чого НЕ\u00A0робити і\u00A0перші 24\u00A0години після.", meta: "12 хв", metaFull: "Квітень 2026 \u00b7 12 хв читання" },
 ];
 
 const footerServices = [
@@ -310,8 +310,7 @@ export default function HomePage() {
             </a>
             <Link
               href="#konsultaciya"
-              className="btn btn-primary"
-              style={{ padding: "10px 24px", minHeight: "40px", fontSize: "0.875rem" }}
+              className="btn btn-primary btn-header-cta"
             >
               Консультація
             </Link>
@@ -332,29 +331,19 @@ export default function HomePage() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div style={{ borderTop: "1px solid var(--color-border)", background: "var(--color-surface)", padding: "var(--space-md) var(--space-lg)" }}>
-            <nav style={{ display: "flex", flexDirection: "column", gap: "var(--space-sm)" }}>
+          <div className="mobile-menu">
+            <nav className="mobile-menu-nav">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  style={{ fontSize: "0.9375rem", padding: "12px 0", minHeight: 44, display: "flex", alignItems: "center" }}
-                  onClick={() => setMenuOpen(false)}
-                >
+                <Link key={link.href} href={link.href} className="mobile-menu-link" onClick={() => setMenuOpen(false)}>
                   {link.label}
                 </Link>
               ))}
             </nav>
-            <div style={{ marginTop: "var(--space-md)", paddingTop: "var(--space-md)", borderTop: "1px solid var(--color-border)", display: "flex", flexDirection: "column", gap: "var(--space-sm)" }}>
-              <a href="tel:+380505940785" style={{ fontWeight: 700 }}>
+            <div className="mobile-menu-cta">
+              <a href="tel:+380505940785" className="mobile-menu-phone">
                 +380 50 594 07 85
               </a>
-              <Link
-                href="#konsultaciya"
-                className="btn btn-primary"
-                style={{ padding: "12px 24px" }}
-                onClick={() => setMenuOpen(false)}
-              >
+              <Link href="#konsultaciya" className="btn btn-primary btn-header-cta" onClick={() => setMenuOpen(false)}>
                 Консультація
               </Link>
             </div>
@@ -371,21 +360,8 @@ export default function HomePage() {
               як&nbsp;він стане потрібен
             </h1>
             <p className="hero-subtitle">
-              Розпізнати ризик. Зрозуміти права. Знати, що&nbsp;робити.
-              <br />
-              Без&nbsp;юридичних термінів, без&nbsp;води, без&nbsp;зайвих витрат.
-              <br />
-              Чесно, конкретно і&nbsp;вчасно.
+              Розпізнати ризик. Зрозуміти права. Знати, що&nbsp;робити. Без&nbsp;юридичних термінів, без&nbsp;води, без&nbsp;зайвих витрат. Чесно, конкретно і&nbsp;вчасно.
             </p>
-            <div className="hero-actions">
-              <Link
-                href="#konsultaciya"
-                className="btn btn-primary"
-                style={{ padding: "18px 40px", fontSize: "1.0625rem" }}
-              >
-                Отримати безкоштовну консультацію
-              </Link>
-            </div>
           </div>
           <div
             className="hero-photo"
@@ -411,6 +387,11 @@ export default function HomePage() {
                 />
               </div>
             </div>
+          </div>
+          <div className="hero-actions">
+            <Link href="#konsultaciya" className="btn btn-primary btn-hero">
+              Отримати безкоштовну консультацію
+            </Link>
           </div>
         </div>
       </section>
@@ -624,22 +605,9 @@ export default function HomePage() {
               </p>
 
               <blockquote
-                style={{
-                  marginTop: "var(--space-xl)",
-                  padding: "var(--space-lg) var(--space-xl)",
-                  borderLeft: "3px solid var(--color-accent)",
-                  background: "rgba(30,58,138,0.04)",
-                  borderRadius: "0 var(--radius-md) var(--radius-md) 0",
-                  fontSize: "0.9375rem",
-                  color: "var(--color-text)",
-                  lineHeight: 1.7,
-                }}
-              >
-                «Більшість юридичних проблем — наслідок незнання, а&nbsp;не злого
-                наміру.
-                <br />
-                Адвокат поруч — це&nbsp;не&nbsp;розкіш. Це&nbsp;ваш спокій до&nbsp;того, як&nbsp;щось
-                станеться.»
+                className="founder-quote"
+            >
+                «Більшість юридичних проблем — наслідок незнання, а&nbsp;не&nbsp;злого наміру. Адвокат поруч — це&nbsp;не&nbsp;розкіш, а&nbsp;спокій до&nbsp;того, як&nbsp;щось станеться.»
               </blockquote>
             </div>
           </div>
@@ -756,18 +724,7 @@ export default function HomePage() {
           </div>
 
           {/* Official badges row */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "var(--space-2xl)",
-              marginTop: "var(--space-2xl)",
-              padding: "var(--space-lg) 0",
-              borderTop: "1px solid var(--color-border)",
-              flexWrap: "wrap" as const,
-            }}
-          >
+          <div className="official-badges-row">
             <div style={{ display: "flex", alignItems: "center", gap: "var(--space-sm)", color: "var(--color-text-muted)", fontSize: "0.875rem" }}>
               <FileBadge style={{ width: 20, height: 20, color: "var(--color-accent)" }} />
               <span>Реєстр НААУ: свідоцтво №647 (можна перевірити публічно)</span>
@@ -797,7 +754,6 @@ export default function HomePage() {
                 color: "rgba(255,255,255,0.7)",
                 marginBottom: "var(--space-lg)",
                 lineHeight: 1.7,
-                maxWidth: 460,
               }}
             >
               Замість шукати юриста по&nbsp;факту проблеми, мати його заздалегідь — і&nbsp;дзвонити по&nbsp;будь-яких питаннях.
@@ -813,7 +769,7 @@ export default function HomePage() {
                   lineHeight: 1.2,
                 }}
               >
-                Абонентський договір — 5 000 ₴
+                Абонентський договір&nbsp;—<br />5&nbsp;000&nbsp;₴
               </div>
               <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.875rem", marginTop: 6 }}>
                 ≈&nbsp;14&nbsp;грн/день — менше, ніж&nbsp;чашка кави
@@ -849,106 +805,72 @@ export default function HomePage() {
 
             <Link
               href="/blog/abonement-yak-pratsuye"
-              className="btn btn-outline"
-              style={{ padding: "16px 36px" }}
+              className="btn btn-outline btn-section"
             >
               Дізнатися більше <ArrowRight style={{ width: 18, height: 18 }} />
             </Link>
           </div>
 
           {/* RIGHT: comparison table */}
-          <div
-            style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: "var(--radius-xl)",
-              overflow: "hidden",
-            }}
-          >
-            {/* Header row */}
+          {/* === Desktop comparison table (hidden ≤640px) === */}
+          <div className="compare-desktop" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
             <div className="compare-row compare-header">
               <div style={{ padding: "var(--space-lg)" }} />
-              <div
-                style={{
-                  padding: "var(--space-lg)",
-                  textAlign: "center",
-                  color: "rgba(255,255,255,0.4)",
-                  fontSize: "0.75rem",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                }}
-              >
-                Разове
-                <br />
-                звернення
-              </div>
-              <div
-                style={{
-                  padding: "var(--space-lg)",
-                  textAlign: "center",
-                  background: "rgba(212,175,55,0.08)",
-                  borderLeft: "1px solid rgba(255,255,255,0.06)",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: "var(--color-accent)",
-                  }}
-                >
-                  Абонентський
-                  <br />
-                  договір
-                </div>
-              </div>
+              <div style={{ padding: "var(--space-lg)", textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>Разове<br />звернення</div>
+              <div style={{ padding: "var(--space-lg)", textAlign: "center", background: "rgba(212,175,55,0.08)", borderLeft: "1px solid rgba(255,255,255,0.06)" }}><div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)" }}>Абонентський<br />договір</div></div>
             </div>
-
-            {/* Row: Price */}
             <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Вартість</div>
               <div style={{ padding: "12px var(--space-lg)", color: "var(--color-surface)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>від 8 000 &#8372;</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "var(--color-accent)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>5 000 &#8372;/рік</div>
             </div>
-
-            {/* Row: History */}
             <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Знання вашої історії</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Кожен раз з нуля</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Уже знає вашу ситуацію</div>
             </div>
-
-            {/* Row: Availability */}
             <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Доступність</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Шукаєте вільного юриста</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Свій адвокат на зв&apos;язку</div>
             </div>
-
-            {/* Row: Relationship type */}
             <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Як побудовані стосунки</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Разовий проєкт</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Робота вдовгу — нам важливо, щоб ви залишились</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Робота вдовгу</div>
             </div>
-
-            {/* Row: Emergency */}
             <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Екстрена допомога</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.25)" }}>
-                <Minus style={{ width: 16, height: 16 }} />
-              </div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>
-                24/7
-              </div>
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.25)" }}><Minus style={{ width: 16, height: 16 }} /></div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>24/7</div>
             </div>
-
-            {/* Row: Stress */}
             <div className="compare-row compare-last">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Дзвінок у момент паніки</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>«Кому ж телефонувати?..»</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>«Мій адвокат» — один номер у телефоні</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>«Мій адвокат» — один номер</div>
+            </div>
+          </div>
+
+          {/* === Mobile comparison cards (shown ≤640px) === */}
+          <div className="compare-mobile">
+            <div className="compare-card" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "rgba(255,255,255,0.4)", marginBottom: "var(--space-md)" }}>Разове звернення</div>
+              <div className="compare-card-item"><span className="compare-card-label">Вартість</span><span className="compare-card-value" style={{ color: "var(--color-surface)", fontWeight: 700 }}>від 8 000 ₴</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Історія</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Кожен раз з нуля</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Доступність</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Шукаєте вільного юриста</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Стосунки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Разовий проєкт</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Екстрена допомога</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.25)" }}>—</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">У момент паніки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>«Кому ж телефонувати?..»</span></div>
+            </div>
+
+            <div className="compare-card" style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}>
+              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)", marginBottom: "var(--space-md)", fontWeight: 700 }}>Абонентський договір</div>
+              <div className="compare-card-item"><span className="compare-card-label">Вартість</span><span className="compare-card-value" style={{ color: "var(--color-accent)", fontWeight: 700, fontFamily: "var(--font-heading)", fontSize: "1rem" }}>5 000 ₴/рік</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Історія</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Вже знає вашу ситуацію</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Доступність</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Свій адвокат на зв&apos;язку</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Стосунки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Робота вдовгу</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Екстрена допомога</span><span className="compare-card-value" style={{ color: "var(--color-accent)", fontWeight: 700 }}>24/7</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">У момент паніки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>«Мій адвокат» — один номер</span></div>
             </div>
           </div>
         </div>
@@ -962,20 +884,37 @@ export default function HomePage() {
             <p>Безкоштовні чеклисти й&nbsp;розбори. Без&nbsp;реєстрації, без&nbsp;«приходьте в&nbsp;офіс»</p>
           </div>
 
-          <div className="blog-grid">
+          {/* Desktop grid */}
+          <div className="blog-grid blog-grid-desktop">
             {blogCards.map((c) => (
               <Link key={c.href} href={c.href} className="blog-card">
                 <div className="blog-card-image">
-                  <img
-                    src={c.img}
-                    alt={c.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
+                  <img src={c.img} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div className="blog-card-body">
                   <div className="blog-card-tag">{c.tag}</div>
                   <h3>{c.title}</h3>
-                  <div className="blog-card-meta">{c.meta}</div>
+                  <div className="blog-card-meta">{c.metaFull}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile horizontal scroll */}
+          <div className="blog-scroll">
+            {blogCards.map((c) => (
+              <Link key={c.href} href={c.href} className="blog-scroll-card">
+                <div className="blog-scroll-image">
+                  <img src={c.img} alt={c.title} />
+                </div>
+                <div className="blog-scroll-body">
+                  <div className="blog-scroll-tag">{c.tag}</div>
+                  <h3 className="blog-scroll-title">{c.title}</h3>
+                  <p className="blog-scroll-excerpt">{c.excerpt}</p>
+                  <div className="blog-scroll-meta">
+                    <span>{c.meta} читання</span>
+                    <span className="blog-scroll-arrow">Читати →</span>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -984,8 +923,7 @@ export default function HomePage() {
           <div style={{ textAlign: "center", marginTop: "var(--space-2xl)" }}>
             <Link
               href="/blog"
-              className="btn btn-primary"
-              style={{ padding: "14px 32px" }}
+              className="btn btn-primary btn-section"
             >
               Усі статті та чеклисти <ArrowRight style={{ width: 18, height: 18 }} />
             </Link>
@@ -999,10 +937,10 @@ export default function HomePage() {
       {/* ===== CTA FINAL ===== */}
       <section className="cta-final" id="konsultaciya">
         <div className="container">
-          <h2 style={{ maxWidth: 620, margin: "0 auto var(--space-md)" }}>
+          <h2>
             Розкажіть ситуацію — і&nbsp;ми чесно скажемо, що&nbsp;з&nbsp;нею робити
           </h2>
-          <p style={{ maxWidth: 620, margin: "0 auto var(--space-2xl)", whiteSpace: "normal" }}>
+          <p>
             Адвокат зателефонує за&nbsp;2&nbsp;години, вислухає і&nbsp;скаже: чи&nbsp;беремось,
             з&nbsp;якими ризиками, скільки коштуватиме. Без&nbsp;зобов&apos;язань.
           </p>
