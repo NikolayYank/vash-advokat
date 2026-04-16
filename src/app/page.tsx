@@ -210,6 +210,7 @@ const steps = [
 const blogCards = [
   { href: "/blog/7-oznak-shahrajstva", img: asset("/images/blog_fraud.jpeg"), tag: "Шахрайство", title: "7 ознак шахрайства: як розпізнати і що робити", meta: "Квітень 2026 \u00b7 8 хв читання" },
   { href: "/blog/abonement-yak-pratsuye", img: asset("/images/b2b_shield.jpeg"), tag: "Абонементний договір", title: "Свій адвокат на рік: коли абонементний договір окуповує себе одним дзвінком", meta: "Квітень 2026 \u00b7 10 хв читання" },
+  { href: "/blog/obshuk-shcho-robyty", img: asset("/images/blog_criminal.jpeg"), tag: "Кримінальне право", title: "Обшук: покрокова інструкція до, під час і після", meta: "Квітень 2026 \u00b7 12 хв читання" },
 ];
 
 const footerServices = [

@@ -48,6 +48,22 @@ const articles: Record<string, Article> = {
       { id: "how-to-start", label: "Як підключитися" },
     ],
   },
+  "obshuk-shcho-robyty": {
+    slug: "obshuk-shcho-robyty",
+    tag: "Кримінальне право",
+    title: "Обшук: покрокова інструкція до, під час і після",
+    date: "Квітень 2026",
+    readTime: "12 хв читання",
+    author: "Фундація адвокатів",
+    image: asset("/images/blog_criminal.jpeg"),
+    toc: [
+      { id: "before", label: "Що зробити заздалегідь" },
+      { id: "threshold", label: "Перші 5 хвилин: поріг" },
+      { id: "during", label: "Під час обшуку: 7 правил" },
+      { id: "never", label: "Чого точно НЕ робити" },
+      { id: "after", label: "Після обшуку: перші 24 години" },
+    ],
+  },
 };
 
 export async function generateStaticParams() {

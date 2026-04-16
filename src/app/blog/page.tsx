@@ -29,6 +29,16 @@ const articles = [
     date: "Квітень 2026",
     readTime: "10 хв читання",
   },
+  {
+    slug: "obshuk-shcho-robyty",
+    image: asset("/images/blog_criminal.jpeg"),
+    tag: "Кримінальне право",
+    title: "Обшук: покрокова інструкція до, під час і після",
+    excerpt:
+      "Що\u00A0зробити заздалегідь, як\u00A0поводитися на\u00A0порозі, 7\u00A0правил під\u00A0час обшуку, чого точно НЕ\u00A0робити і\u00A0що\u00A0критично зробити у\u00A0перші 24\u00A0години після.",
+    date: "Квітень 2026",
+    readTime: "12 хв читання",
+  },
 ];
 
 export default function BlogPage() {
