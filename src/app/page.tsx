@@ -810,11 +810,7 @@ export default function HomePage() {
               Замість шукати юриста по&nbsp;факту проблеми, мати його заздалегідь — і&nbsp;дзвонити по&nbsp;будь-яких питаннях.
             </p>
 
-            {/* Anchor: 8000 → 5000 */}
             <div style={{ marginBottom: "var(--space-xl)" }}>
-              <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9375rem", marginBottom: 6 }}>
-                Разовий виклик адвоката — <span style={{ textDecoration: "line-through" }}>від 8 000 ₴</span>
-              </div>
               <div
                 style={{
                   fontFamily: "var(--font-heading)",
