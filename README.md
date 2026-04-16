@@ -1,36 +1,140 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Сайт Фундації адвокатів України — vash-advokat.org
 
-## Getting Started
+## Что это
 
-First, run the development server:
+Маркетинговый сайт юридической фирмы «Фундація адвокатів України» (Веприцкий С.С.). Next.js 16 + static export, задеплоен на GitHub Pages.
+
+- **Живой сайт:** https://nikolayyank.github.io/vash-advokat/
+- **Репозиторий:** github.com/NikolayYank/vash-advokat (public)
+- **Деплой:** GitHub Actions (автоматически на каждый push в main)
+- **Домен:** пока GitHub Pages, планируется перенос на собственный хостинг
+
+## Как запустить локально
 
 ```bash
+cd projects/advokat/website/site
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Открыть http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+При `npm run dev` — basePath не применяется (работает на корне `/`).
+При `npm run build` (production) — basePath = `/vash-advokat` для GitHub Pages.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Структура проекта
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+site/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx              ← главная страница (все блоки)
+│   │   ├── layout.tsx            ← meta, шрифты, OG-теги
+│   │   ├── not-found.tsx         ← кастомная 404
+│   │   ├── globals.css           ← все стили (CSS-переменные, секции, адаптивность)
+│   │   └── blog/
+│   │       ├── page.tsx          ← список статей блога
+│   │       └── [slug]/
+│   │           ├── page.tsx      ← роутинг + данные статей (TOC, мета)
+│   │           └── ArticleContent.tsx ← тела статей (JSX, условный рендер по slug)
+│   ├── components/
+│   │   ├── Header.tsx, HeaderMinimal.tsx, Footer.tsx, FooterMinimal.tsx
+│   └── lib/
+│       └── asset.ts              ← helper для basePath-префикса на картинках
+├── public/images/                ← все картинки сайта (ava, logos, blog covers)
+├── .github/workflows/deploy.yml  ← CI: build → deploy на GitHub Pages
+├── CHECKLIST.md                  ← 26-пунктовый чек-лист типографики и визуала
+├── next.config.ts                ← output: export, basePath (prod only)
+└── package.json
+```
 
-## Learn More
+## Блоки главной страницы (порядок сверху вниз)
 
-To learn more about Next.js, take a look at the following resources:
+1. **Hero** — H1 «Адвокат поруч — до того, як він стане потрібен» + подзаголовок + CTA + YouTube видео
+2. **Trust numbers** — 11 500+ справ / 87% / 38 років / 3 офіси
+3. **Services (8 карточек з розкриттям)** — кликабельные карточки, каждая раскрывается с деталями (ситуації + що робимо). Muted фон
+4. **Як працюємо (4 шаги)** — Консультація → Абонемент → Аналіз → Постійна робота. Белый фон
+5. **Веприцкий (founder)** — біографія + цитата. Muted фон
+6. **Те, що можна перевірити (awards)** — орден + газета + ТВ + офіційні бейджі. Белый фон
+7. **Абонемент** — ціна 5000 ₴, фічі через виготи, таблиця порівняння. Тёмный фон
+8. **Блог-превью** — 2 картки (шахрайство + абонемент). Белый фон
+9. **Фінальний CTA** — форма (ім'я + телефон) + 3 мікро-обіцянки
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Статьи блога
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Slug | Статус | Тема |
+|---|---|---|
+| `7-oznak-shahrajstva` | ✅ Готова | 7 ознак шахрайства + актуальні схеми 2026 + що робити жертві |
+| `abonement-yak-pratsuye` | ✅ Готова | Абонементний договір: що входить, 5 кейсів, кому НЕ потрібен, розрахунок ROI |
 
-## Deploy on Vercel
+Тела статей живут в `ArticleContent.tsx` — условный рендер по `article.slug`. Каждая новая статья: добавить slug в `[slug]/page.tsx` (данные + TOC) + тело в `ArticleContent.tsx` + карточку в `blog/page.tsx`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Две векторные базы знаний (RAG)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Используются для написания и проверки текстов сайта и статей.
+
+### sales_master — приёмы продаж и копирайтинга
+```bash
+python3 tools/sales_expert.py "запрос" --top 6
+```
+29 документов: психология решений, Чалдини, копирайтинг, формулы заголовков, маркетинг профессиональных услуг, value-based pricing, воронки, вирусный контент.
+**Когда использовать:** формулировки, структура статей, CTA, заголовки, работа с возражениями.
+
+### advokat_knowledge — юридические факты и схемы
+```bash
+python3 tools/advokat_expert.py "запрос" --top 6
+```
+5 блоков: A (мошенничество), B (лайфхаки), C (быт), D (бизнес), E (конкурент Гридасов, 303 видео).
+**Когда использовать:** конкретные схемы, red flags, что делать, правовые процедуры, факты для статей.
+
+### Процесс работы со статьёй через RAG
+
+1. **Запрос в advokat_kb** — собрать фактуру по теме (схемы, ситуации, что делать)
+2. **Запрос в sales_master** — собрать приёмы оформления (структура, hooks, CTA, формулы)
+3. **Написать/переписать статью** — объединить фактуру с продающей структурой
+4. **Проверить по 26-пунктовому чек-листу** (`CHECKLIST.md`) — типографика, контраст, &nbsp;, адаптивность
+5. **Билд + пуш** — `npm run build && git add -A && git commit && git push`
+
+## Чек-лист качества (26 пунктов)
+
+Полный чек-лист в файле `CHECKLIST.md`. Ключевые пункты для текстов:
+
+- **Сироты/вдовы:** `text-wrap: balance` на H, `text-wrap: pretty` на p/li + ручные `&nbsp;` после коротких прийменників (і, й, у, в, з, на, до, за, по, як, що, та, чи, від, без, не). В JSX: `&nbsp;`. В строках JS: `\u00A0`
+- **Контраст:** muted текст `#475569` (5.1:1 WCAG AA). Проверять через webaim.org/resources/contrastchecker
+- **Картинки:** plain `<img>` оборачивать в `asset()` для basePath. `<Image>` из next/image тоже (unoptimized не префиксует автоматически)
+- **Формулировки услуг:** адекватные, без гарантий результата. Глаголы процесса (фіксуємо, готуємо, супроводжуємо), не результата (повернемо, виграємо)
+
+## Правила деплоя
+
+- **Не пушить без подтверждения пользователя** (сначала тест на localhost)
+- **Автодеплой:** push в main → GitHub Actions build → GitHub Pages обновляется за ~1 мин
+- **basePath:** `/vash-advokat` (только production). В dev — корень `/`
+- **Видео:** YouTube embed (iframe), не хранить .mp4 в репо (лимит GitHub 100 MB/файл)
+- **Секреты:** нет .env, нет ключей — всё публичное
+
+## Roadmap (что делать дальше)
+
+### Ближайшие задачи (в порядке приоритета)
+
+1. **Написать 3-ю статью** — тема на выбор (затримання / нерухомість / військове право). Через RAG advokat_kb + sales_master, с проверкой по 26 пунктам
+2. **Углублённая проверка статьи про абонемент** — прогнать через обе RAG-базы поблочно (intro, каждый кейс, ROI-расчёт, CTA), усилить формулировки
+3. **Адаптивная версия** — проверить и доработать мобильный вид: hero, карточки услуг с раскрытием, таблица абонементу, форма
+4. **Перенос на собственный хостинг** — убрать basePath, настроить домен vash-advokat.org, обновить deploy workflow
+
+### Что уже сделано
+
+- ✅ Вычитка всех текстов главной через sales_master (10 блоков, HTML-презентация `vychitka_main_page.html`)
+- ✅ Объединение блоков Pains + Services в один (8 карточек с раскрытием)
+- ✅ Шаги работы переписаны под абонементную модель
+- ✅ Статья «7 ознак шахрайства» — обновлена актуальными схемами 2026 из advokat_kb
+- ✅ Статья «Абонемент» — написана с нуля через обе RAG-базы
+- ✅ Деплой на GitHub Pages (auto-deploy через Actions)
+- ✅ Аудит по 26 пунктам типографики/визуала — все пройдены
+- ✅ Видео перенесено на YouTube (iframe embed)
+
+## Ключевые цифры (актуальные)
+
+- Стаж засновника: **38 років** (без «+»)
+- Справ за весь час: **11 500+**
+- Успішних: **87%**
+- Офіси: **3** (Харків, Київ, Софія)
+- Абонемент: **5 000 ₴/рік**
+- Разовий виклик: **від 8 000 ₴**
