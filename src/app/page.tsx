@@ -390,7 +390,7 @@ export default function HomePage() {
           </div>
           <div className="hero-actions">
             <Link href="#konsultaciya" className="btn btn-primary btn-hero">
-              Отримати безкоштовну консультацію
+              Отримати консультацію
             </Link>
           </div>
         </div>
@@ -951,7 +951,7 @@ export default function HomePage() {
               <input type="tel" placeholder="Телефон" required />
             </div>
             <button type="submit" className="btn btn-primary">
-              Хочу безкоштовну консультацію
+              Отримати консультацію
             </button>
             <div className="cta-form-note" style={{ flexWrap: "wrap", justifyContent: "center", gap: 14 }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>

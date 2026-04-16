@@ -555,7 +555,7 @@ export default function ArticleContent({ article }: ArticleProps) {
                 Перші 30 хвилин — критичні. Зателефонуйте — адвокат відповість одразу і скаже, що робити покроково.
               </p>
               <Link href="/#konsultaciya" className="article-end-link">
-                Безкоштовна консультація — за 2 години
+                Отримати консультацію
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </Link>
             </div>
@@ -570,7 +570,7 @@ export default function ArticleContent({ article }: ArticleProps) {
                 Перша консультація — 0 ₴, до 30 хвилин. Чесно скажемо, чи варто вам абонемент саме зараз.
               </p>
               <Link href="/#konsultaciya" className="article-end-link">
-                Безкоштовна консультація — за 2 години
+                Отримати консультацію
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </Link>
             </div>
@@ -585,7 +585,7 @@ export default function ArticleContent({ article }: ArticleProps) {
                 Перші години — критичні для побудови захисту. Зателефонуйте — адвокат відповість одразу і допоможе зібрати лінію оборони.
               </p>
               <Link href="/#konsultaciya" className="article-end-link">
-                Безкоштовна консультація — за 2 години
+                Отримати консультацію
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </Link>
             </div>
