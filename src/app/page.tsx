@@ -810,10 +810,10 @@ export default function HomePage() {
               Замість шукати юриста по&nbsp;факту проблеми, мати його заздалегідь — і&nbsp;дзвонити по&nbsp;будь-яких питаннях.
             </p>
 
-            {/* Anchor: 15000 → 5000 */}
+            {/* Anchor: 8000 → 5000 */}
             <div style={{ marginBottom: "var(--space-xl)" }}>
               <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9375rem", marginBottom: 6 }}>
-                Разовий виклик адвоката — <span style={{ textDecoration: "line-through" }}>від 15 000 ₴</span>
+                Разовий виклик адвоката — <span style={{ textDecoration: "line-through" }}>від 8 000 ₴</span>
               </div>
               <div
                 style={{
@@ -919,7 +919,7 @@ export default function HomePage() {
             {/* Row: Price */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)", alignItems: "center" }}>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Вартість</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "var(--color-surface)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>від 15 000 &#8372;</div>
+              <div style={{ padding: "12px var(--space-lg)", color: "var(--color-surface)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>від 8 000 &#8372;</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "var(--color-accent)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>5 000 &#8372;/рік</div>
             </div>
 
