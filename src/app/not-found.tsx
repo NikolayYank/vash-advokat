@@ -1,6 +1,15 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 
+const redirectScript = `
+(function() {
+  var p = window.location.pathname;
+  if (p.startsWith('/ru/') || p.startsWith('/ua/') || p === '/ru' || p === '/ua') {
+    window.location.replace('/');
+  }
+})();
+`;
+
 export default function NotFound() {
   return (
     <div
@@ -70,6 +79,7 @@ export default function NotFound() {
           <polyline points="12 5 19 12 12 19" />
         </svg>
       </Link>
+      <script dangerouslySetInnerHTML={{ __html: redirectScript }} />
     </div>
   );
 }

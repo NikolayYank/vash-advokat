@@ -18,7 +18,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nikolayyank.github.io/vash-advokat"),
+  metadataBase: new URL("https://vash-advokat.org"),
   title: {
     default: "Фундація адвокатів України — Захист та надійність",
     template: "%s — Фундація адвокатів",
