@@ -1647,8 +1647,11 @@ h2 { font-size: var(--font-h2); }
   .hero-actions .btn { width: 100%; text-align: center; justify-content: center; box-sizing: border-box; }
   .btn-hero { padding: 16px var(--space-lg); font-size: 1rem; }
 
-  /* Services single column */
-  .services-grid { grid-template-columns: 1fr; }
+  /* Services single column, compact cards */
+  .services-grid { grid-template-columns: 1fr; gap: var(--space-sm); }
+  .service-card { padding: var(--space-md); min-height: auto; }
+  .service-card h3 { font-size: 0.9375rem; }
+  .service-card p { font-size: 0.75rem; }
 
   /* Official badges: left-align on mobile */
   .official-badges-row { justify-content: flex-start; gap: var(--space-md); }
