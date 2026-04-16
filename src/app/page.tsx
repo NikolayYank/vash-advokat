@@ -376,16 +376,13 @@ export default function HomePage() {
                 boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
               }}
             >
-              <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", height: 0 }}>
-                <iframe
-                  src="https://www.youtube.com/embed/pIEGja7pkdQ?vq=hd1080&hd=1&modestbranding=1&rel=0&playsinline=1"
-                  title="Фундація адвокатів України"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
-                />
-              </div>
+              <video
+                src="https://res.cloudinary.com/dogdcmlqa/video/upload/q_auto/f_auto/v1776365020/video_web_ytrakq.mp4"
+                controls
+                playsInline
+                preload="metadata"
+                style={{ width: "100%", display: "block" }}
+              />
             </div>
           </div>
           <div className="hero-actions">
