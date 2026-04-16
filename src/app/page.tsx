@@ -766,7 +766,7 @@ export default function HomePage() {
                   lineHeight: 1.2,
                 }}
               >
-                Абонентський договір&nbsp;—<br />5&nbsp;000&nbsp;₴
+                <span className="abonement-title-text">Абонентський договір&nbsp;— 5&nbsp;000&nbsp;₴</span>
               </div>
               <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.875rem", marginTop: 6 }}>
                 ≈&nbsp;14&nbsp;грн/день — менше, ніж&nbsp;чашка кави
@@ -834,7 +834,7 @@ export default function HomePage() {
             <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Як побудовані стосунки</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Разовий проєкт</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Робота вдовгу</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700, whiteSpace: "nowrap" }}>Робота вдовгу</div>
             </div>
             <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Екстрена допомога</div>

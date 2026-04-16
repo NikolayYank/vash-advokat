@@ -1495,6 +1495,10 @@ h2 { font-size: var(--font-h2); }
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: stretch;
+}
+.compare-row > div {
+  display: flex;
   align-items: center;
 }
 .compare-header { border-bottom-color: rgba(255,255,255,0.08); }
@@ -1600,8 +1604,12 @@ h2 { font-size: var(--font-h2); }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
 
+/* Abonement title: one line on desktop, wrap on mobile */
+.abonement-title-text { white-space: nowrap; }
+
 /* — Mobile — */
 @media (max-width: 640px) {
+  .abonement-title-text { white-space: normal; }
   /* Global text left-align + fix heading/subheading hierarchy */
   .section-header { text-align: left; margin-bottom: var(--space-xl); }
   .section-header h2 { font-size: 1.5rem; }
