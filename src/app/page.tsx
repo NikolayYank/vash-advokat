@@ -337,7 +337,7 @@ export default function HomePage() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  style={{ fontSize: "0.9375rem", padding: "var(--space-sm) 0" }}
+                  style={{ fontSize: "0.9375rem", padding: "12px 0", minHeight: 44, display: "flex", alignItems: "center" }}
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}

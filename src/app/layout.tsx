@@ -31,6 +31,25 @@ export const metadata: Metadata = {
     ],
     apple: asset("/apple-touch-icon.png"),
   },
+  openGraph: {
+    title: "Фундація адвокатів України — Захист та надійність",
+    description:
+      "Адвокатське об\u2019єднання з\u00A038-річним досвідом. 11\u00A0500+ справ. Безкоштовна перша консультація.",
+    type: "website",
+    locale: "uk_UA",
+    siteName: "Фундація адвокатів України",
+    images: [
+      {
+        url: asset("/images/office_exterior.jpeg"),
+        width: 1200,
+        height: 630,
+        alt: "Офіс Фундації адвокатів України",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
