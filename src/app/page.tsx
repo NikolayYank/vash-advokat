@@ -29,6 +29,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import MuxPlayer from "@mux/mux-player-react";
 import { asset } from "@/lib/asset";
 
 /* ===== Scroll reveal hook ===== */
@@ -367,21 +368,13 @@ export default function HomePage() {
             className="hero-photo"
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
           >
-            <div
-              style={{
-                width: "100%",
-                maxWidth: "540px",
-                borderRadius: "var(--radius-xl)",
-                overflow: "hidden",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-              }}
-            >
-              <video
-                src="https://res.cloudinary.com/dogdcmlqa/video/upload/q_auto/f_auto/v1776365020/video_web_ytrakq.mp4"
-                controls
-                playsInline
-                preload="metadata"
-                style={{ width: "100%", display: "block" }}
+            <div className="hero-video-wrap">
+              <MuxPlayer
+                playbackId="3kWyg0201HO1MAdbmQTlQU81vz9dQOjkZGg4GChJO25Bc"
+                streamType="on-demand"
+                thumbnailTime={56}
+                accentColor="#d4af37"
+                style={{ width: "100%", display: "block", aspectRatio: "16/9" }}
               />
             </div>
           </div>
