@@ -661,7 +661,7 @@ export default function HomePage() {
                 borderRadius: "var(--radius-lg)",
                 padding: "var(--space-xl)",
                 boxShadow: "var(--shadow-card)",
-                textAlign: "center",
+                textAlign: "left",
                 borderTop: "3px solid var(--color-accent)",
               }}
             >
@@ -669,7 +669,7 @@ export default function HomePage() {
                 style={{
                   width: 64,
                   height: 64,
-                  margin: "0 auto var(--space-md)",
+                  margin: "0 0 var(--space-md)",
                   background: "rgba(212,175,55,0.1)",
                   borderRadius: "50%",
                   display: "flex",
@@ -694,7 +694,7 @@ export default function HomePage() {
                 borderRadius: "var(--radius-lg)",
                 padding: "var(--space-xl)",
                 boxShadow: "var(--shadow-card)",
-                textAlign: "center",
+                textAlign: "left",
                 borderTop: "3px solid var(--color-primary)",
               }}
             >
@@ -702,7 +702,7 @@ export default function HomePage() {
                 style={{
                   width: 64,
                   height: 64,
-                  margin: "0 auto var(--space-md)",
+                  margin: "0 0 var(--space-md)",
                   background: "rgba(30,58,138,0.08)",
                   borderRadius: "50%",
                   display: "flex",
@@ -716,7 +716,7 @@ export default function HomePage() {
                 Головний редактор «Захист прав»
               </h3>
               <p style={{ color: "var(--color-text-muted)", fontSize: "0.875rem" }}>
-                Та сама правова експертиза, що в нашому кабінеті, — у відкритих публікаціях. Якщо хочете перевірити рівень — починайте з газети
+                Та сама правова експертиза, що&nbsp;в&nbsp;нашому кабінеті, — у&nbsp;відкритих публікаціях. Якщо хочете перевірити рівень — починайте з&nbsp;газети
               </p>
             </div>
 
@@ -727,7 +727,7 @@ export default function HomePage() {
                 borderRadius: "var(--radius-lg)",
                 padding: "var(--space-xl)",
                 boxShadow: "var(--shadow-card)",
-                textAlign: "center",
+                textAlign: "left",
                 borderTop: "3px solid var(--color-primary)",
               }}
             >
@@ -735,7 +735,7 @@ export default function HomePage() {
                 style={{
                   width: 64,
                   height: 64,
-                  margin: "0 auto var(--space-md)",
+                  margin: "0 0 var(--space-md)",
                   background: "rgba(30,58,138,0.08)",
                   borderRadius: "50%",
                   display: "flex",
