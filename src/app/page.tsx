@@ -654,7 +654,7 @@ export default function HomePage() {
             <p>Офіційні документи, нагорода від&nbsp;колег і&nbsp;14&nbsp;років публічної роботи в&nbsp;медіа</p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "var(--space-lg)" }}>
+          <div className="awards-grid">
             {/* Award card 1 */}
             <div
               style={{
@@ -786,15 +786,7 @@ export default function HomePage() {
 
       {/* ===== B2B TEASER ===== */}
       <section className="section section-dark b2b-teaser" id="abonement">
-        <div
-          className="container"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "var(--space-3xl)",
-            alignItems: "center",
-          }}
-        >
+        <div className="container b2b-grid">
           {/* LEFT: description */}
           <div>
             <h2 style={{ color: "var(--color-surface)", marginBottom: "var(--space-md)", lineHeight: 1.2 }}>
@@ -874,7 +866,7 @@ export default function HomePage() {
             }}
           >
             {/* Header row */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+            <div className="compare-row compare-header">
               <div style={{ padding: "var(--space-lg)" }} />
               <div
                 style={{
@@ -914,35 +906,35 @@ export default function HomePage() {
             </div>
 
             {/* Row: Price */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)", alignItems: "center" }}>
+            <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Вартість</div>
               <div style={{ padding: "12px var(--space-lg)", color: "var(--color-surface)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>від 8 000 &#8372;</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "var(--color-accent)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>5 000 &#8372;/рік</div>
             </div>
 
             {/* Row: History */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)", alignItems: "center" }}>
+            <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Знання вашої історії</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Кожен раз з нуля</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Уже знає вашу ситуацію</div>
             </div>
 
             {/* Row: Availability */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)", alignItems: "center" }}>
+            <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Доступність</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Шукаєте вільного юриста</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Свій адвокат на зв&apos;язку</div>
             </div>
 
             {/* Row: Relationship type */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)", alignItems: "center" }}>
+            <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Як побудовані стосунки</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Разовий проєкт</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Робота вдовгу — нам важливо, щоб ви залишились</div>
             </div>
 
             {/* Row: Emergency */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", borderBottom: "1px solid rgba(255,255,255,0.06)", alignItems: "center" }}>
+            <div className="compare-row">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Екстрена допомога</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.25)" }}>
                 <Minus style={{ width: 16, height: 16 }} />
@@ -953,7 +945,7 @@ export default function HomePage() {
             </div>
 
             {/* Row: Stress */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", alignItems: "center" }}>
+            <div className="compare-row compare-last">
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Дзвінок у момент паніки</div>
               <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>«Кому ж телефонувати?..»</div>
               <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>«Мій адвокат» — один номер у телефоні</div>
