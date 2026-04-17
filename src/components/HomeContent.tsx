@@ -255,6 +255,14 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             </Link>
           </div>
 
+          <Link
+            href={switchPath}
+            className="lang-switch-mobile"
+            aria-label={dict.header.langSwitchLabel}
+          >
+            {dict.header.otherLangLabel}
+          </Link>
+
           <button
             className="menu-toggle"
             aria-label={dict.header.menuLabel}
@@ -281,13 +289,6 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href={switchPath}
-                className="mobile-menu-link"
-                onClick={() => setMenuOpen(false)}
-              >
-                {dict.header.otherLangLabel}
-              </Link>
             </nav>
             <div className="mobile-menu-cta">
               <a href="tel:+380505940785" className="mobile-menu-phone">
