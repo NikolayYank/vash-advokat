@@ -36,7 +36,7 @@ import { asset } from "@/lib/asset";
 function useReveal() {
   useEffect(() => {
     const revealEls = document.querySelectorAll(
-      ".section-header, .pain-card, .step-item, .service-card, .founder, .blog-card, .cta-form, .gold-divider, .award-badge, .trust-numbers, [style*=\"border-top:3px\"]"
+      ".section-header, .pain-card, .step-item, .service-card, .founder, .blog-card, .cta-form, .gold-divider, .award-badge, [style*=\"border-top:3px\"]"
     );
     revealEls.forEach((el) => el.classList.add("reveal"));
 
@@ -52,6 +52,24 @@ function useReveal() {
       { threshold: 0.15 }
     );
     revealEls.forEach((el) => observer.observe(el));
+
+    /* Trust-numbers card: reveal only when fully in viewport (not when only its top edge peeks from hero) */
+    const trustCard = document.querySelector(".trust-numbers");
+    if (trustCard) {
+      trustCard.classList.add("reveal");
+      const trustObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.95) {
+              entry.target.classList.add("visible");
+              trustObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: [0.95, 1], rootMargin: "0px 0px -10% 0px" }
+      );
+      trustObserver.observe(trustCard);
+    }
 
     // Stagger delay for grid children
     document
@@ -69,37 +87,47 @@ function useReveal() {
 /* ===== Counter animation hook ===== */
 function useCounters() {
   useEffect(() => {
-    const counterObserver = new IntersectionObserver(
+    const trustCard = document.querySelector(".trust-numbers");
+    if (!trustCard) return;
+
+    const runCounters = () => {
+      document.querySelectorAll(".trust-number").forEach((node) => {
+        const el = node as HTMLElement;
+        if (el.dataset.counted === "1") return;
+        el.dataset.counted = "1";
+        const text = el.textContent?.trim() || "";
+        const match = text.match(/^([\d\s]+)/);
+        if (!match) return;
+        const target = parseInt(match[1].replace(/\s/g, ""));
+        const suffix = text.replace(match[1], "");
+        const duration = 1800;
+        const start = performance.now();
+
+        function tick(now: number) {
+          const progress = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(target * ease);
+          el.textContent =
+            current.toLocaleString("uk-UA").replace(/,/g, " ") + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    };
+
+    const cardObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target as HTMLElement;
-          const text = el.textContent?.trim() || "";
-          const match = text.match(/^([\d\s]+)/);
-          if (!match) return;
-          const target = parseInt(match[1].replace(/\s/g, ""));
-          const suffix = text.replace(match[1], "");
-          const duration = 1800;
-          const start = performance.now();
-
-          function tick(now: number) {
-            const progress = Math.min((now - start) / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(target * ease);
-            el.textContent =
-              current.toLocaleString("uk-UA").replace(/,/g, " ") + suffix;
-            if (progress < 1) requestAnimationFrame(tick);
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.95) {
+            runCounters();
+            cardObserver.unobserve(entry.target);
           }
-          requestAnimationFrame(tick);
-          counterObserver.unobserve(el);
         });
       },
-      { threshold: 0.5 }
+      { threshold: [0.95, 1], rootMargin: "0px 0px -10% 0px" }
     );
-    document
-      .querySelectorAll(".trust-number")
-      .forEach((el) => counterObserver.observe(el));
-    return () => counterObserver.disconnect();
+    cardObserver.observe(trustCard);
+    return () => cardObserver.disconnect();
   }, []);
 }
 
@@ -356,9 +384,11 @@ export default function HomePage() {
       <section className="hero">
         <div className="container">
           <div className="hero-content">
+            <div className="eyebrow-row">
+              <span className="eyebrow">Фундація адвокатів України</span>
+            </div>
             <h1>
-              Адвокат поруч — до&nbsp;того,<br />
-              як&nbsp;він стане потрібен
+              Адвокат поруч — <em className="h1-italic">до&nbsp;того</em>, як&nbsp;він стане потрібен
             </h1>
             <p className="hero-subtitle">
               Розпізнати ризик. Зрозуміти права. Знати, що&nbsp;робити. Без&nbsp;юридичних термінів, без&nbsp;води, без&nbsp;зайвих витрат. Чесно, конкретно і&nbsp;вчасно.
@@ -399,7 +429,7 @@ export default function HomePage() {
           </div>
           <div className="trust-item">
             <div className="trust-number">38</div>
-            <div className="trust-label">років стажу засновника</div>
+            <div className="trust-label">років стажу<br className="mobile-br" /> засновника</div>
           </div>
           <div className="trust-item">
             <div className="trust-number">3</div>
@@ -530,7 +560,7 @@ export default function HomePage() {
                     fontSize: "0.75rem",
                     textTransform: "uppercase",
                     letterSpacing: "0.08em",
-                    color: "var(--color-accent)",
+                    color: "var(--color-text-muted)",
                     fontWeight: 700,
                     marginBottom: 12,
                   }}
@@ -565,13 +595,7 @@ export default function HomePage() {
               <img
                 src={asset("/images/ava.jpg")}
                 alt="Сергій Сергійович Веприцький — засновник Фундації адвокатів"
-                style={{
-                  width: "100%",
-                  maxWidth: "400px",
-                  aspectRatio: "3/4",
-                  objectFit: "cover",
-                  borderRadius: "var(--radius-xl)",
-                }}
+                className="founder-photo-img"
               />
             </div>
             <div className="founder-info">
@@ -580,25 +604,157 @@ export default function HomePage() {
                 Засновник та керівник Фундації адвокатів України
               </div>
               <p>
-                Адвокатська практика — 38&nbsp;років. У&nbsp;2010 заснував Фундацію
-                адвокатів України. За&nbsp;весь час практики команда провела понад
-                11&nbsp;500 справ — від&nbsp;побутових спорів до&nbsp;кримінальних,
-                цивільних і&nbsp;бізнесових.
+                Адвокатська практика&nbsp;— <strong>38&nbsp;років</strong>. У&nbsp;<strong>2010</strong>&nbsp;заснував Фундацію адвокатів України. За&nbsp;весь час практики команда провела понад <strong>11&nbsp;500&nbsp;справ</strong>&nbsp;— від&nbsp;побутових спорів до&nbsp;кримінальних, цивільних і&nbsp;бізнесових.
               </p>
               <p>
                 Третє покоління адвокатської династії.
               </p>
               <p>
-                2013 — орден «Видатний адвокат України», вища відзнака Ради
-                адвокатів. Головний редактор правової газети «Захист прав».
-                Автор і&nbsp;ведучий ТВ-програми «Людина і&nbsp;Закон».
+                <strong>2013</strong>&nbsp;— орден «Видатний адвокат України», вища відзнака Ради адвокатів. Головний редактор правової газети «Захист прав». Автор і&nbsp;ведучий ТВ-програми «Людина і&nbsp;Закон».
               </p>
 
-              <blockquote
-                className="founder-quote"
-            >
-                «Більшість юридичних проблем — наслідок незнання, а&nbsp;не&nbsp;злого наміру. Адвокат поруч — це&nbsp;не&nbsp;розкіш, а&nbsp;спокій до&nbsp;того, як&nbsp;щось станеться.»
+              <blockquote className="founder-quote">
+                «Більшість юридичних проблем&nbsp;— наслідок незнання, а&nbsp;не&nbsp;злого наміру. Адвокат поруч&nbsp;— це&nbsp;не&nbsp;розкіш, а&nbsp;спокій до&nbsp;того, як&nbsp;щось станеться.»
               </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== B2B TEASER ===== */}
+      <section className="section section-dark b2b-teaser" id="abonement">
+        <div className="container b2b-grid">
+          {/* LEFT: description */}
+          <div>
+            <div className="eyebrow-row">
+              <span className="eyebrow-hair" />
+              <span className="eyebrow">Абонентський договір</span>
+            </div>
+            <h2 style={{ color: "var(--color-surface)", marginBottom: "var(--space-md)", lineHeight: 1.15 }}>
+              Свій адвокат на&nbsp;рік — за&nbsp;ціною одного разового виклику
+            </h2>
+            <p
+              style={{
+                color: "rgba(255,255,255,0.7)",
+                marginBottom: "var(--space-lg)",
+                lineHeight: 1.7,
+              }}
+            >
+              Замість шукати юриста по&nbsp;факту проблеми, мати його заздалегідь — і&nbsp;дзвонити по&nbsp;будь-яких питаннях.
+            </p>
+
+            <div style={{ marginBottom: "var(--space-xl)" }}>
+              <div
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "1.875rem",
+                  fontWeight: 700,
+                  color: "var(--color-accent)",
+                  lineHeight: 1.2,
+                }}
+              >
+                <span className="abonement-title-text">Абонентський договір&nbsp;— 5&nbsp;000&nbsp;₴</span>
+              </div>
+              <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.875rem", marginTop: 6 }}>
+                ≈&nbsp;14&nbsp;грн/день — менше, ніж&nbsp;чашка кави
+              </div>
+            </div>
+
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 14, marginBottom: "var(--space-xl)" }}>
+              {[
+                { strong: "Запитати до\u00A0того, як\u00A0підписати або переказати", thin: " — необмежені консультації до\u00A01\u00A0години щодня" },
+                { strong: "Адвокат їде до\u00A0вас, навіть о\u00A0третій ночі", thin: " — екстрена допомога 24/7, без\u00A0вихідних і\u00A0свят" },
+                { strong: "Виїзд на\u00A0місце замість «приходьте у\u00A0нас в\u00A0офіс»", thin: " — у\u00A0будь-яке місто, де\u00A0ми\u00A0є" },
+                { strong: "Документи, що\u00A0працюють як\u00A0видимий захист", thin: " — пластиковий ордер і\u00A0захисні знаки на\u00A0двері та\u00A0авто" },
+              ].map((item) => (
+                <li
+                  key={item.strong}
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 12,
+                    color: "rgba(255,255,255,0.85)",
+                    fontSize: "0.9375rem",
+                    lineHeight: 1.55,
+                  }}
+                >
+                  <Check style={{ width: 18, height: 18, color: "var(--color-accent)", flexShrink: 0, marginTop: 3 }} />
+                  <span>
+                    <strong style={{ color: "var(--color-surface)" }}>{item.strong}</strong>
+                    <span style={{ color: "rgba(255,255,255,0.7)" }}>{item.thin}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="#konsultaciya"
+              className="btn btn-outline btn-section"
+            >
+              Дізнатися більше <ArrowRight style={{ width: 18, height: 18 }} />
+            </Link>
+          </div>
+
+          {/* RIGHT: comparison table */}
+          {/* === Desktop comparison table (hidden ≤640px) === */}
+          <div className="compare-desktop" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
+            <div className="compare-row compare-header">
+              <div style={{ padding: "var(--space-lg)" }} />
+              <div style={{ padding: "var(--space-lg)", textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>Разове<br />звернення</div>
+              <div style={{ padding: "var(--space-lg)", textAlign: "center", background: "rgba(212,175,55,0.08)", borderLeft: "1px solid rgba(255,255,255,0.06)" }}><div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)" }}>Абонентський<br />договір</div></div>
+            </div>
+            <div className="compare-row">
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Вартість</div>
+              <div style={{ padding: "12px var(--space-lg)", color: "var(--color-surface)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>від 8 000 &#8372;</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "var(--color-accent)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>5 000 &#8372;/рік</div>
+            </div>
+            <div className="compare-row">
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Знання вашої історії</div>
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Кожен раз з нуля</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Уже знає вашу ситуацію</div>
+            </div>
+            <div className="compare-row">
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Доступність</div>
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Шукаєте вільного юриста</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Свій адвокат на зв&apos;язку</div>
+            </div>
+            <div className="compare-row">
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Як побудовані стосунки</div>
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Разовий проєкт</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700, whiteSpace: "nowrap" }}>Робота вдовгу</div>
+            </div>
+            <div className="compare-row">
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Екстрена допомога</div>
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.25)" }}><Minus style={{ width: 16, height: 16 }} /></div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>24/7</div>
+            </div>
+            <div className="compare-row compare-last">
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Дзвінок у момент паніки</div>
+              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>«Кому ж телефонувати?..»</div>
+              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>«Мій адвокат» — один номер</div>
+            </div>
+          </div>
+
+          {/* === Mobile comparison cards (shown ≤640px) === */}
+          <div className="compare-mobile">
+            <div className="compare-card" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "rgba(255,255,255,0.4)", marginBottom: "var(--space-md)" }}>Разове звернення</div>
+              <div className="compare-card-item"><span className="compare-card-label">Вартість</span><span className="compare-card-value" style={{ color: "var(--color-surface)", fontWeight: 700 }}>від 8 000 ₴</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Історія</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Кожен раз з нуля</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Доступність</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Шукаєте вільного юриста</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Стосунки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Разовий проєкт</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Екстрена допомога</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.25)" }}>—</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">У момент паніки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>«Кому ж телефонувати?..»</span></div>
+            </div>
+
+            <div className="compare-card" style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}>
+              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)", marginBottom: "var(--space-md)", fontWeight: 700 }}>Абонентський договір</div>
+              <div className="compare-card-item"><span className="compare-card-label">Вартість</span><span className="compare-card-value" style={{ color: "var(--color-accent)", fontWeight: 700, fontFamily: "var(--font-heading)", fontSize: "1rem" }}>5 000 ₴/рік</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Історія</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Вже знає вашу ситуацію</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Доступність</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Свій адвокат на зв&apos;язку</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Стосунки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Робота вдовгу</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">Екстрена допомога</span><span className="compare-card-value" style={{ color: "var(--color-accent)", fontWeight: 700 }}>24/7</span></div>
+              <div className="compare-card-item"><span className="compare-card-label">У момент паніки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>«Мій адвокат» — один номер</span></div>
             </div>
           </div>
         </div>
@@ -731,143 +887,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== B2B TEASER ===== */}
-      <section className="section section-dark b2b-teaser" id="abonement">
-        <div className="container b2b-grid">
-          {/* LEFT: description */}
-          <div>
-            <h2 style={{ color: "var(--color-surface)", marginBottom: "var(--space-md)", lineHeight: 1.2 }}>
-              Свій адвокат на&nbsp;рік — за&nbsp;ціною одного разового виклику
-            </h2>
-            <p
-              style={{
-                color: "rgba(255,255,255,0.7)",
-                marginBottom: "var(--space-lg)",
-                lineHeight: 1.7,
-              }}
-            >
-              Замість шукати юриста по&nbsp;факту проблеми, мати його заздалегідь — і&nbsp;дзвонити по&nbsp;будь-яких питаннях.
-            </p>
-
-            <div style={{ marginBottom: "var(--space-xl)" }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "1.875rem",
-                  fontWeight: 700,
-                  color: "var(--color-accent)",
-                  lineHeight: 1.2,
-                }}
-              >
-                <span className="abonement-title-text">Абонентський договір&nbsp;— 5&nbsp;000&nbsp;₴</span>
-              </div>
-              <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.875rem", marginTop: 6 }}>
-                ≈&nbsp;14&nbsp;грн/день — менше, ніж&nbsp;чашка кави
-              </div>
-            </div>
-
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 14, marginBottom: "var(--space-xl)" }}>
-              {[
-                { strong: "Запитати до\u00A0того, як\u00A0підписати або переказати", thin: " — необмежені консультації до\u00A01\u00A0години щодня" },
-                { strong: "Адвокат їде до\u00A0вас, навіть о\u00A0третій ночі", thin: " — екстрена допомога 24/7, без\u00A0вихідних і\u00A0свят" },
-                { strong: "Виїзд на\u00A0місце замість «приходьте у\u00A0нас в\u00A0офіс»", thin: " — у\u00A0будь-яке місто, де\u00A0ми\u00A0є" },
-                { strong: "Документи, що\u00A0працюють як\u00A0видимий захист", thin: " — пластиковий ордер і\u00A0захисні знаки на\u00A0двері та\u00A0авто" },
-              ].map((item) => (
-                <li
-                  key={item.strong}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 12,
-                    color: "rgba(255,255,255,0.85)",
-                    fontSize: "0.9375rem",
-                    lineHeight: 1.55,
-                  }}
-                >
-                  <Check style={{ width: 18, height: 18, color: "var(--color-accent)", flexShrink: 0, marginTop: 3 }} />
-                  <span>
-                    <strong style={{ color: "var(--color-surface)" }}>{item.strong}</strong>
-                    <span style={{ color: "rgba(255,255,255,0.7)" }}>{item.thin}</span>
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <Link
-              href="/blog/abonement-yak-pratsuye"
-              className="btn btn-outline btn-section"
-            >
-              Дізнатися більше <ArrowRight style={{ width: 18, height: 18 }} />
-            </Link>
-          </div>
-
-          {/* RIGHT: comparison table */}
-          {/* === Desktop comparison table (hidden ≤640px) === */}
-          <div className="compare-desktop" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
-            <div className="compare-row compare-header">
-              <div style={{ padding: "var(--space-lg)" }} />
-              <div style={{ padding: "var(--space-lg)", textAlign: "center", color: "rgba(255,255,255,0.4)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em" }}>Разове<br />звернення</div>
-              <div style={{ padding: "var(--space-lg)", textAlign: "center", background: "rgba(212,175,55,0.08)", borderLeft: "1px solid rgba(255,255,255,0.06)" }}><div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)" }}>Абонентський<br />договір</div></div>
-            </div>
-            <div className="compare-row">
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Вартість</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "var(--color-surface)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>від 8 000 &#8372;</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "var(--color-accent)", fontFamily: "var(--font-heading)", fontSize: "1.125rem", fontWeight: 700 }}>5 000 &#8372;/рік</div>
-            </div>
-            <div className="compare-row">
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Знання вашої історії</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Кожен раз з нуля</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Уже знає вашу ситуацію</div>
-            </div>
-            <div className="compare-row">
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Доступність</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Шукаєте вільного юриста</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>Свій адвокат на зв&apos;язку</div>
-            </div>
-            <div className="compare-row">
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Як побудовані стосунки</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>Разовий проєкт</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700, whiteSpace: "nowrap" }}>Робота вдовгу</div>
-            </div>
-            <div className="compare-row">
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Екстрена допомога</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.25)" }}><Minus style={{ width: 16, height: 16 }} /></div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>24/7</div>
-            </div>
-            <div className="compare-row compare-last">
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem" }}>Дзвінок у момент паніки</div>
-              <div style={{ padding: "12px var(--space-lg)", color: "rgba(255,255,255,0.35)", fontSize: "0.8125rem" }}>«Кому ж телефонувати?..»</div>
-              <div style={{ padding: "12px var(--space-lg)", background: "rgba(212,175,55,0.05)", borderLeft: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.85)", fontSize: "0.8125rem", fontWeight: 700 }}>«Мій адвокат» — один номер</div>
-            </div>
-          </div>
-
-          {/* === Mobile comparison cards (shown ≤640px) === */}
-          <div className="compare-mobile">
-            <div className="compare-card" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "rgba(255,255,255,0.4)", marginBottom: "var(--space-md)" }}>Разове звернення</div>
-              <div className="compare-card-item"><span className="compare-card-label">Вартість</span><span className="compare-card-value" style={{ color: "var(--color-surface)", fontWeight: 700 }}>від 8 000 ₴</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Історія</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Кожен раз з нуля</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Доступність</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Шукаєте вільного юриста</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Стосунки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>Разовий проєкт</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Екстрена допомога</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.25)" }}>—</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">У момент паніки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.35)" }}>«Кому ж телефонувати?..»</span></div>
-            </div>
-
-            <div className="compare-card" style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}>
-              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)", marginBottom: "var(--space-md)", fontWeight: 700 }}>Абонентський договір</div>
-              <div className="compare-card-item"><span className="compare-card-label">Вартість</span><span className="compare-card-value" style={{ color: "var(--color-accent)", fontWeight: 700, fontFamily: "var(--font-heading)", fontSize: "1rem" }}>5 000 ₴/рік</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Історія</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Вже знає вашу ситуацію</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Доступність</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Свій адвокат на зв&apos;язку</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Стосунки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>Робота вдовгу</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">Екстрена допомога</span><span className="compare-card-value" style={{ color: "var(--color-accent)", fontWeight: 700 }}>24/7</span></div>
-              <div className="compare-card-item"><span className="compare-card-label">У момент паніки</span><span className="compare-card-value" style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>«Мій адвокат» — один номер</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ===== BLOG PREVIEW ===== */}
-      <section className="section">
+      <section className="section section-muted">
         <div className="container">
           <div className="section-header">
             <h2>Розбираємо реальні ситуації — щоб&nbsp;ви знали, що&nbsp;робити</h2>
@@ -927,6 +948,11 @@ export default function HomePage() {
       {/* ===== CTA FINAL ===== */}
       <section className="cta-final" id="konsultaciya">
         <div className="container">
+          <div className="eyebrow-row">
+            <span className="eyebrow-hair" />
+            <span className="eyebrow">Консультація</span>
+            <span className="eyebrow-hair" />
+          </div>
           <h2>
             Розкажіть ситуацію — і&nbsp;ми чесно скажемо, що&nbsp;з&nbsp;нею робити
           </h2>

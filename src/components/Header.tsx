@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-100 bg-surface border-b border-border">
-      <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between gap-6 py-3">
+      <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between gap-6 py-2 lg:py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 no-underline">
           <Image
@@ -27,11 +27,11 @@ export default function Header() {
             alt="Фундація адвокатів України"
             width={48}
             height={48}
-            className="h-12 w-auto"
+            className="h-9 lg:h-12 w-auto"
           />
-          <div className="font-heading text-[1.1rem] font-semibold text-primary leading-tight">
+          <div className="font-heading text-[0.95rem] lg:text-[1.1rem] font-semibold text-primary leading-tight">
             Фундація адвокатів
-            <small className="block font-body text-[0.75rem] font-normal text-text-muted">
+            <small className="block font-body text-[0.6875rem] lg:text-[0.75rem] font-normal text-text-muted">
               Захист та надійність
             </small>
           </div>
