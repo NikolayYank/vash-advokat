@@ -20,7 +20,6 @@ import {
   MapPin,
   Check,
   Minus,
-  Lock,
   Menu,
   X,
   Phone,
@@ -32,6 +31,7 @@ import { useEffect, useState } from "react";
 import MuxPlayer from "@mux/mux-player-react";
 import { asset } from "@/lib/asset";
 import type { Dict, Locale } from "@/lib/i18n";
+import ContactForm from "@/components/ContactForm";
 
 /* ===== Scroll reveal hook ===== */
 function useReveal() {
@@ -861,26 +861,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
           <h2>{dict.ctaFinal.h2}</h2>
           <p>{dict.ctaFinal.lead}</p>
 
-          <form className="cta-form" onSubmit={(e) => e.preventDefault()}>
-            <div className="form-row">
-              <input type="text" placeholder={dict.ctaFinal.nameInput} required />
-              <input type="tel" placeholder={dict.ctaFinal.phoneInput} required />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              {dict.ctaFinal.submit}
-            </button>
-            <div className="cta-form-note" style={{ flexWrap: "wrap", justifyContent: "center", gap: 14 }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                <Lock style={{ width: 14, height: 14 }} /> {dict.ctaFinal.noteSecret}
-              </span>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                <Clock style={{ width: 14, height: 14 }} /> {dict.ctaFinal.noteTime}
-              </span>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                <Check style={{ width: 14, height: 14 }} /> {dict.ctaFinal.noteCommitment}
-              </span>
-            </div>
-          </form>
+          <ContactForm dict={dict.ctaFinal} />
         </div>
       </section>
 

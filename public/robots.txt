@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /ua/
+Disallow: /en/
+
+Sitemap: https://vash-advokat.org/sitemap.xml

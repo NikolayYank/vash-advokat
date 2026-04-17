@@ -201,9 +201,17 @@ export interface Dict {
     nameInput: string;
     phoneInput: string;
     submit: string;
+    submitSending: string;
     noteSecret: string;
     noteTime: string;
     noteCommitment: string;
+    errorNameRequired: string;
+    errorPhoneRequired: string;
+    errorPhoneFormat: string;
+    errorPhoneOperator: string;
+    errorSubmit: ReactNode;
+    successTitle: string;
+    successMessage: ReactNode;
   };
 
   footer: {

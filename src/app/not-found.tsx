@@ -1,14 +1,6 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
-
-const redirectScript = `
-(function() {
-  var p = window.location.pathname;
-  if (p.startsWith('/ua') || p.startsWith('/en')) {
-    window.location.replace('/');
-  }
-})();
-`;
+import LegacyPathRedirect from "@/components/LegacyPathRedirect";
 
 export default function NotFound() {
   return (
@@ -79,7 +71,7 @@ export default function NotFound() {
           <polyline points="12 5 19 12 12 19" />
         </svg>
       </Link>
-      <script dangerouslySetInnerHTML={{ __html: redirectScript }} />
+      <LegacyPathRedirect />
     </div>
   );
 }
