@@ -1852,6 +1852,9 @@ h2 { font-size: var(--font-h2); }
 .compare-desktop { display: block; }
 .compare-mobile { display: none; }
 
+/* Abonement CTA: shown in left column on desktop, moved below comparison on mobile */
+.abonement-cta-mobile { display: none; }
+
 /* Mobile comparison card */
 .compare-card {
   border-radius: var(--radius-lg);
@@ -1919,6 +1922,12 @@ h2 { font-size: var(--font-h2); }
   .partner-quote { font-size: 0.9375rem; padding: var(--space-sm) var(--space-md); }
 
   .b2b-grid { grid-template-columns: 1fr; }
+  .abonement-cta-desktop { display: none; }
+  .abonement-cta-mobile {
+    display: inline-flex;
+    margin-top: var(--space-xl);
+    justify-self: start;
+  }
   .awards-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }

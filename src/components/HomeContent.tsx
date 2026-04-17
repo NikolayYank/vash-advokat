@@ -609,7 +609,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
               ))}
             </ul>
 
-            <Link href={localizeHref("#konsultaciya", locale)} className="btn btn-outline btn-section">
+            <Link href={localizeHref("#konsultaciya", locale)} className="btn btn-outline btn-section abonement-cta-desktop">
               {dict.abonement.ctaLabel} <ArrowRight style={{ width: 18, height: 18 }} />
             </Link>
           </div>
@@ -724,6 +724,10 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
               })}
             </div>
           </div>
+
+          <Link href={localizeHref("#konsultaciya", locale)} className="btn btn-outline btn-section abonement-cta-mobile">
+            {dict.abonement.ctaLabel} <ArrowRight style={{ width: 18, height: 18 }} />
+          </Link>
         </div>
       </section>
 
