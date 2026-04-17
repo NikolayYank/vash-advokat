@@ -35,7 +35,7 @@ export const uk: Dict = {
     ctaLabel: "Консультація",
     menuLabel: "Меню",
     langSwitchLabel: "Мова",
-    otherLangLabel: "RU",
+    otherLangLabel: "UA",
     otherLangCode: "ru",
     backLabel: "На головну",
     blogBackLabel: "Усі матеріали",
