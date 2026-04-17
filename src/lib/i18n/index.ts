@@ -3,7 +3,21 @@ import { ru } from "./ru";
 import type { Dict, Locale } from "./types";
 
 export { uk, ru };
-export type { Dict, Locale };
+export type {
+  Dict,
+  Locale,
+  ServiceText,
+  StepText,
+  AbonementFeature,
+  CompareRow,
+  AwardCard,
+  PartnerBadge,
+  PartnerCard,
+  BlogCardPreview,
+  ArticleTocItem,
+  ArticleListing,
+  ArticleEntry,
+} from "./types";
 export { DEFAULT_LOCALE, LOCALES } from "./types";
 
 export const dictionaries: Record<Locale, Dict> = { uk, ru };
