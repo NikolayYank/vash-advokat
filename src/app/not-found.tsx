@@ -4,7 +4,7 @@ import { asset } from "@/lib/asset";
 const redirectScript = `
 (function() {
   var p = window.location.pathname;
-  if (p.startsWith('/ru') || p.startsWith('/ua') || p.startsWith('/en')) {
+  if (p.startsWith('/ua') || p.startsWith('/en')) {
     window.location.replace('/');
   }
 })();

@@ -1,0 +1,143 @@
+"use client";
+
+import { useEffect } from "react";
+import Link from "next/link";
+import { asset } from "@/lib/asset";
+import type { Dict, Locale, ArticleEntry } from "@/lib/i18n";
+
+function localizeHref(href: string, locale: Locale): string {
+  if (!href) return href;
+  if (href.startsWith("#") || href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) return href;
+  if (locale === "uk") return href;
+  return `/ru${href === "/" ? "" : href}` || "/ru";
+}
+
+interface Props {
+  article: ArticleEntry;
+  dict: Dict;
+  locale: Locale;
+}
+
+export default function ArticleContent({ article, dict, locale }: Props) {
+  useEffect(() => {
+    const links = document.querySelectorAll<HTMLAnchorElement>(".toc-list a");
+    const sections: { id: string; el: Element; link: HTMLAnchorElement }[] = [];
+
+    links.forEach((link) => {
+      const id = link.getAttribute("href")?.slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (el) sections.push({ id, el, link });
+    });
+
+    function updateActive() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.el.getBoundingClientRect().top <= 120) {
+          current = s;
+        }
+      }
+      links.forEach((l) => l.classList.remove("active"));
+      if (current) current.link.classList.add("active");
+    }
+
+    window.addEventListener("scroll", updateActive, { passive: true });
+    updateActive();
+    return () => window.removeEventListener("scroll", updateActive);
+  }, []);
+
+  const homeHref = locale === "uk" ? "/" : "/ru";
+  const blogHref = locale === "uk" ? "/blog" : "/ru/blog";
+  const switchPath =
+    locale === "uk" ? `/ru/blog/${article.slug}` : `/blog/${article.slug}`;
+
+  return (
+    <>
+      {/* HEADER */}
+      <header className="header-article">
+        <div className="container">
+          <Link href={homeHref} className="header-logo">
+            <img src={asset("/images/logo_mini.png")} alt={dict.header.logoAlt} />
+            <div className="header-logo-text">
+              {dict.header.logoTitle}
+              <small>{dict.header.logoSubtitle}</small>
+            </div>
+          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--space-md)" }}>
+            <Link href={switchPath} className="lang-switch" aria-label={dict.header.langSwitchLabel}>
+              {dict.header.otherLangLabel}
+            </Link>
+            <Link href={blogHref} className="header-back">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              {dict.article.backToBlog}
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* LAYOUT */}
+      <div className="article-layout">
+        {/* Sidebar TOC */}
+        <aside className="toc">
+          <div className="toc-label">{dict.article.tocLabel}</div>
+          <ul className="toc-list">
+            {article.toc.map((item) => (
+              <li key={item.id}>
+                <a href={`#${item.id}`}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+        {/* Article Content */}
+        <article className="article">
+          <div className="article-tag">{article.tag}</div>
+
+          <h1>{article.title}</h1>
+
+          <div className="article-meta">
+            <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              {article.date}
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              {article.readTime}
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              {article.author}
+            </span>
+          </div>
+
+          <img src={article.image} alt={article.title} className="article-cover" />
+
+          <div className="article-body">{article.body}</div>
+
+          {/* END BLOCK */}
+          <div className="article-end">
+            <img src={asset("/images/logo_mini.png")} alt={dict.header.logoAlt} className="article-end-logo" />
+            <p>
+              <strong>{article.endBlock.strong}</strong>
+              <br />
+              {article.endBlock.text}
+            </p>
+            <Link href={localizeHref("/#konsultaciya", locale)} className="article-end-link">
+              {article.endBlock.cta}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </Link>
+          </div>
+        </article>
+      </div>
+
+      {/* FOOTER */}
+      <footer className="footer-minimal">
+        <div className="container">
+          <p>
+            &copy; 2026 {dict.header.logoAlt} &middot; <a href={homeHref}>vash-advokat.org</a>
+          </p>
+        </div>
+      </footer>
+    </>
+  );
+}

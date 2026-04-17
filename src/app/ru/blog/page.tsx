@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import BlogListContent from "@/components/BlogListContent";
-import { uk } from "@/lib/i18n";
+import { ru } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: uk.meta.blogListTitle,
-  description: uk.meta.blogListDescription,
+  title: ru.meta.blogListTitle,
+  description: ru.meta.blogListDescription,
   alternates: {
-    canonical: "/blog",
+    canonical: "/ru/blog",
     languages: {
       "uk-UA": "/blog",
       "ru-UA": "/ru/blog",
@@ -15,6 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  return <BlogListContent dict={uk} locale="uk" />;
+export default function BlogPageRu() {
+  return <BlogListContent dict={ru} locale="ru" />;
 }

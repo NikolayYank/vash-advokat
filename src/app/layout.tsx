@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { EB_Garamond, Lato } from "next/font/google";
 import "./globals.css";
 import { asset } from "@/lib/asset";
+import LangSync from "@/components/LangSync";
 
 const ebGaramond = EB_Garamond({
   variable: "--font-eb-garamond",
@@ -60,7 +61,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk" className={`${ebGaramond.variable} ${lato.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LangSync />
+        {children}
+      </body>
     </html>
   );
 }

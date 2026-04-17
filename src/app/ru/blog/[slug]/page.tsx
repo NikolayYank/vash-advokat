@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ArticleContent from "@/components/ArticleContent";
-import { uk } from "@/lib/i18n";
+import { ru } from "@/lib/i18n";
 
 export async function generateStaticParams() {
-  return Object.keys(uk.articles).map((slug) => ({ slug }));
+  return Object.keys(ru.articles).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -13,13 +13,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = uk.articles[slug];
-  if (!article) return { title: "Стаття не знайдена" };
+  const article = ru.articles[slug];
+  if (!article) return { title: "Статья не найдена" };
   return {
     title: article.title,
     description: article.metaDescription,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: `/ru/blog/${slug}`,
       languages: {
         "uk-UA": `/blog/${slug}`,
         "ru-UA": `/ru/blog/${slug}`,
@@ -29,14 +29,14 @@ export async function generateMetadata({
   };
 }
 
-export default async function ArticlePage({
+export default async function ArticlePageRu({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = uk.articles[slug];
+  const article = ru.articles[slug];
   if (!article) notFound();
 
-  return <ArticleContent article={article} dict={uk} locale="uk" />;
+  return <ArticleContent article={article} dict={ru} locale="ru" />;
 }
