@@ -3,6 +3,9 @@ import { EB_Garamond, Lato } from "next/font/google";
 import "./globals.css";
 import { asset } from "@/lib/asset";
 import LangSync from "@/components/LangSync";
+import JsonLd from "@/components/JsonLd";
+import { getOrganizationSchema } from "@/lib/schema/organization";
+import { getWebSiteSchema } from "@/lib/schema/website";
 
 const ebGaramond = EB_Garamond({
   variable: "--font-eb-garamond",
@@ -62,6 +65,7 @@ export default function RootLayout({
   return (
     <html lang="uk" className={`${ebGaramond.variable} ${lato.variable}`}>
       <body>
+        <JsonLd data={[getOrganizationSchema("uk"), getWebSiteSchema()]} id="site-schema" />
         <LangSync />
         {children}
       </body>

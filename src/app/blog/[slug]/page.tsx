@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ArticleContent from "@/components/ArticleContent";
+import JsonLd from "@/components/JsonLd";
 import { uk } from "@/lib/i18n";
+import { getBlogPostingSchema } from "@/lib/schema/blog-posting";
+import { getBreadcrumbSchema } from "@/lib/schema/breadcrumbs";
+import { SITE_URL } from "@/lib/schema/constants";
 
 export async function generateStaticParams() {
   return Object.keys(uk.articles).map((slug) => ({ slug }));
@@ -38,5 +42,31 @@ export default async function ArticlePage({
   const article = uk.articles[slug];
   if (!article) notFound();
 
-  return <ArticleContent article={article} dict={uk} locale="uk" />;
+  const imageUrl = article.image.startsWith("http")
+    ? article.image
+    : `${SITE_URL}${article.image}`;
+
+  const blogPostingSchema = getBlogPostingSchema({
+    slug: article.slug,
+    title: article.title,
+    description: article.metaDescription,
+    image: imageUrl,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified,
+    locale: "uk",
+    authorName: article.author,
+  });
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Головна", path: "/" },
+    { name: "Корисні матеріали", path: "/blog/" },
+    { name: article.title, path: `/blog/${article.slug}/` },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={[blogPostingSchema, breadcrumbSchema]} id="article-schema" />
+      <ArticleContent article={article} dict={uk} locale="uk" />
+    </>
+  );
 }
