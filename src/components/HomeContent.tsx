@@ -909,8 +909,8 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
               <div className="footer-contact-item">
                 <Mail style={{ width: 16, height: 16 }} />
                 <div>
-                  <a href="mailto:info@vash-advokat.org" style={{ color: "rgba(255,255,255,0.8)" }}>
-                    info@vash-advokat.org
+                  <a href="mailto:promo.vashadvokat@gmail.com" style={{ color: "rgba(255,255,255,0.8)" }}>
+                    promo.vashadvokat@gmail.com
                   </a>
                 </div>
               </div>
