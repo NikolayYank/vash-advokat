@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import BlogListContent from "@/components/BlogListContent";
+import JsonLd from "@/components/JsonLd";
 import { ru } from "@/lib/i18n";
+import { getBreadcrumbSchema } from "@/lib/schema/breadcrumbs";
 
 export const metadata: Metadata = {
   title: ru.meta.blogListTitle,
@@ -16,5 +18,15 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPageRu() {
-  return <BlogListContent dict={ru} locale="ru" />;
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Главная", path: "/ru/" },
+    { name: "Полезные материалы", path: "/ru/blog/" },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={breadcrumbSchema} id="blog-list-schema" />
+      <BlogListContent dict={ru} locale="ru" />
+    </>
+  );
 }

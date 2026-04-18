@@ -5,40 +5,71 @@ export const dynamic = "force-static";
 
 const BASE = "https://vash-advokat.org";
 
+// GH Pages добавляет trailing slash к маршрутам → sitemap должен совпадать с живыми URL.
+const withTrailingSlash = (path: string) => {
+  if (path === "/") return "/";
+  return path.endsWith("/") ? path : `${path}/`;
+};
+
+// Last modified для статических страниц (когда менялись компоненты/layout).
+const STATIC_LAST_MOD = "2026-04-17";
+
+// Приоритеты по типу страницы (hint для гугла).
+const priorityFor = (path: string): number => {
+  if (path === "/") return 1.0;
+  if (path === "/blog/") return 0.8;
+  if (path.startsWith("/blog/")) return 0.7;
+  return 0.5;
+};
+
+const changeFreqFor = (path: string): "daily" | "weekly" | "monthly" => {
+  if (path === "/") return "weekly";
+  if (path === "/blog/") return "weekly";
+  if (path.startsWith("/blog/")) return "monthly";
+  return "monthly";
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const staticPaths = ["/", "/blog/"];
   const articleSlugs = Object.keys(uk.articles);
-
-  const staticPaths = ["/", "/blog"];
-  const articlePaths = articleSlugs.map((s) => `/blog/${s}`);
-
+  const articlePaths = articleSlugs.map((s) => `/blog/${s}/`);
   const allPaths = [...staticPaths, ...articlePaths];
 
   return allPaths.flatMap((path) => {
-    const ukUrl = `${BASE}${path === "/" ? "" : path}` || BASE;
-    const ruUrl = `${BASE}/ru${path === "/" ? "" : path}`;
+    const normalizedPath = withTrailingSlash(path);
+    const ukUrl = normalizedPath === "/" ? BASE : `${BASE}${normalizedPath}`;
+    const ruUrl = normalizedPath === "/" ? `${BASE}/ru/` : `${BASE}/ru${normalizedPath}`;
+
+    // Для статей берём реальный dateModified.
+    let lastMod: string = STATIC_LAST_MOD;
+    if (path.startsWith("/blog/") && path !== "/blog/") {
+      const slug = path.replace(/^\/blog\//, "").replace(/\/$/, "");
+      const article = uk.articles[slug];
+      if (article) lastMod = article.dateModified;
+    }
+
+    const alternates = {
+      languages: {
+        "uk-UA": ukUrl,
+        "ru-UA": ruUrl,
+        "x-default": ukUrl,
+      },
+    };
+
     return [
       {
         url: ukUrl,
-        lastModified: now,
-        alternates: {
-          languages: {
-            "uk-UA": ukUrl,
-            "ru-UA": ruUrl,
-            "x-default": ukUrl,
-          },
-        },
+        lastModified: new Date(lastMod),
+        changeFrequency: changeFreqFor(normalizedPath),
+        priority: priorityFor(normalizedPath),
+        alternates,
       },
       {
         url: ruUrl,
-        lastModified: now,
-        alternates: {
-          languages: {
-            "uk-UA": ukUrl,
-            "ru-UA": ruUrl,
-            "x-default": ukUrl,
-          },
-        },
+        lastModified: new Date(lastMod),
+        changeFrequency: changeFreqFor(normalizedPath),
+        priority: priorityFor(normalizedPath),
+        alternates,
       },
     ];
   });

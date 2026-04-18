@@ -81,6 +81,8 @@ export interface ArticleEntry {
   tag: string;
   title: string;
   date: string;
+  datePublished: string; // ISO 8601
+  dateModified: string;  // ISO 8601
   readTime: string;
   author: string;
   image: string;
