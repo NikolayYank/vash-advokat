@@ -27,6 +27,12 @@ export const FOUNDER_NAME_RU = "Сергей Сергеевич Веприцки
 export const FOUNDER_JOB_TITLE_UK = "Адвокат, засновник Фундації адвокатів України";
 export const FOUNDER_JOB_TITLE_RU = "Адвокат, основатель Фундации адвокатов Украины";
 export const FOUNDER_BAR_CERTIFICATE = "№1114";
+export const FOUNDER_IMAGE_URL = `${SITE_URL}/images/ava.jpg`;
+export const FOUNDER_ABOUT_PATH_UK = "/pro-nas/";
+export const FOUNDER_ABOUT_PATH_RU = "/ru/o-nas/";
+// 40 лет адвокатской практики (по состоянию на 2026), орден «Видатний адвокат України» 2013,
+// Головний редактор газети «Захист прав», автор і ведучий ТВ-програми «Людина і Закон»,
+// представник адвокатів Харківської області в Раді адвокатів України.
 
 export const escapeJson = (obj: unknown): string =>
   JSON.stringify(obj).replace(/</g, "\\u003c");

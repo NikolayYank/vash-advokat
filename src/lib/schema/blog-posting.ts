@@ -5,6 +5,8 @@ import {
   ORG_NAME_UK,
   ORG_NAME_RU,
   ORG_LOGO_URL,
+  FOUNDER_NAME_UK,
+  FOUNDER_NAME_RU,
 } from "./constants";
 
 export interface BlogPostingInput {
@@ -15,7 +17,9 @@ export interface BlogPostingInput {
   datePublished: string;
   dateModified: string;
   locale: Locale;
-  authorName: string;
+  // authorName не используется в schema напрямую — автор всегда Веприцкий (@id=Person).
+  // Оставлен для совместимости со старым вызовом.
+  authorName?: string;
 }
 
 const pathForLocale = (slug: string, locale: Locale) =>
@@ -35,11 +39,13 @@ export const getBlogPostingSchema = (input: BlogPostingInput) => {
     image: [imageUrl],
     datePublished: input.datePublished,
     dateModified: input.dateModified,
+    // Author — Person (Веприцкий). Важно для E-E-A-T YMYL: Google понимает кто эксперт.
     author: {
-      "@type": "Organization",
-      "@id": SCHEMA_IDS.organization,
-      name: input.authorName,
+      "@type": "Person",
+      "@id": SCHEMA_IDS.founder,
+      name: input.locale === "uk" ? FOUNDER_NAME_UK : FOUNDER_NAME_RU,
     },
+    // Publisher — Organization (Фундация).
     publisher: {
       "@type": "Organization",
       "@id": SCHEMA_IDS.organization,
