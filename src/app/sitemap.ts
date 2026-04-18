@@ -18,6 +18,7 @@ const STATIC_LAST_MOD = "2026-04-17";
 const priorityFor = (path: string): number => {
   if (path === "/") return 1.0;
   if (path === "/pro-nas/") return 0.9;
+  if (path === "/kontakty/") return 0.9;
   if (path === "/blog/") return 0.8;
   if (path.startsWith("/blog/")) return 0.7;
   return 0.5;
@@ -37,6 +38,7 @@ const LOCALIZED_PATH_OVERRIDES: Record<
   { ru: string; priority?: number; changeFrequency?: "daily" | "weekly" | "monthly" }
 > = {
   "/pro-nas/": { ru: "/ru/o-nas/", priority: 0.9, changeFrequency: "monthly" },
+  "/kontakty/": { ru: "/ru/kontakty/", priority: 0.9, changeFrequency: "monthly" },
 };
 
 // Изображения, релевантные для image sitemap (GoogleImages / Discover).
@@ -70,7 +72,7 @@ const imagesFor = (path: string): string[] => {
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["/", "/blog/", "/pro-nas/"];
+  const staticPaths = ["/", "/blog/", "/pro-nas/", "/kontakty/"];
   const articleSlugs = Object.keys(uk.articles);
   const articlePaths = articleSlugs.map((s) => `/blog/${s}/`);
   const allPaths = [...staticPaths, ...articlePaths];

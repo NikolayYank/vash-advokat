@@ -27,9 +27,11 @@ interface Props {
   locale: Locale;
   breadcrumbs?: BreadcrumbUiItem[];
   breadcrumbLabel?: string;
+  relatedArticles?: ArticleEntry[];
+  relatedLabel?: string;
 }
 
-export default function ArticleContent({ article, dict, locale, breadcrumbs, breadcrumbLabel }: Props) {
+export default function ArticleContent({ article, dict, locale, breadcrumbs, breadcrumbLabel, relatedArticles, relatedLabel }: Props) {
   useEffect(() => {
     const links = document.querySelectorAll<HTMLAnchorElement>(".toc-list a");
     const sections: { id: string; el: Element; link: HTMLAnchorElement }[] = [];
@@ -174,6 +176,41 @@ export default function ArticleContent({ article, dict, locale, breadcrumbs, bre
               </Link>
             </div>
           </aside>
+
+          {/* RELATED ARTICLES */}
+          {relatedArticles && relatedArticles.length > 0 && (
+            <section className="related-articles" aria-labelledby="related-articles-header">
+              <h2 id="related-articles-header" className="related-articles-header">
+                {relatedLabel ?? (locale === "uk" ? "Схожі матеріали" : "Похожие материалы")}
+              </h2>
+              <ul className="related-articles-list">
+                {relatedArticles.map((r) => {
+                  const href = locale === "uk" ? `/blog/${r.slug}/` : `/ru/blog/${r.slug}/`;
+                  return (
+                    <li key={r.slug} className="related-articles-item">
+                      <Link href={href} className="related-articles-link">
+                        <OptimizedImage
+                          src={r.image}
+                          alt={r.coverAlt}
+                          width={320}
+                          height={180}
+                          className="related-articles-image"
+                          sizes="(max-width: 720px) 100vw, 320px"
+                        />
+                        <div className="related-articles-body">
+                          <div className="related-articles-tag">{r.tag}</div>
+                          <div className="related-articles-title">{r.title}</div>
+                          <time className="related-articles-date" dateTime={r.datePublished}>
+                            {formatIsoDate(r.datePublished)}
+                          </time>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          )}
 
           {/* END BLOCK */}
           <div className="article-end">
