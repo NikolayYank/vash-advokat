@@ -494,6 +494,7 @@ export const uk: Dict = {
       author: "Сергій Веприцький",
       image: asset("/images/blog_fraud.jpeg"),
       coverAlt: "Зімʼятий паспорт і банківська картка поруч з ноутбуком — ілюстрація до 7 ознак шахрайства",
+      ogImage: asset("/images/og/og_fraud.jpeg"),
       metaDescription: "7 ознак шахрайства, 10 актуальних схем 2026 з механікою, 6-кроковий протокол для жертви і правила цифрової гігієни. Фундація адвокатів України.",
       toc: [
         { id: "signs", label: "7 ознак шахрайства" },
@@ -520,6 +521,7 @@ export const uk: Dict = {
       author: "Сергій Веприцький",
       image: asset("/images/b2b_shield.jpeg"),
       coverAlt: "Щит з мечем над відкритою теглою — метафора постійного правового захисту бізнесу за абонементним договором",
+      ogImage: asset("/images/og/og_abonement.jpeg"),
       metaDescription: "Абонементний договір — Свій адвокат на рік: коли абонементний договір окуповує себе одним дзвінком. Фундація адвокатів України.",
       toc: [
         { id: "mechanics", label: "Що це і як працює" },
@@ -546,6 +548,7 @@ export const uk: Dict = {
       author: "Сергій Веприцький",
       image: asset("/images/blog_search.jpeg"),
       coverAlt: "Поліцейські у формі біля вхідних дверей квартири — ілюстрація до покрокової інструкції при обшуку",
+      ogImage: asset("/images/og/og_criminal.jpeg"),
       metaDescription: "Кримінальне право — Обшук: покрокова інструкція до, під час і після. Фундація адвокатів України.",
       toc: [
         { id: "before", label: "Що зробити заздалегідь" },

@@ -494,6 +494,7 @@ export const ru: Dict = {
       author: "Сергей Веприцкий",
       image: asset("/images/blog_fraud.jpeg"),
       coverAlt: "Смятый паспорт и банковская карта рядом с ноутбуком — иллюстрация к 7 признакам мошенничества",
+      ogImage: asset("/images/og/og_fraud.jpeg"),
       metaDescription: "7 признаков мошенничества, 10 актуальных схем 2026 с механикой, 6-шаговый протокол для жертвы и правила цифровой гигиены. Фундация адвокатов Украины.",
       toc: [
         { id: "signs", label: "7 признаков мошенничества" },
@@ -520,6 +521,7 @@ export const ru: Dict = {
       author: "Сергей Веприцкий",
       image: asset("/images/b2b_shield.jpeg"),
       coverAlt: "Щит с мечом над открытой папкой — метафора постоянной правовой защиты бизнеса по абонементному договору",
+      ogImage: asset("/images/og/og_abonement.jpeg"),
       metaDescription: "Абонентский договор — Свой адвокат на год: когда абонентский договор окупает себя одним звонком. Фундация адвокатов Украины.",
       toc: [
         { id: "mechanics", label: "Что это и как работает" },
@@ -546,6 +548,7 @@ export const ru: Dict = {
       author: "Сергей Веприцкий",
       image: asset("/images/blog_search.jpeg"),
       coverAlt: "Полицейские в форме у входной двери квартиры — иллюстрация к пошаговой инструкции при обыске",
+      ogImage: asset("/images/og/og_criminal.jpeg"),
       metaDescription: "Уголовное право — Обыск: пошаговая инструкция до, во время и после. Фундация адвокатов Украины.",
       toc: [
         { id: "before", label: "Что сделать заранее" },

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { EB_Garamond, Lato } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { asset } from "@/lib/asset";
-import LangSync from "@/components/LangSync";
 import JsonLd from "@/components/JsonLd";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getWebSiteSchema } from "@/lib/schema/website";
@@ -68,7 +67,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function RootLayoutUk({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -77,7 +76,6 @@ export default function RootLayout({
     <html lang="uk" className={`${ebGaramond.variable} ${lato.variable}`}>
       <body>
         <JsonLd data={[getOrganizationSchema("uk"), getWebSiteSchema()]} id="site-schema" />
-        <LangSync />
         {children}
       </body>
     </html>

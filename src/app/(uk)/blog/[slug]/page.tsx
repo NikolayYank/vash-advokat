@@ -19,6 +19,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = uk.articles[slug];
   if (!article) return { title: "Стаття не знайдена" };
+  const ogImageUrl = article.ogImage ?? article.image;
   return {
     title: article.title,
     description: article.metaDescription,
@@ -29,6 +30,31 @@ export async function generateMetadata({
         "ru-UA": `/ru/blog/${slug}`,
         "x-default": `/blog/${slug}`,
       },
+    },
+    openGraph: {
+      title: article.title,
+      description: article.metaDescription,
+      type: "article",
+      locale: "uk_UA",
+      siteName: "Фундація адвокатів України",
+      publishedTime: article.datePublished,
+      modifiedTime: article.dateModified,
+      authors: ["https://vash-advokat.org/pro-nas/"],
+      url: `https://vash-advokat.org/blog/${slug}/`,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 675,
+          alt: article.coverAlt,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.metaDescription,
+      images: [ogImageUrl],
     },
   };
 }

@@ -39,6 +39,36 @@ const LOCALIZED_PATH_OVERRIDES: Record<
   "/pro-nas/": { ru: "/ru/o-nas/", priority: 0.9, changeFrequency: "monthly" },
 };
 
+// Изображения, релевантные для image sitemap (GoogleImages / Discover).
+// Абсолютные URL, по одному или несколько на страницу.
+const imagesFor = (path: string): string[] => {
+  if (path === "/") {
+    return [
+      `${BASE}/images/office_exterior.jpeg`,
+      `${BASE}/images/logo_mini.png`,
+    ];
+  }
+  if (path === "/pro-nas/") {
+    return [`${BASE}/images/ava.jpg`];
+  }
+  if (path === "/blog/") {
+    return [
+      `${BASE}/images/blog_fraud.jpeg`,
+      `${BASE}/images/blog_criminal.jpeg`,
+      `${BASE}/images/b2b_shield.jpeg`,
+    ];
+  }
+  if (path.startsWith("/blog/")) {
+    const slug = path.replace(/^\/blog\//, "").replace(/\/$/, "");
+    const article = uk.articles[slug];
+    if (article?.image) {
+      const abs = article.image.startsWith("http") ? article.image : `${BASE}${article.image}`;
+      return [abs];
+    }
+  }
+  return [];
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = ["/", "/blog/", "/pro-nas/"];
   const articleSlugs = Object.keys(uk.articles);
@@ -71,6 +101,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     };
 
+    const ukImages = imagesFor(normalizedPath);
+    // Для ru-зеркала используем те же изображения (один физический актив на локали).
+    const ruImages = ukImages;
+
     return [
       {
         url: ukUrl,
@@ -78,6 +112,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: changeFreqFor(normalizedPath),
         priority: priorityFor(normalizedPath),
         alternates,
+        ...(ukImages.length > 0 ? { images: ukImages } : {}),
       },
       {
         url: ruUrl,
@@ -85,6 +120,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: changeFreqFor(normalizedPath),
         priority: priorityFor(normalizedPath),
         alternates,
+        ...(ruImages.length > 0 ? { images: ruImages } : {}),
       },
     ];
   });
