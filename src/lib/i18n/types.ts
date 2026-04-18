@@ -96,6 +96,28 @@ export interface ArticleEntry {
   };
 }
 
+export interface AboutFactBadge {
+  icon: string;
+  label: ReactNode;
+}
+
+export interface AboutSection {
+  h1: ReactNode;
+  lead: ReactNode;
+  imageAlt: string;
+  credentialsHeader: ReactNode;
+  credentials: AboutFactBadge[];
+  bioHeader: ReactNode;
+  bio: ReactNode[];
+  practiceHeader: ReactNode;
+  practicePoints: ReactNode[];
+  mediaHeader: ReactNode;
+  mediaPoints: ReactNode[];
+  ctaHeader: ReactNode;
+  ctaText: ReactNode;
+  ctaButton: string;
+}
+
 export interface Dict {
   htmlLang: string;
 
@@ -108,6 +130,9 @@ export interface Dict {
     homeOgImageAlt: string;
     blogListTitle: string;
     blogListDescription: string;
+    aboutTitle: string;
+    aboutDescription: string;
+    aboutOgTitle: string;
     titleTemplate: string;
   };
 
@@ -242,6 +267,8 @@ export interface Dict {
     tocLabel: string;
     backToBlog: string;
   };
+
+  about: AboutSection;
 
   notFound: {
     bodyText: ReactNode;

@@ -17,6 +17,7 @@ const STATIC_LAST_MOD = "2026-04-17";
 // Приоритеты по типу страницы (hint для гугла).
 const priorityFor = (path: string): number => {
   if (path === "/") return 1.0;
+  if (path === "/pro-nas/") return 0.9;
   if (path === "/blog/") return 0.8;
   if (path.startsWith("/blog/")) return 0.7;
   return 0.5;
@@ -29,16 +30,30 @@ const changeFreqFor = (path: string): "daily" | "weekly" | "monthly" => {
   return "monthly";
 };
 
+// Пути, которые имеют разные slug'и в uk и ru версиях (не просто ru = /ru + uk-path).
+// Формат: uk-path → { ru: ru-path, priority?: number, changeFrequency?: ... }.
+const LOCALIZED_PATH_OVERRIDES: Record<
+  string,
+  { ru: string; priority?: number; changeFrequency?: "daily" | "weekly" | "monthly" }
+> = {
+  "/pro-nas/": { ru: "/ru/o-nas/", priority: 0.9, changeFrequency: "monthly" },
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["/", "/blog/"];
+  const staticPaths = ["/", "/blog/", "/pro-nas/"];
   const articleSlugs = Object.keys(uk.articles);
   const articlePaths = articleSlugs.map((s) => `/blog/${s}/`);
   const allPaths = [...staticPaths, ...articlePaths];
 
   return allPaths.flatMap((path) => {
     const normalizedPath = withTrailingSlash(path);
+    const override = LOCALIZED_PATH_OVERRIDES[normalizedPath];
     const ukUrl = normalizedPath === "/" ? BASE : `${BASE}${normalizedPath}`;
-    const ruUrl = normalizedPath === "/" ? `${BASE}/ru/` : `${BASE}/ru${normalizedPath}`;
+    const ruUrl = override
+      ? `${BASE}${override.ru}`
+      : normalizedPath === "/"
+        ? `${BASE}/ru/`
+        : `${BASE}/ru${normalizedPath}`;
 
     // Для статей берём реальный dateModified.
     let lastMod: string = STATIC_LAST_MOD;
