@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 import OptimizedImage from "@/components/OptimizedImage";
+import Breadcrumbs, { type BreadcrumbUiItem } from "@/components/Breadcrumbs";
 import type { Dict, Locale, ArticleEntry } from "@/lib/i18n";
 
 function localizeHref(href: string, locale: Locale): string {
@@ -24,9 +25,11 @@ interface Props {
   article: ArticleEntry;
   dict: Dict;
   locale: Locale;
+  breadcrumbs?: BreadcrumbUiItem[];
+  breadcrumbLabel?: string;
 }
 
-export default function ArticleContent({ article, dict, locale }: Props) {
+export default function ArticleContent({ article, dict, locale, breadcrumbs, breadcrumbLabel }: Props) {
   useEffect(() => {
     const links = document.querySelectorAll<HTMLAnchorElement>(".toc-list a");
     const sections: { id: string; el: Element; link: HTMLAnchorElement }[] = [];
@@ -99,6 +102,9 @@ export default function ArticleContent({ article, dict, locale }: Props) {
 
         {/* Article Content */}
         <article className="article">
+          {breadcrumbs && breadcrumbLabel && (
+            <Breadcrumbs items={breadcrumbs} ariaLabel={breadcrumbLabel} />
+          )}
           <div className="article-tag">{article.tag}</div>
 
           <h1>{article.title}</h1>
