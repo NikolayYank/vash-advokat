@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { asset } from "@/lib/asset";
+import OptimizedImage from "@/components/OptimizedImage";
 import type { Dict, Locale } from "@/lib/i18n";
 
 interface Props {
@@ -74,10 +75,14 @@ export default function AboutContent({ dict, locale }: Props) {
       <article className="article about-page">
         <h1>{about.h1}</h1>
 
-        <img
+        <OptimizedImage
           src={asset("/images/ava.jpg")}
           alt={about.imageAlt}
+          width={1200}
+          height={1600}
           className="article-cover"
+          priority
+          sizes="(max-width: 720px) 100vw, 720px"
         />
 
         <p className="about-lead">{about.lead}</p>

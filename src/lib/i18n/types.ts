@@ -86,6 +86,7 @@ export interface ArticleEntry {
   readTime: string;
   author: string;
   image: string;
+  coverAlt: string;
   metaDescription: string;
   toc: ArticleTocItem[];
   body: ReactNode;

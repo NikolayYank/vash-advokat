@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { asset } from "@/lib/asset";
+import OptimizedImage from "@/components/OptimizedImage";
 import type { Dict, Locale, ArticleEntry } from "@/lib/i18n";
 
 function localizeHref(href: string, locale: Locale): string {
@@ -129,17 +130,24 @@ export default function ArticleContent({ article, dict, locale }: Props) {
             </span>
           </div>
 
-          <img src={article.image} alt={article.title} className="article-cover" />
+          <OptimizedImage
+            src={article.image}
+            alt={article.coverAlt}
+            width={1200}
+            height={675}
+            className="article-cover"
+            priority
+            sizes="(max-width: 720px) 100vw, 720px"
+          />
 
           <div className="article-body">{article.body}</div>
 
           {/* AUTHOR BIO */}
           <aside className="article-author-bio" aria-labelledby="article-author-bio-header">
-            <img
+            <OptimizedImage
               src={dict.article.authorImage}
               alt={dict.article.authorImageAlt}
               className="article-author-bio-photo"
-              loading="lazy"
               width={120}
               height={160}
             />

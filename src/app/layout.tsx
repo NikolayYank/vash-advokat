@@ -29,6 +29,17 @@ export const metadata: Metadata = {
   },
   description:
     "Адвокатське об'єднання «Фундація адвокатів України». Захист та надійність з 2010 року. Безкоштовна перша консультація.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: [
       { url: asset("/favicon-32x32.png"), sizes: "32x32", type: "image/png" },
