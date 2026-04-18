@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 import OptimizedImage from "@/components/OptimizedImage";
+import Breadcrumbs, { type BreadcrumbUiItem } from "@/components/Breadcrumbs";
 import type { Dict, Locale } from "@/lib/i18n";
 
 interface Props {
   dict: Dict;
   locale: Locale;
+  breadcrumbs?: BreadcrumbUiItem[];
+  breadcrumbLabel?: string;
 }
 
 function localizeHref(href: string, locale: Locale): string {
@@ -23,7 +26,7 @@ function localizeHref(href: string, locale: Locale): string {
   return `/ru${href === "/" ? "" : href}` || "/ru";
 }
 
-export default function AboutContent({ dict, locale }: Props) {
+export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabel }: Props) {
   const about = dict.about;
   const homeHref = locale === "uk" ? "/" : "/ru";
   const blogHref = locale === "uk" ? "/blog" : "/ru/blog";
@@ -73,6 +76,9 @@ export default function AboutContent({ dict, locale }: Props) {
       </header>
 
       <article className="article about-page">
+        {breadcrumbs && breadcrumbLabel && (
+          <Breadcrumbs items={breadcrumbs} ariaLabel={breadcrumbLabel} />
+        )}
         <h1>{about.h1}</h1>
 
         <OptimizedImage

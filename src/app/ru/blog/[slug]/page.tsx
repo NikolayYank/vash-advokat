@@ -57,16 +57,23 @@ export default async function ArticlePageRu({
     authorName: article.author,
   });
 
-  const breadcrumbSchema = getBreadcrumbSchema([
+  const breadcrumbs = [
     { name: "Главная", path: "/ru/" },
     { name: "Полезные материалы", path: "/ru/blog/" },
     { name: article.title, path: `/ru/blog/${article.slug}/` },
-  ]);
+  ];
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
 
   return (
     <>
       <JsonLd data={[blogPostingSchema, breadcrumbSchema]} id="article-schema" />
-      <ArticleContent article={article} dict={ru} locale="ru" />
+      <ArticleContent
+        article={article}
+        dict={ru}
+        locale="ru"
+        breadcrumbs={breadcrumbs}
+        breadcrumbLabel="Хлебные крошки"
+      />
     </>
   );
 }

@@ -35,10 +35,11 @@ export const metadata: Metadata = {
 export default function OnasPageRu() {
   const personSchema = getPersonSchema("ru");
   const profileSchema = getProfilePageSchema("ru");
-  const breadcrumbSchema = getBreadcrumbSchema([
+  const breadcrumbs = [
     { name: "Главная", path: "/ru/" },
     { name: "О нас", path: "/ru/o-nas/" },
-  ]);
+  ];
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
 
   return (
     <>
@@ -46,7 +47,12 @@ export default function OnasPageRu() {
         data={[personSchema, profileSchema, breadcrumbSchema]}
         id="about-schema"
       />
-      <AboutContent dict={ru} locale="ru" />
+      <AboutContent
+        dict={ru}
+        locale="ru"
+        breadcrumbs={breadcrumbs}
+        breadcrumbLabel="Хлебные крошки"
+      />
     </>
   );
 }

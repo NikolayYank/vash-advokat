@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
+import OptimizedImage from "@/components/OptimizedImage";
+import Breadcrumbs, { type BreadcrumbUiItem } from "@/components/Breadcrumbs";
 import type { Dict, Locale } from "@/lib/i18n";
 
 function localizeHref(href: string, locale: Locale): string {
@@ -9,7 +11,14 @@ function localizeHref(href: string, locale: Locale): string {
   return `/ru${href === "/" ? "" : href}` || "/ru";
 }
 
-export default function BlogListContent({ dict, locale }: { dict: Dict; locale: Locale }) {
+interface Props {
+  dict: Dict;
+  locale: Locale;
+  breadcrumbs?: BreadcrumbUiItem[];
+  breadcrumbLabel?: string;
+}
+
+export default function BlogListContent({ dict, locale, breadcrumbs, breadcrumbLabel }: Props) {
   const homeHref = locale === "uk" ? "/" : "/ru";
   const switchPath = locale === "uk" ? "/ru/blog" : "/blog";
 
@@ -40,6 +49,9 @@ export default function BlogListContent({ dict, locale }: { dict: Dict; locale: 
       {/* PAGE TITLE */}
       <section className="page-title">
         <div className="container">
+          {breadcrumbs && breadcrumbLabel && (
+            <Breadcrumbs items={breadcrumbs} ariaLabel={breadcrumbLabel} />
+          )}
           <h1>{dict.blogList.h1}</h1>
           <p>{dict.blogList.subtitle}</p>
         </div>
@@ -51,10 +63,17 @@ export default function BlogListContent({ dict, locale }: { dict: Dict; locale: 
           <div className="articles-grid">
             {dict.blogList.articles.map((a) => (
               <Link key={a.slug} href={localizeHref(`/blog/${a.slug}`, locale)} className="article-card">
-                <div
-                  className="article-card-image"
-                  style={a.image ? { backgroundImage: `url(${a.image})` } : undefined}
-                />
+                <div className="article-card-image">
+                  {a.image && (
+                    <OptimizedImage
+                      src={a.image}
+                      alt={a.title}
+                      width={480}
+                      height={270}
+                      sizes="(max-width: 720px) 100vw, 360px"
+                    />
+                  )}
+                </div>
                 <div className="article-card-body">
                   <div className="article-card-tag">{a.tag}</div>
                   <h3>{a.title}</h3>

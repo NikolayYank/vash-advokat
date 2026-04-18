@@ -32,6 +32,7 @@ import MuxPlayer from "@mux/mux-player-react";
 import { asset } from "@/lib/asset";
 import type { Dict, Locale } from "@/lib/i18n";
 import ContactForm from "@/components/ContactForm";
+import OptimizedImage from "@/components/OptimizedImage";
 
 /* ===== Scroll reveal hook ===== */
 function useReveal() {
@@ -809,7 +810,14 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             {dict.blogPreview.cards.map((c) => (
               <Link key={c.href} href={localizeHref(c.href, locale)} className="blog-card">
                 <div className="blog-card-image">
-                  <img src={c.img} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <OptimizedImage
+                    src={c.img}
+                    alt={c.title}
+                    width={480}
+                    height={270}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    sizes="(max-width: 720px) 100vw, 360px"
+                  />
                 </div>
                 <div className="blog-card-body">
                   <div className="blog-card-tag">{c.tag}</div>
@@ -824,7 +832,13 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             {dict.blogPreview.cards.map((c) => (
               <Link key={c.href} href={localizeHref(c.href, locale)} className="blog-scroll-card">
                 <div className="blog-scroll-image">
-                  <img src={c.img} alt={c.title} />
+                  <OptimizedImage
+                    src={c.img}
+                    alt={c.title}
+                    width={480}
+                    height={270}
+                    sizes="(max-width: 720px) 80vw, 360px"
+                  />
                 </div>
                 <div className="blog-scroll-body">
                   <div className="blog-scroll-tag">{c.tag}</div>

@@ -18,15 +18,21 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const breadcrumbSchema = getBreadcrumbSchema([
+  const breadcrumbs = [
     { name: "Головна", path: "/" },
     { name: "Корисні матеріали", path: "/blog/" },
-  ]);
+  ];
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
 
   return (
     <>
       <JsonLd data={breadcrumbSchema} id="blog-list-schema" />
-      <BlogListContent dict={uk} locale="uk" />
+      <BlogListContent
+        dict={uk}
+        locale="uk"
+        breadcrumbs={breadcrumbs}
+        breadcrumbLabel="Хлібні крихти"
+      />
     </>
   );
 }

@@ -35,10 +35,11 @@ export const metadata: Metadata = {
 export default function ProNasPage() {
   const personSchema = getPersonSchema("uk");
   const profileSchema = getProfilePageSchema("uk");
-  const breadcrumbSchema = getBreadcrumbSchema([
+  const breadcrumbs = [
     { name: "Головна", path: "/" },
     { name: "Про нас", path: "/pro-nas/" },
-  ]);
+  ];
+  const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
 
   return (
     <>
@@ -46,7 +47,12 @@ export default function ProNasPage() {
         data={[personSchema, profileSchema, breadcrumbSchema]}
         id="about-schema"
       />
-      <AboutContent dict={uk} locale="uk" />
+      <AboutContent
+        dict={uk}
+        locale="uk"
+        breadcrumbs={breadcrumbs}
+        breadcrumbLabel="Хлібні крихти"
+      />
     </>
   );
 }
