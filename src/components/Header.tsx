@@ -11,7 +11,7 @@ const navLinks = [
   { href: "/#pro-nas", label: "Про нас" },
   { href: "/#abonement", label: "Абонентський договір" },
   { href: "/blog", label: "Блог" },
-  { href: "/#kontakty", label: "Контакти" },
+  { href: "/kontakty", label: "Контакти" },
 ];
 
 export default function Header() {

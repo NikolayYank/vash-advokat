@@ -6,6 +6,7 @@ import { uk } from "@/lib/i18n";
 import { getBlogPostingSchema } from "@/lib/schema/blog-posting";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumbs";
 import { SITE_URL } from "@/lib/schema/constants";
+import { getRelatedArticles } from "@/lib/related";
 
 export async function generateStaticParams() {
   return Object.keys(uk.articles).map((slug) => ({ slug }));
@@ -90,6 +91,8 @@ export default async function ArticlePage({
   ];
   const breadcrumbSchema = getBreadcrumbSchema(breadcrumbs);
 
+  const relatedArticles = getRelatedArticles(slug, uk.articles, 3);
+
   return (
     <>
       <JsonLd data={[blogPostingSchema, breadcrumbSchema]} id="article-schema" />
@@ -99,6 +102,8 @@ export default async function ArticlePage({
         locale="uk"
         breadcrumbs={breadcrumbs}
         breadcrumbLabel="Хлібні крихти"
+        relatedArticles={relatedArticles}
+        relatedLabel="Схожі матеріали"
       />
     </>
   );

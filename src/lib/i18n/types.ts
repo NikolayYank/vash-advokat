@@ -88,6 +88,8 @@ export interface ArticleEntry {
   image: string;
   coverAlt: string;
   ogImage?: string;
+  category: "fraud" | "criminal" | "business" | "general";
+  tags: string[];
   metaDescription: string;
   toc: ArticleTocItem[];
   body: ReactNode;
