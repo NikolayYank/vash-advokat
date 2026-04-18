@@ -153,19 +153,15 @@ export default function Footer() {
               <div className="flex items-start gap-2 text-[0.9375rem]">
                 <Mail size={16} className="text-accent shrink-0 mt-0.5" />
                 <a
-                  href="mailto:info@vash-advokat.org"
+                  href="mailto:promo.vashadvokat@gmail.com"
                   className="text-white/80 no-underline hover:text-accent"
                 >
-                  info@vash-advokat.org
+                  promo.vashadvokat@gmail.com
                 </a>
               </div>
               <div className="flex items-start gap-2 text-[0.9375rem]">
                 <MapPin size={16} className="text-accent shrink-0 mt-0.5" />
-                <span>
-                  м. Харків, вул. Римарська, 19
-                  <br />
-                  м. Київ
-                </span>
+                <span>м. Харків, вул. Римарська, 19</span>
               </div>
               <div className="flex items-start gap-2 text-[0.9375rem]">
                 <Clock size={16} className="text-accent shrink-0 mt-0.5" />

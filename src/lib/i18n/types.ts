@@ -266,6 +266,18 @@ export interface Dict {
   article: {
     tocLabel: string;
     backToBlog: string;
+    authorPrefix: string;
+    authorCredential: string;
+    authorProfilePath: string;
+    publishedLabel: string;
+    modifiedLabel: string;
+    authorBioHeader: string;
+    authorBioName: string;
+    authorBioTitle: string;
+    authorBioLines: ReactNode[];
+    authorBioCta: string;
+    authorImage: string;
+    authorImageAlt: string;
   };
 
   about: AboutSection;

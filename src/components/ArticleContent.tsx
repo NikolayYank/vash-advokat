@@ -12,6 +12,13 @@ function localizeHref(href: string, locale: Locale): string {
   return `/ru${href === "/" ? "" : href}` || "/ru";
 }
 
+function formatIsoDate(iso: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (!match) return iso;
+  const [, y, m, d] = match;
+  return `${d}.${m}.${y}`;
+}
+
 interface Props {
   article: ArticleEntry;
   dict: Dict;
@@ -97,22 +104,62 @@ export default function ArticleContent({ article, dict, locale }: Props) {
 
           <div className="article-meta">
             <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>
+                {dict.article.authorPrefix}{" "}
+                <Link href={dict.article.authorProfilePath} className="article-author-link" rel="author">
+                  {article.author}
+                </Link>
+                , {dict.article.authorCredential}
+              </span>
+            </span>
+            <span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              {article.date}
+              {dict.article.publishedLabel}{" "}
+              <time dateTime={article.datePublished}>{formatIsoDate(article.datePublished)}</time>
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              {dict.article.modifiedLabel}{" "}
+              <time dateTime={article.dateModified}>{formatIsoDate(article.dateModified)}</time>
             </span>
             <span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               {article.readTime}
-            </span>
-            <span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              {article.author}
             </span>
           </div>
 
           <img src={article.image} alt={article.title} className="article-cover" />
 
           <div className="article-body">{article.body}</div>
+
+          {/* AUTHOR BIO */}
+          <aside className="article-author-bio" aria-labelledby="article-author-bio-header">
+            <img
+              src={dict.article.authorImage}
+              alt={dict.article.authorImageAlt}
+              className="article-author-bio-photo"
+              loading="lazy"
+              width={120}
+              height={160}
+            />
+            <div className="article-author-bio-body">
+              <div id="article-author-bio-header" className="article-author-bio-header">
+                {dict.article.authorBioHeader}
+              </div>
+              <div className="article-author-bio-name">{dict.article.authorBioName}</div>
+              <div className="article-author-bio-title">{dict.article.authorBioTitle}</div>
+              <ul className="article-author-bio-lines">
+                {dict.article.authorBioLines.map((line, i) => (
+                  <li key={i}>{line}</li>
+                ))}
+              </ul>
+              <Link href={dict.article.authorProfilePath} className="article-author-bio-cta" rel="author">
+                {dict.article.authorBioCta}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </Link>
+            </div>
+          </aside>
 
           {/* END BLOCK */}
           <div className="article-end">

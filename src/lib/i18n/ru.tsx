@@ -425,13 +425,7 @@ export const ru: Dict = {
       { href: "/blog", label: "Блог" },
       { href: "/kontakty", label: "Контакты" },
     ],
-    addressLines: (
-      <>
-        г. Харьков, ул. Рымарская, 19
-        <br />
-        г. Киев
-      </>
-    ),
+    addressLines: <>г. Харьков, ул. Рымарская, 19</>,
     hoursLines: (
       <>
         Пн–Пт: 9:00–18:00
@@ -497,7 +491,7 @@ export const ru: Dict = {
       datePublished: "2026-04-05",
       dateModified: "2026-04-17",
       readTime: "14 мин чтения",
-      author: "Фундация адвокатов",
+      author: "Сергей Веприцкий",
       image: asset("/images/blog_fraud.jpeg"),
       metaDescription: "7 признаков мошенничества, 10 актуальных схем 2026 с механикой, 6-шаговый протокол для жертвы и правила цифровой гигиены. Фундация адвокатов Украины.",
       toc: [
@@ -522,7 +516,7 @@ export const ru: Dict = {
       datePublished: "2026-04-10",
       dateModified: "2026-04-17",
       readTime: "10 мин чтения",
-      author: "Фундация адвокатов",
+      author: "Сергей Веприцкий",
       image: asset("/images/b2b_shield.jpeg"),
       metaDescription: "Абонентский договор — Свой адвокат на год: когда абонентский договор окупает себя одним звонком. Фундация адвокатов Украины.",
       toc: [
@@ -547,7 +541,7 @@ export const ru: Dict = {
       datePublished: "2026-04-15",
       dateModified: "2026-04-17",
       readTime: "12 мин чтения",
-      author: "Фундация адвокатов",
+      author: "Сергей Веприцкий",
       image: asset("/images/blog_search.jpeg"),
       metaDescription: "Уголовное право — Обыск: пошаговая инструкция до, во время и после. Фундация адвокатов Украины.",
       toc: [
@@ -569,6 +563,22 @@ export const ru: Dict = {
   article: {
     tocLabel: "Содержание",
     backToBlog: "Все материалы",
+    authorPrefix: "Автор:",
+    authorCredential: "удостоверение адвоката №1114",
+    authorProfilePath: "/ru/o-nas/",
+    publishedLabel: "Опубликовано",
+    modifiedLabel: "Обновлено",
+    authorBioHeader: "Об авторе",
+    authorBioName: "Сергей Веприцкий",
+    authorBioTitle: "Адвокат, основатель Фундации адвокатов Украины",
+    authorBioLines: [
+      <>38 лет адвокатской практики · 11 500+ дел · 87% в пользу клиентов</>,
+      <>Удостоверение адвоката №1114 · Орден «Выдающийся адвокат Украины» (2013)</>,
+      <>Представитель адвокатов Харьковской области в Совете адвокатов Украины</>,
+    ],
+    authorBioCta: "Читать больше об авторе",
+    authorImage: asset("/images/ava.jpg"),
+    authorImageAlt: "Сергей Веприцкий — адвокат, основатель Фундации адвокатов Украины",
   },
 
   about: {
