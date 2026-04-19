@@ -2070,6 +2070,18 @@ h2 { font-size: var(--font-h2); }
   margin-top: auto;
 }
 
+/* AI Disclosure — subtle E-E-A-T marker for AI-assisted articles */
+.article-ai-disclosure {
+  margin-top: var(--space-2xl);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--color-text-muted, rgba(0, 0, 0, 0.5));
+  font-style: italic;
+  max-width: 680px;
+  padding: var(--space-s) 0;
+  border-top: 1px dashed var(--color-border);
+}
+
 /* Article end block */
 .article-end {
   margin-top: var(--space-3xl);

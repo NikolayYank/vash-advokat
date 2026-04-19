@@ -282,6 +282,7 @@ export interface Dict {
     authorBioCta: string;
     authorImage: string;
     authorImageAlt: string;
+    aiDisclosure: string;
   };
 
   about: AboutSection;

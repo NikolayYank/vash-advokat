@@ -212,6 +212,11 @@ export default function ArticleContent({ article, dict, locale, breadcrumbs, bre
             </section>
           )}
 
+          {/* AI DISCLOSURE — ненав'язлива плашка для E-E-A-T, спеціально мінімалістична */}
+          <p className="article-ai-disclosure" role="note">
+            {dict.article.aiDisclosure}
+          </p>
+
           {/* END BLOCK */}
           <div className="article-end">
             <img src={asset("/images/logo_mini.png")} alt={dict.header.logoAlt} className="article-end-logo" />
