@@ -72,6 +72,7 @@ export default function FAQClusterContent({ locale, cluster, cards }: Props) {
     <div className="faq-scope">
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
+      <main>
       <section className="faq-narrow faq-hero">
         <nav className="faq-breadcrumbs" aria-label="breadcrumbs">
           <Link href={homeHref}>{l.breadcrumbHome}</Link>
@@ -196,6 +197,7 @@ export default function FAQClusterContent({ locale, cluster, cards }: Props) {
       <section className="faq-narrow faq-section-last">
         <AIDisclosureBox locale={locale} />
       </section>
+      </main>
 
       <SiteFooter dict={dict} locale={locale} />
       <StickyCTA locale={locale} />

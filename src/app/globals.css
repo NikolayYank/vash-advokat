@@ -6,6 +6,7 @@
   --color-primary-dark: #0F172A;
   --color-accent: #D4AF37;
   --color-accent-warm: #B45309;
+  --color-accent-warm-strong: #9A4408;
   --color-bg: #F8FAFC;
   --color-surface: #FFFFFF;
   --color-text: #0F172A;
@@ -27,6 +28,7 @@
   --color-primary-dark: #0F172A;
   --color-accent: #D4AF37;
   --color-accent-warm: #B45309;
+  --color-accent-warm-strong: #9A4408;
   --color-bg: #F8FAFC;
   --color-surface: #FFFFFF;
   --color-text: #0F172A;
@@ -353,7 +355,7 @@ h2 { font-size: var(--font-h2); }
   color: #FFFFFF;
 }
 .btn-primary:hover {
-  background: #9A4408;
+  background: var(--color-accent-warm-strong);
   color: #FFFFFF;
 }
 
@@ -1542,7 +1544,7 @@ h2 { font-size: var(--font-h2); }
   max-width: 280px;
 }
 
-.footer h4 {
+.footer h3 {
   color: var(--color-surface);
   font-family: var(--font-body);
   font-size: 0.875rem;
@@ -2058,8 +2060,8 @@ h2 { font-size: var(--font-h2); }
   border-left-color: var(--color-accent-warm);
 }
 .callout-warning .callout-title {
-  /* #9A4408 = accent-warm darkened. On --color-muted-bg → 5.62:1 (AA). */
-  color: #9A4408;
+  /* accent-warm-strong: 5.62:1 on --color-muted-bg (AA). */
+  color: var(--color-accent-warm-strong);
 }
 
 /* Numbered checklist */

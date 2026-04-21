@@ -69,10 +69,10 @@ export default function SiteFooter({ dict, locale }: SiteFooterProps) {
           </div>
 
           <div>
-            <h4>{dict.footer.servicesHeader}</h4>
+            <h3>{dict.footer.servicesHeader}</h3>
             <ul className="footer-links">
               {dict.footer.servicesLinks.map((s) => (
-                <li key={s.href}>
+                <li key={s.label}>
                   <Link href={localizeHref(s.href, locale)}>{s.label}</Link>
                 </li>
               ))}
@@ -80,10 +80,10 @@ export default function SiteFooter({ dict, locale }: SiteFooterProps) {
           </div>
 
           <div>
-            <h4>{dict.footer.companyHeader}</h4>
+            <h3>{dict.footer.companyHeader}</h3>
             <ul className="footer-links">
               {dict.footer.companyLinks.map((c) => (
-                <li key={c.href}>
+                <li key={c.label}>
                   <Link href={localizeHref(c.href, locale)}>{c.label}</Link>
                 </li>
               ))}
@@ -91,7 +91,7 @@ export default function SiteFooter({ dict, locale }: SiteFooterProps) {
           </div>
 
           <div>
-            <h4>{dict.footer.contactsHeader}</h4>
+            <h3>{dict.footer.contactsHeader}</h3>
             <div className="footer-contact-item">
               <Phone style={{ width: 16, height: 16 }} />
               <div>

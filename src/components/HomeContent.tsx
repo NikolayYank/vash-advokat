@@ -198,6 +198,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
       />
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
+      <main>
       {/* ===== HERO ===== */}
       <section className="hero">
         <div className="container">
@@ -218,7 +219,6 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
                 thumbnailTime={56}
                 accentColor="#d4af37"
                 posterSrc="/images/hero_poster.jpeg"
-                posterAlt={dict.hero.videoPosterAlt}
                 playLabel={dict.hero.videoPlayLabel}
               />
             </div>
@@ -768,6 +768,8 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
           <ContactForm dict={dict.ctaFinal} />
         </div>
       </section>
+
+      </main>
 
       <SiteFooter dict={dict} locale={locale} />
     </>

@@ -105,6 +105,7 @@ export default function FAQHubContent({ locale }: Props) {
     <div className="faq-scope">
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
+      <main>
       {/* HERO */}
       <section className="faq-wide faq-hero">
         <nav className="faq-breadcrumbs" aria-label="breadcrumbs">
@@ -191,6 +192,7 @@ export default function FAQHubContent({ locale }: Props) {
       <section className="faq-wide faq-section-last">
         <AIDisclosureBox locale={locale} />
       </section>
+      </main>
 
       <SiteFooter dict={dict} locale={locale} />
       <StickyCTA locale={locale} />

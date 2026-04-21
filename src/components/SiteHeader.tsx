@@ -35,6 +35,7 @@ export default function SiteHeader({ dict, locale, switchPath }: SiteHeaderProps
             alt={dict.header.logoAlt}
             width={48}
             height={48}
+            priority
           />
           <div className="header-logo-text">
             {dict.header.logoTitle}

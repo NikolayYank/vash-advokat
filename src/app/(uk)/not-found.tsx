@@ -26,6 +26,7 @@ export default function NotFound() {
   return (
     <>
       <SiteHeader dict={uk} locale="uk" switchPath="/ru" />
+    <main>
     <div
       style={{
         minHeight: "60vh",
@@ -197,6 +198,7 @@ export default function NotFound() {
         </ul>
       </section>
     </div>
+    </main>
       <SiteFooter dict={uk} locale="uk" />
     </>
   );
