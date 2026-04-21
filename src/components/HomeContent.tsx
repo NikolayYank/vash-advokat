@@ -10,6 +10,7 @@ import {
   Building2,
   Heart,
   ScrollText,
+  Landmark,
   Car,
   ArrowRight,
   Award,
@@ -21,7 +22,7 @@ import {
   Minus,
   ChevronDown,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import MuxPlayer from "@mux/mux-player-react";
 import { asset } from "@/lib/asset";
 import type { Dict, Locale } from "@/lib/i18n";
@@ -130,25 +131,25 @@ function useCounters(locale: Locale) {
 }
 
 const serviceIcons: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
-  shahrajstvo: ShieldAlert,
   "kryminalnyj-zahyst": Scale,
+  "zahyst-biznesu": Briefcase,
+  shahrajstvo: ShieldAlert,
   "vijskove-pravo": Shield,
   neruhomist: Building2,
-  "simejne-pravo": Heart,
-  "spadkove-pravo": ScrollText,
+  "koruptsiyni-spravy": Landmark,
   dtp: Car,
-  "zahyst-biznesu": Briefcase,
+  "simejne-pravo": Heart,
 };
 
 const serviceOrder = [
-  "shahrajstvo",
   "kryminalnyj-zahyst",
+  "zahyst-biznesu",
+  "shahrajstvo",
   "vijskove-pravo",
   "neruhomist",
-  "simejne-pravo",
-  "spadkove-pravo",
+  "koruptsiyni-spravy",
   "dtp",
-  "zahyst-biznesu",
+  "simejne-pravo",
 ];
 
 function localizeHref(href: string, locale: Locale): string {
@@ -165,6 +166,23 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
   useCounters(locale);
 
   const [expandedService, setExpandedService] = useState<number | null>(null);
+  const [columnsPerRow, setColumnsPerRow] = useState(4);
+
+  useEffect(() => {
+    const compute = () => {
+      if (window.matchMedia("(min-width: 1024px)").matches) setColumnsPerRow(4);
+      else if (window.matchMedia("(min-width: 720px)").matches) setColumnsPerRow(2);
+      else setColumnsPerRow(1);
+    };
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+
+  const serviceChunks: string[][] = [];
+  for (let i = 0; i < serviceOrder.length; i += columnsPerRow) {
+    serviceChunks.push(serviceOrder.slice(i, i + columnsPerRow));
+  }
 
   const switchPath = locale === "uk" ? "/ru" : "/";
 
@@ -226,88 +244,128 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             <p>{dict.services.sectionHint}</p>
           </div>
 
-          <div className="services-grid" style={{ alignItems: "start" }}>
-            {serviceOrder.map((key, idx) => {
-              const s = dict.services.items[key];
-              const Icon = serviceIcons[key];
-              const isExpanded = expandedService === idx;
-              return (
+          {serviceChunks.map((chunk, chunkIdx) => {
+            const startIdx = chunkIdx * columnsPerRow;
+            const activeInChunk =
+              expandedService !== null &&
+              expandedService >= startIdx &&
+              expandedService < startIdx + columnsPerRow;
+            const activeKey = activeInChunk ? serviceOrder[expandedService!] : null;
+            const activeService = activeKey ? dict.services.items[activeKey] : null;
+            const isTwoCol = columnsPerRow >= 2;
+
+            return (
+              <Fragment key={chunkIdx}>
                 <div
-                  key={key}
-                  className="service-card"
-                  onClick={() => setExpandedService(isExpanded ? null : idx)}
+                  className="services-grid"
                   style={{
-                    cursor: "pointer",
-                    flexDirection: "column",
-                    alignItems: "stretch",
-                    transition: "box-shadow 0.25s ease, transform 0.25s ease",
-                    boxShadow: isExpanded ? "0 8px 24px rgba(15,30,77,0.12)" : undefined,
-                    borderColor: isExpanded ? "var(--color-accent)" : undefined,
+                    alignItems: "start",
+                    marginTop: chunkIdx === 0 ? 0 : "var(--space-md)",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-                    <Icon className="service-icon" style={{ width: 24, height: 24, flexShrink: 0 }} />
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <h3 style={{ marginBottom: 4 }}>{s.title}</h3>
-                      <p style={{ margin: 0 }}>{s.desc}</p>
-                    </div>
-                    <ChevronDown
-                      style={{
-                        width: 20,
-                        height: 20,
-                        flexShrink: 0,
-                        color: "var(--color-text-muted)",
-                        transition: "transform 0.3s ease",
-                        transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-                      }}
-                    />
-                  </div>
+                  {chunk.map((key, i) => {
+                    const idx = startIdx + i;
+                    const s = dict.services.items[key];
+                    const Icon = serviceIcons[key];
+                    const isExpanded = expandedService === idx;
+                    return (
+                      <div
+                        key={key}
+                        className="service-card"
+                        onClick={() => setExpandedService(isExpanded ? null : idx)}
+                        style={{
+                          cursor: "pointer",
+                          flexDirection: "column",
+                          alignItems: "stretch",
+                          transition: "box-shadow 0.25s ease, border-color 0.25s ease",
+                          boxShadow: isExpanded ? "0 8px 24px rgba(15,30,77,0.12)" : undefined,
+                          borderColor: isExpanded ? "var(--color-accent)" : undefined,
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                          <Icon className="service-icon" style={{ width: 24, height: 24, flexShrink: 0 }} />
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <h3 style={{ marginBottom: 4 }}>{s.title}</h3>
+                            <p style={{ margin: 0 }}>{s.desc}</p>
+                          </div>
+                          <ChevronDown
+                            style={{
+                              width: 20,
+                              height: 20,
+                              flexShrink: 0,
+                              color: "var(--color-text-muted)",
+                              transition: "transform 0.3s ease",
+                              transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
 
+                {activeService && (
                   <div
+                    role="region"
+                    aria-label={typeof activeService.title === "string" ? activeService.title : undefined}
                     style={{
-                      maxHeight: isExpanded ? 400 : 0,
-                      overflow: "hidden",
-                      transition: "max-height 0.4s ease, margin-top 0.3s ease, padding-top 0.3s ease",
-                      marginTop: isExpanded ? 16 : 0,
-                      paddingTop: isExpanded ? 16 : 0,
-                      borderTop: isExpanded ? "1px solid var(--color-border)" : "none",
+                      marginTop: "var(--space-md)",
+                      padding: "var(--space-xl)",
+                      background: "var(--color-surface)",
+                      border: "1px solid var(--color-border)",
+                      borderLeft: "3px solid var(--color-accent)",
+                      borderRadius: "var(--radius-lg)",
+                      boxShadow: "0 8px 24px rgba(15,30,77,0.08)",
+                      animation: "service-drawer-in 0.28s ease-out",
                     }}
                   >
                     <div
                       style={{
-                        fontSize: "0.7rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.08em",
-                        color: "var(--color-text-muted)",
-                        fontWeight: 700,
-                        marginBottom: 6,
+                        display: "grid",
+                        gridTemplateColumns: isTwoCol ? "1fr 1fr" : "1fr",
+                        gap: isTwoCol ? "var(--space-xl)" : "var(--space-md)",
                       }}
                     >
-                      {dict.services.situationsLabel}
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "0.7rem",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.08em",
+                            color: "var(--color-text-muted)",
+                            fontWeight: 700,
+                            marginBottom: 6,
+                          }}
+                        >
+                          {dict.services.situationsLabel}
+                        </div>
+                        <p style={{ margin: 0, fontSize: "0.9375rem", lineHeight: 1.55 }}>
+                          {activeService.scenarios}
+                        </p>
+                      </div>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: "0.7rem",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.08em",
+                            color: "var(--color-accent)",
+                            fontWeight: 700,
+                            marginBottom: 6,
+                          }}
+                        >
+                          {dict.services.actionLabel}
+                        </div>
+                        <p style={{ margin: 0, fontSize: "0.9375rem", lineHeight: 1.55 }}>
+                          {activeService.action}
+                        </p>
+                      </div>
                     </div>
-                    <p style={{ margin: "0 0 14px", fontSize: "0.9375rem", lineHeight: 1.55 }}>
-                      {s.scenarios}
-                    </p>
-                    <div
-                      style={{
-                        fontSize: "0.7rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.08em",
-                        color: "var(--color-accent)",
-                        fontWeight: 700,
-                        marginBottom: 6,
-                      }}
-                    >
-                      {dict.services.actionLabel}
-                    </div>
-                    <p style={{ margin: 0, fontSize: "0.9375rem", lineHeight: 1.55 }}>
-                      {s.action}
-                    </p>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                )}
+              </Fragment>
+            );
+          })}
         </div>
       </section>
 

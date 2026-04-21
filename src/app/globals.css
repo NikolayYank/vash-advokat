@@ -735,6 +735,10 @@ h2 { font-size: var(--font-h2); }
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
 }
+@keyframes service-drawer-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .service-card {
   display: flex;
   align-items: center;
