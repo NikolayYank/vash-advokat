@@ -1,0 +1,84 @@
+{
+  "/images/ava.jpg": {
+    "srcWidth": 1792,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/b2b_shield.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/blog_criminal.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/blog_fraud.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/blog_realestate.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/blog_search.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/galavan.jpg": {
+    "srcWidth": 1792,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/hero_poster.jpeg": {
+    "srcWidth": 2400,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/logo_mini.png": {
+    "srcWidth": 300,
+    "widths": []
+  },
+  "/images/office_exterior.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  }
+}

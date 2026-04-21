@@ -160,6 +160,8 @@ export interface Dict {
     h1: ReactNode;
     subtitle: ReactNode;
     cta: string;
+    videoPlayLabel: string;
+    videoPosterAlt: string;
   };
 
   trust: {

@@ -59,6 +59,8 @@ export const ru: Dict = {
       </>
     ),
     cta: "Получить консультацию",
+    videoPlayLabel: "Включить видео",
+    videoPosterAlt: "Сергей Веприцкий — основатель Фундации адвокатов Украины",
   },
 
   trust: {
@@ -411,14 +413,14 @@ export const ru: Dict = {
     companyHeader: "Компания",
     contactsHeader: "Контакты",
     servicesLinks: [
-      { href: "/poslugy/kryminalnyj-zahyst", label: "Уголовная защита" },
-      { href: "/poslugy/zahyst-biznesu", label: "Защита бизнеса" },
-      { href: "/poslugy/shahrajstvo", label: "Мошенничество" },
-      { href: "/poslugy/vijskove-pravo", label: "Военное право" },
-      { href: "/poslugy/neruhomist", label: "Недвижимость и активы" },
-      { href: "/poslugy/koruptsiyni-spravy", label: "Коррупционные дела" },
-      { href: "/poslugy/dtp", label: "ДТП" },
-      { href: "/poslugy/simejne-pravo", label: "Семейные и наследственные дела" },
+      { href: "/#poslugy", label: "Уголовная защита" },
+      { href: "/#poslugy", label: "Защита бизнеса" },
+      { href: "/#poslugy", label: "Мошенничество" },
+      { href: "/#poslugy", label: "Военное право" },
+      { href: "/#poslugy", label: "Недвижимость и активы" },
+      { href: "/#poslugy", label: "Коррупционные дела" },
+      { href: "/#poslugy", label: "ДТП" },
+      { href: "/#poslugy", label: "Семейные и наследственные дела" },
     ],
     companyLinks: [
       { href: "/pro-nas", label: "О нас" },
