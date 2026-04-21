@@ -72,7 +72,7 @@ export default function SiteFooter({ dict, locale }: SiteFooterProps) {
             <h3>{dict.footer.servicesHeader}</h3>
             <ul className="footer-links">
               {dict.footer.servicesLinks.map((s) => (
-                <li key={s.href}>
+                <li key={s.label}>
                   <Link href={localizeHref(s.href, locale)}>{s.label}</Link>
                 </li>
               ))}
@@ -83,7 +83,7 @@ export default function SiteFooter({ dict, locale }: SiteFooterProps) {
             <h3>{dict.footer.companyHeader}</h3>
             <ul className="footer-links">
               {dict.footer.companyLinks.map((c) => (
-                <li key={c.href}>
+                <li key={c.label}>
                   <Link href={localizeHref(c.href, locale)}>{c.label}</Link>
                 </li>
               ))}
