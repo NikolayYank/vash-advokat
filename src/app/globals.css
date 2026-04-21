@@ -15,7 +15,7 @@
   --color-error: #DC2626;
   --color-success: #16A34A;
   --font-heading: var(--font-eb-garamond), Georgia, serif;
-  --font-body: var(--font-lato), sans-serif;
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* ==========================================================================
@@ -37,8 +37,13 @@
   --color-success: #16A34A;
 
   --font-heading: var(--font-eb-garamond), Georgia, serif;
-  --font-body: var(--font-lato), sans-serif;
-  --font-body-size: clamp(1.0625rem, 0.3vw + 0.95rem, 1.125rem);
+  --font-body: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body-size: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
+
+  /* Text on dark sections — canonical (opacity < 0.65 для текста запрещено) */
+  --text-on-dark: rgba(255, 255, 255, 0.95);
+  --text-on-dark-muted: rgba(255, 255, 255, 0.75);
+  --text-on-dark-caption: rgba(255, 255, 255, 0.65);
   --font-h1: clamp(2rem, 2vw + 1rem, 2.75rem);
   --font-h2: clamp(1.75rem, 2vw + 0.5rem, 2.5rem);
   --font-display: clamp(3rem, 5vw, 4.5rem);
@@ -117,6 +122,58 @@ h3 {
 /* Avoid widows in long text */
 p, li {
   text-wrap: pretty;
+}
+
+/* Hyphens for cyrillic-heavy paragraphs (lang-aware via <html lang>) */
+.article-body,
+.article-body p,
+.article-body li,
+.prose,
+.prose p,
+.prose li {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphenate-limit-chars: 8 3 3;
+  hyphenate-limit-lines: 2;
+}
+
+/* Headings — manual hyphens + safety break-word for very long tokens */
+h1, h2, h3, h4 {
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  overflow-wrap: break-word;
+}
+
+/* UI chrome — never hyphenate or mid-word-wrap navigation/buttons/chrome labels */
+nav,
+header,
+footer,
+button,
+.btn,
+.lang-switch,
+.header-back,
+.header-logo-text,
+.footer-links,
+.footer-badge,
+.breadcrumbs,
+.faq-breadcrumbs {
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+nav a,
+nav li,
+.btn,
+button {
+  white-space: nowrap;
+}
+
+/* Links inside body copy — always underlined (two visual indicators: color + underline) */
+.article-body a,
+.prose a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 4px;
 }
 
 h1 { font-size: var(--font-h1); }
@@ -213,6 +270,7 @@ h2 { font-size: var(--font-h2); }
   align-items: center;
   gap: var(--space-sm);
   text-decoration: none;
+  flex-shrink: 0;
 }
 .header-logo img {
   height: 48px;
@@ -224,6 +282,7 @@ h2 { font-size: var(--font-h2); }
   font-weight: 600;
   color: var(--color-primary);
   line-height: 1.2;
+  white-space: nowrap;
 }
 .header-logo-text small {
   display: block;
@@ -231,13 +290,15 @@ h2 { font-size: var(--font-h2); }
   font-size: 0.75rem;
   font-weight: 400;
   color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 .header-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
   list-style: none;
+  flex-wrap: nowrap;
 }
 .header-nav a {
   font-size: 0.9375rem;
@@ -250,6 +311,7 @@ h2 { font-size: var(--font-h2); }
   display: flex;
   align-items: center;
   gap: var(--space-lg);
+  flex-shrink: 0;
 }
 .header-phone {
   font-weight: 700;
@@ -513,7 +575,7 @@ h2 { font-size: var(--font-h2); }
   margin: 0 auto;
 }
 .section-dark .section-header p {
-  color: rgba(255,255,255,0.6);
+  color: var(--text-on-dark-muted);
 }
 .section-dark h2 {
   color: var(--color-surface);
@@ -701,7 +763,6 @@ h2 { font-size: var(--font-h2); }
 }
 .service-card h3 {
   font-size: 1rem;
-  font-family: var(--font-body);
   font-weight: 700;
 }
 .service-card p {
@@ -930,7 +991,7 @@ h2 { font-size: var(--font-h2); }
   line-height: 1.7;
   color: var(--color-text);
   margin: 0 0 0.85em;
-  max-width: 58ch;
+  max-width: 75ch;
 }
 
 .partner-bio p:last-child {
@@ -956,7 +1017,7 @@ h2 { font-size: var(--font-h2); }
   line-height: 1.55;
   letter-spacing: -0.01em;
   box-shadow: 0 10px 28px rgba(15, 30, 77, 0.08), 0 1px 3px rgba(15, 30, 77, 0.04);
-  max-width: 58ch;
+  max-width: 75ch;
 }
 
 /* ===== MEDIA & AWARDS ===== */
@@ -1310,7 +1371,7 @@ h2 { font-size: var(--font-h2); }
   gap: var(--space-sm);
 }
 .footer-links a {
-  color: rgba(255,255,255,0.6);
+  color: var(--text-on-dark-muted);
   font-size: 0.9375rem;
   text-underline-offset: 4px;
 }
@@ -1360,8 +1421,8 @@ h2 { font-size: var(--font-h2); }
   gap: var(--space-md);
 }
 .footer-bottom p {
-  font-size: 0.8125rem;
-  color: rgba(255,255,255,0.4);
+  font-size: 0.875rem;
+  color: var(--text-on-dark-caption);
 }
 .footer-badges {
   display: flex;
@@ -1371,8 +1432,8 @@ h2 { font-size: var(--font-h2); }
   display: flex;
   align-items: center;
   gap: var(--space-xs);
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.5);
+  font-size: 0.875rem;
+  color: var(--text-on-dark-caption);
 }
 .footer-badge svg { color: var(--color-accent); width: 14px; height: 14px; }
 
@@ -1664,12 +1725,119 @@ h2 { font-size: var(--font-h2); }
   padding: var(--space-2xl) 0 var(--space-4xl);
 }
 
-/* About page (/pro-nas, /ru/o-nas) — .article used standalone without .article-layout wrapper,
-   so it needs its own centering and side padding. */
+/* About page (/pro-nas, /ru/o-nas) — .article used standalone without .article-layout wrapper.
+   Wider than default .article (680px) to fit the .partners-grid (280px photo + content). */
 .article.about-page {
+  max-width: 1040px;
   margin: 0 auto;
   padding-left: var(--space-lg);
   padding-right: var(--space-lg);
+}
+
+/* Partners grid on /pro-nas — more space between partner blocks */
+.about-partners {
+  margin: var(--space-2xl) 0 var(--space-3xl);
+  gap: var(--space-4xl);
+}
+
+/* About — portrait cover (overrides article-cover 16:9 crop) */
+.about-cover {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  margin: 0 auto var(--space-2xl);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), 0 18px 40px rgba(15, 23, 42, 0.16);
+}
+
+/* About — lead paragraph under H1 (before first H2) */
+.about-lead {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  max-width: 60ch;
+  margin: 0 0 var(--space-2xl);
+}
+.about-lead strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* About — H2 rhythm for direct-child section headings only (Practice, Media).
+   NOT applied to .partner-name h2 inside partner blocks — they keep own styles. */
+.article.about-page > h2 {
+  font-size: 1.75rem;
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+.article.about-page > p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  max-width: 62ch;
+  margin-bottom: var(--space-md);
+}
+
+/* About — credentials list (icon + fact) */
+.about-credentials {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.about-credentials li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.about-credentials li:last-child {
+  border-bottom: none;
+}
+.about-credential-icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-accent-warm);
+  padding-top: 2px;
+}
+
+/* About — practice / media points (bulleted list, compact) */
+.about-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.about-points li {
+  position: relative;
+  padding-left: var(--space-lg);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+.about-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 8px;
+  height: 1px;
+  background: var(--color-accent-warm);
+}
+.about-points li strong {
+  color: var(--color-primary);
+  font-weight: 700;
 }
 
 /* Unified font family inside articles — only size & weight vary */
@@ -2179,8 +2347,8 @@ h2 { font-size: var(--font-h2); }
 }
 .compare-card-item:last-child { border-bottom: none; }
 .compare-card-label {
-  color: rgba(255,255,255,0.5);
-  font-size: 0.8125rem;
+  color: var(--text-on-dark-caption);
+  font-size: 0.875rem;
   flex-shrink: 0;
 }
 .compare-card-value {
@@ -2309,7 +2477,20 @@ h2 { font-size: var(--font-h2); }
   .cta-final .eyebrow-row { display: none; }
   .cta-final h2 { font-size: 1.75rem; line-height: 1.2; }
   .cta-final > .container > p { font-size: 0.875rem; }
-  .cta-form-note { justify-content: flex-start !important; }
+  .cta-form-note {
+    justify-content: flex-start !important;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .cta-form-note > span {
+    align-items: flex-start !important;
+    text-align: left;
+  }
+  .cta-form-note > span > svg {
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
 
   /* B2B heading hierarchy */
   .b2b-grid h2 { font-size: 1.375rem; }
@@ -2391,8 +2572,6 @@ h2 { font-size: var(--font-h2); }
   .page-title { padding: var(--space-2xl) 0 var(--space-xl); text-align: left; }
   .page-title p { margin-left: 0; margin-right: 0; font-size: 0.9375rem; }
 
-  body { font-size: 17px; }
-
   /* Article layout */
   .article { padding: var(--space-xl) 0 var(--space-2xl); max-width: 100%; }
   .article h1 { font-size: 1.5rem; }
@@ -2413,11 +2592,11 @@ h2 { font-size: var(--font-h2); }
     margin-bottom: var(--space-sm);
   }
   .article-body p {
-    font-size: 0.9375rem;
+    font-size: 1.0625rem;
     margin-bottom: var(--space-md);
   }
   .article-body li {
-    font-size: 0.9375rem;
+    font-size: 1.0625rem;
   }
 
   /* Checklist: strong title visually separated from description */

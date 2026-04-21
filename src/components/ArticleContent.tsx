@@ -5,6 +5,8 @@ import Link from "next/link";
 import { asset } from "@/lib/asset";
 import OptimizedImage from "@/components/OptimizedImage";
 import Breadcrumbs, { type BreadcrumbUiItem } from "@/components/Breadcrumbs";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import type { Dict, Locale, ArticleEntry } from "@/lib/i18n";
 
 function localizeHref(href: string, locale: Locale): string {
@@ -59,34 +61,12 @@ export default function ArticleContent({ article, dict, locale, breadcrumbs, bre
     return () => window.removeEventListener("scroll", updateActive);
   }, []);
 
-  const homeHref = locale === "uk" ? "/" : "/ru";
-  const blogHref = locale === "uk" ? "/blog" : "/ru/blog";
   const switchPath =
     locale === "uk" ? `/ru/blog/${article.slug}` : `/blog/${article.slug}`;
 
   return (
     <>
-      {/* HEADER */}
-      <header className="header-article">
-        <div className="container">
-          <Link href={homeHref} className="header-logo">
-            <img src={asset("/images/logo_mini.png")} alt={dict.header.logoAlt} />
-            <div className="header-logo-text">
-              {dict.header.logoTitle}
-              <small>{dict.header.logoSubtitle}</small>
-            </div>
-          </Link>
-          <div style={{ display: "flex", alignItems: "center", gap: "var(--space-md)" }}>
-            <Link href={switchPath} className="lang-switch" aria-label={dict.header.langSwitchLabel}>
-              {dict.header.otherLangLabel}
-            </Link>
-            <Link href={blogHref} className="header-back">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-              {dict.article.backToBlog}
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
       {/* LAYOUT */}
       <div className="article-layout">
@@ -233,14 +213,7 @@ export default function ArticleContent({ article, dict, locale, breadcrumbs, bre
         </article>
       </div>
 
-      {/* FOOTER */}
-      <footer className="footer-minimal">
-        <div className="container">
-          <p>
-            &copy; 2026 {dict.header.logoAlt} &middot; <a href={homeHref}>vash-advokat.org</a>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter dict={dict} locale={locale} />
     </>
   );
 }

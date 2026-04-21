@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { asset } from "@/lib/asset";
 import OptimizedImage from "@/components/OptimizedImage";
 import Breadcrumbs, { type BreadcrumbUiItem } from "@/components/Breadcrumbs";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import type { Dict, Locale } from "@/lib/i18n";
 
 function localizeHref(href: string, locale: Locale): string {
@@ -19,32 +20,11 @@ interface Props {
 }
 
 export default function BlogListContent({ dict, locale, breadcrumbs, breadcrumbLabel }: Props) {
-  const homeHref = locale === "uk" ? "/" : "/ru";
   const switchPath = locale === "uk" ? "/ru/blog" : "/blog";
 
   return (
     <>
-      {/* HEADER (minimal) */}
-      <header className="header-minimal">
-        <div className="container">
-          <Link href={homeHref} className="header-logo">
-            <img src={asset("/images/logo_mini.png")} alt={dict.header.logoAlt} />
-            <div className="header-logo-text">
-              {dict.header.logoTitle}
-              <small>{dict.header.logoSubtitle}</small>
-            </div>
-          </Link>
-          <div style={{ display: "flex", alignItems: "center", gap: "var(--space-md)" }}>
-            <Link href={switchPath} className="lang-switch" aria-label={dict.header.langSwitchLabel}>
-              {dict.header.otherLangLabel}
-            </Link>
-            <Link href={homeHref} className="header-back">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-              {dict.header.backLabel}
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
       {/* PAGE TITLE */}
       <section className="page-title">
@@ -95,14 +75,7 @@ export default function BlogListContent({ dict, locale, breadcrumbs, breadcrumbL
         </div>
       </section>
 
-      {/* FOOTER (minimal) */}
-      <footer className="footer-minimal">
-        <div className="container">
-          <p>
-            &copy; 2026 {dict.header.logoAlt} &middot; <a href={homeHref}>vash-advokat.org</a>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter dict={dict} locale={locale} />
     </>
   );
 }

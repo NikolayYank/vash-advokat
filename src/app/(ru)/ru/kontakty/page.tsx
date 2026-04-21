@@ -4,6 +4,8 @@ import { Phone, Mail, MapPin, Clock, AlertCircle } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { ru } from "@/lib/i18n";
 import { getBreadcrumbSchema } from "@/lib/schema/breadcrumbs";
 import { getContactLegalServiceSchema } from "@/lib/schema/contact-page";
@@ -40,6 +42,7 @@ export default function KontaktyPageRu() {
   return (
     <>
       <JsonLd data={[contactSchema, breadcrumbSchema]} id="kontakty-schema" />
+      <SiteHeader dict={ru} locale="ru" switchPath="/kontakty" />
       <main className="container" style={{ padding: "var(--space-2xl) 0 var(--space-3xl)" }}>
         <Breadcrumbs items={breadcrumbs} ariaLabel="Хлебные крошки" />
 
@@ -203,6 +206,7 @@ export default function KontaktyPageRu() {
           </section>
         </div>
       </main>
+      <SiteFooter dict={ru} locale="ru" />
     </>
   );
 }

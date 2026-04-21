@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import HeaderMinimal from "@/components/HeaderMinimal";
-import FooterMinimal from "@/components/FooterMinimal";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import CategoryCard from "./CategoryCard";
 import QACard from "./QACard";
 import SearchBar from "./SearchBar";
@@ -16,7 +16,7 @@ import {
   cardAnswer,
   cardKeywords,
 } from "@/lib/faq";
-import type { Locale } from "@/lib/i18n";
+import { getDict, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -98,10 +98,12 @@ export default function FAQHubContent({ locale }: Props) {
   const totalQ = cards.length;
   const totalCat = clusters.length;
   const leadParts = l.leadTemplate.split("__N__");
+  const dict = getDict(locale);
+  const switchPath = locale === "uk" ? "/ru/chto-delat" : "/shcho-robyty";
 
   return (
     <div className="faq-scope">
-      <HeaderMinimal backHref={homeHref} backLabel={l.backLabel} />
+      <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
       {/* HERO */}
       <section className="faq-wide faq-hero">
@@ -190,7 +192,7 @@ export default function FAQHubContent({ locale }: Props) {
         <AIDisclosureBox locale={locale} />
       </section>
 
-      <FooterMinimal />
+      <SiteFooter dict={dict} locale={locale} />
       <StickyCTA locale={locale} />
     </div>
   );

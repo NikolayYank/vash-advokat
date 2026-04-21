@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { asset } from "@/lib/asset";
-import OptimizedImage from "@/components/OptimizedImage";
 import Breadcrumbs, { type BreadcrumbUiItem } from "@/components/Breadcrumbs";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import type { Dict, Locale } from "@/lib/i18n";
 
 interface Props {
@@ -28,85 +29,110 @@ function localizeHref(href: string, locale: Locale): string {
 
 export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabel }: Props) {
   const about = dict.about;
-  const homeHref = locale === "uk" ? "/" : "/ru";
-  const blogHref = locale === "uk" ? "/blog" : "/ru/blog";
   const switchPath = locale === "uk" ? "/ru/o-nas" : "/pro-nas";
+
+  // Partner blocks — Veprytsky (extended from about dict) + Galavan (compact from home dict)
+  const veprytsky = {
+    image: "/images/ava.jpg",
+    imageAlt: about.imageAlt,
+    name:
+      locale === "uk"
+        ? "Сергій Сергійович Веприцький"
+        : "Сергей Сергеевич Веприцкий",
+    title:
+      locale === "uk" ? (
+        <>Засновник Фундації адвокатів України</>
+      ) : (
+        <>Основатель Фундации адвокатов Украины</>
+      ),
+    badges: about.credentials,
+    bio: about.bio,
+    quote: dict.partners.items[0]?.quote,
+  };
+  const galavan = dict.partners.items[1];
 
   return (
     <>
-      <header className="header-article">
-        <div className="container">
-          <Link href={homeHref} className="header-logo">
-            <img src={asset("/images/logo_mini.png")} alt={dict.header.logoAlt} />
-            <div className="header-logo-text">
-              {dict.header.logoTitle}
-              <small>{dict.header.logoSubtitle}</small>
-            </div>
-          </Link>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--space-md)",
-            }}
-          >
-            <Link
-              href={switchPath}
-              className="lang-switch"
-              aria-label={dict.header.langSwitchLabel}
-            >
-              {dict.header.otherLangLabel}
-            </Link>
-            <Link href={blogHref} className="header-back">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="19" y1="12" x2="5" y2="12" />
-                <polyline points="12 19 5 12 12 5" />
-              </svg>
-              {dict.article.backToBlog}
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
       <article className="article about-page">
         {breadcrumbs && breadcrumbLabel && (
           <Breadcrumbs items={breadcrumbs} ariaLabel={breadcrumbLabel} />
         )}
         <h1>{about.h1}</h1>
-
-        <OptimizedImage
-          src={asset("/images/ava.jpg")}
-          alt={about.imageAlt}
-          width={1200}
-          height={1600}
-          className="article-cover"
-          priority
-          sizes="(max-width: 720px) 100vw, 720px"
-        />
-
         <p className="about-lead">{about.lead}</p>
 
-        <h2>{about.credentialsHeader}</h2>
-        <ul className="about-credentials">
-          {about.credentials.map((c, i) => (
-            <li key={i}>
-              <span className="about-credential-icon">{c.icon}</span>
-              <span>{c.label}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="partners-grid about-partners">
+          {/* Veprytsky — extended */}
+          <article className="partner">
+            <div className="partner-photo">
+              <img
+                src={asset(veprytsky.image)}
+                alt={veprytsky.imageAlt}
+                className="partner-photo-img"
+              />
+            </div>
+            <div className="partner-info">
+              <h2 className="partner-name">{veprytsky.name}</h2>
+              <div className="partner-title">{veprytsky.title}</div>
+              <ul className="partner-badges">
+                {veprytsky.badges.map((b, i) => (
+                  <li key={i} className="badge">
+                    <span aria-hidden="true" className="badge-icon">
+                      {b.icon}
+                    </span>
+                    <span>{b.label}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="partner-bio">
+                {veprytsky.bio.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+              {veprytsky.quote ? (
+                <blockquote className="partner-quote">{veprytsky.quote}</blockquote>
+              ) : null}
+            </div>
+          </article>
 
-        <h2>{about.bioHeader}</h2>
-        {about.bio.map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
+          {/* Galavan — compact (reused from home dict) */}
+          {galavan ? (
+            <article className={`partner${galavan.reverse ? " partner--reverse" : ""}`}>
+              <div className="partner-photo">
+                <img
+                  src={asset(galavan.image)}
+                  alt={galavan.imageAlt}
+                  className="partner-photo-img"
+                />
+              </div>
+              <div className="partner-info">
+                <h2 className="partner-name">{galavan.name}</h2>
+                <div className="partner-title">{galavan.title}</div>
+                {galavan.badges?.length ? (
+                  <ul className="partner-badges">
+                    {galavan.badges.map((b, i) => (
+                      <li key={i} className="badge">
+                        <span aria-hidden="true" className="badge-icon">
+                          {b.icon}
+                        </span>
+                        <span>{b.label}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                <div className="partner-bio">
+                  {galavan.bio.map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+                </div>
+                {galavan.quote ? (
+                  <blockquote className="partner-quote">{galavan.quote}</blockquote>
+                ) : null}
+              </div>
+            </article>
+          ) : null}
+        </div>
 
         <h2>{about.practiceHeader}</h2>
         <ul className="about-points">
@@ -133,7 +159,10 @@ export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabe
             <br />
             {about.ctaText}
           </p>
-          <Link href={localizeHref("/#konsultaciya", locale)} className="article-end-link">
+          <Link
+            href={localizeHref("/#konsultaciya", locale)}
+            className="article-end-link"
+          >
             {about.ctaButton}
             <svg
               viewBox="0 0 24 24"
@@ -150,14 +179,7 @@ export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabe
         </div>
       </article>
 
-      <footer className="footer-minimal">
-        <div className="container">
-          <p>
-            &copy; 2026 {dict.header.logoAlt} &middot;{" "}
-            <a href={homeHref}>vash-advokat.org</a>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter dict={dict} locale={locale} />
     </>
   );
 }

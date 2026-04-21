@@ -1,6 +1,6 @@
 import Link from "next/link";
-import HeaderMinimal from "@/components/HeaderMinimal";
-import FooterMinimal from "@/components/FooterMinimal";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import QACard from "./QACard";
 import CategoryCard from "./CategoryCard";
 import AIDisclosureBox from "./AIDisclosureBox";
@@ -15,7 +15,7 @@ import {
   getRelatedClusters,
   faqHubPath,
 } from "@/lib/faq";
-import type { Locale } from "@/lib/i18n";
+import { getDict, type Locale } from "@/lib/i18n";
 
 interface Props {
   locale: Locale;
@@ -65,10 +65,12 @@ export default function FAQClusterContent({ locale, cluster, cards }: Props) {
   const title = clusterTitle(cluster, locale);
   const description = clusterDescription(cluster, locale);
   const related = getRelatedClusters(cluster.cluster_num, 3);
+  const dict = getDict(locale);
+  const switchPath = locale === "uk" ? "/ru/chto-delat" : "/shcho-robyty";
 
   return (
     <div className="faq-scope">
-      <HeaderMinimal backHref={homeHref} backLabel={l.backLabel} />
+      <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
       <section className="faq-narrow faq-hero">
         <nav className="faq-breadcrumbs" aria-label="breadcrumbs">
@@ -195,7 +197,7 @@ export default function FAQClusterContent({ locale, cluster, cards }: Props) {
         <AIDisclosureBox locale={locale} />
       </section>
 
-      <FooterMinimal />
+      <SiteFooter dict={dict} locale={locale} />
       <StickyCTA locale={locale} />
     </div>
   );

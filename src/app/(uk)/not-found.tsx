@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import { uk } from "@/lib/i18n";
 
 const recentArticles = [
   {
@@ -21,9 +24,11 @@ const recentArticles = [
 
 export default function NotFound() {
   return (
+    <>
+      <SiteHeader dict={uk} locale="uk" switchPath="/ru" />
     <div
       style={{
-        minHeight: "100vh",
+        minHeight: "60vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -197,5 +202,7 @@ export default function NotFound() {
         </ul>
       </section>
     </div>
+      <SiteFooter dict={uk} locale="uk" />
+    </>
   );
 }

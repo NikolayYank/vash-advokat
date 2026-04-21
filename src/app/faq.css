@@ -474,40 +474,29 @@
 .faq-scope details.toc-mobile[open] > summary .chev { transform: rotate(180deg); }
 .faq-scope details.toc-mobile > div { padding: 4px 18px 14px; }
 
-/* ---------- AI Disclosure box ---------- */
+/* ---------- AI Disclosure box (compact service disclaimer) ---------- */
 .faq-scope .ai-disclosure {
   background: var(--color-muted-bg);
-  border-radius: var(--radius-xl);
-  padding: 24px;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
   display: flex;
-  gap: 16px;
+  gap: 10px;
   align-items: flex-start;
 }
 .faq-scope .ai-disclosure-icon {
   flex-shrink: 0;
-  color: var(--color-primary);
+  color: var(--color-text-muted);
   margin-top: 2px;
+  opacity: 0.7;
 }
 .faq-scope .ai-disclosure-text {
-  font-size: 0.9375rem;
-  line-height: 1.6;
+  font-size: 0.8125rem;
+  line-height: 1.5;
   color: var(--color-text-muted);
 }
-@media (min-width: 768px) {
-  .faq-scope .ai-disclosure-text { font-size: 1rem; }
-  .faq-scope .ai-disclosure { padding: 28px 32px; }
-}
 .faq-scope .ai-disclosure-title {
-  color: var(--color-primary-dark);
-  font-weight: 700;
-}
-.faq-scope .ai-disclosure-link {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-.faq-scope .ai-disclosure-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 /* ---------- Sticky CTA pill (mobile only) ---------- */

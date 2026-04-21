@@ -12,7 +12,6 @@ export const ORG_EMAIL = "promo.vashadvokat@gmail.com";
 export const ORG_PHONE = "+380505940785";
 export const ORG_FOUNDING_DATE = "2010-05-19";
 export const ORG_AREA_SERVED = "UA";
-export const ORG_BAR_CERTIFICATE = "№647";
 export const ORG_MINISTRY_ORDER = "Наказ Мін'юсту №1076/5 від 19.05.2010";
 export const ORG_LOGO_URL = `${SITE_URL}/images/logo_mini.png`;
 export const ORG_ADDRESS = {

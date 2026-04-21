@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EB_Garamond, Lato } from "next/font/google";
+import { EB_Garamond, Inter } from "next/font/google";
 import "../globals.css";
 import { asset } from "@/lib/asset";
 import JsonLd from "@/components/JsonLd";
@@ -13,10 +13,9 @@ const ebGaramond = EB_Garamond({
   display: "swap",
 });
 
-const lato = Lato({
-  variable: "--font-lato",
-  subsets: ["latin", "latin-ext"],
-  weight: ["300", "400", "700"],
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "latin-ext", "cyrillic", "cyrillic-ext"],
   display: "swap",
 });
 
@@ -73,7 +72,7 @@ export default function RootLayoutUk({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uk" className={`${ebGaramond.variable} ${lato.variable}`}>
+    <html lang="uk" className={`${ebGaramond.variable} ${inter.variable}`}>
       <body>
         <JsonLd data={[getOrganizationSchema("uk"), getWebSiteSchema()]} id="site-schema" />
         {children}

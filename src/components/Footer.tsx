@@ -200,7 +200,7 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[0.8125rem] text-white/40 text-center md:text-left">
             &copy; 2010–2026 Адвокатське об&apos;єднання «Фундація адвокатів
-            України». Свідоцтво №647
+            України»
           </p>
           <div className="flex gap-4">
             <span className="flex items-center gap-1 text-xs text-white/50">
