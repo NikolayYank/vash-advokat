@@ -30,19 +30,10 @@ export default function LegalPageContent({
   return (
     <>
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
-      <main
-        className="container"
-        style={{ padding: "var(--space-2xl) 0 var(--space-3xl)", maxWidth: "80ch" }}
-      >
+      <main className="container legal-main">
         <Breadcrumbs items={breadcrumbs} ariaLabel={breadcrumbLabel} />
-        <h1 style={{ marginTop: "var(--space-md)" }}>{title}</h1>
-        <p
-          className="body-sm"
-          style={{
-            color: "var(--color-text-muted)",
-            marginBottom: "var(--space-2xl)",
-          }}
-        >
+        <h1 className="legal-title">{title}</h1>
+        <p className="body-sm legal-meta">
           {lastUpdatedLabel}: <time dateTime={lastUpdatedDate}>{lastUpdatedDate}</time>
         </p>
         <article className="legal-content">{children}</article>
