@@ -137,6 +137,12 @@ export interface Dict {
     aboutTitle: string;
     aboutDescription: string;
     aboutOgTitle: string;
+    privacyTitle: string;
+    privacyDescription: string;
+    termsTitle: string;
+    termsDescription: string;
+    cookieTitle: string;
+    cookieDescription: string;
     titleTemplate: string;
   };
 
@@ -254,11 +260,22 @@ export interface Dict {
     contactsHeader: string;
     servicesLinks: { href: string; label: string }[];
     companyLinks: { href: string; label: string }[];
+    legalLinks: { href: string; label: string }[];
     addressLines: ReactNode;
     hoursLines: ReactNode;
     copyright: ReactNode;
     badgeCouncil: string;
     badgeOrder: ReactNode;
+  };
+
+  legal: {
+    breadcrumbRoot: string;
+    lastUpdatedLabel: string;
+    lastUpdatedDate: string;
+    breadcrumbLabel: string;
+    privacyTitle: string;
+    termsTitle: string;
+    cookieTitle: string;
   };
 
   blogList: {

@@ -153,6 +153,19 @@ export default function SiteFooter({ dict, locale }: SiteFooterProps) {
           </div>
         </div>
 
+        <nav aria-label={dict.legal.breadcrumbLabel} className="footer-legal-row">
+          {dict.footer.legalLinks.map((l, idx) => (
+            <span key={l.href} className="footer-legal-item">
+              <Link href={localizeHref(l.href, locale)}>{l.label}</Link>
+              {idx < dict.footer.legalLinks.length - 1 ? (
+                <span aria-hidden="true" className="footer-legal-sep">
+                  {" · "}
+                </span>
+              ) : null}
+            </span>
+          ))}
+        </nav>
+
         <div className="footer-bottom">
           <p>{dict.footer.copyright}</p>
           <div className="footer-badges">

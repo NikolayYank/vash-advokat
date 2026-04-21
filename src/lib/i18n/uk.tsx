@@ -21,6 +21,15 @@ export const uk: Dict = {
     aboutDescription:
       "Засновник Сергій Веприцький: 38 років адвокатської практики, свідоцтво №1114, орден «Видатний адвокат України». Офіси Харків, Київ, Софія.",
     aboutOgTitle: "Сергій Веприцький — засновник Фундації адвокатів України",
+    privacyTitle: "Політика конфіденційності — Фундація адвокатів України",
+    privacyDescription:
+      "Як Фундація адвокатів України обробляє персональні дані відвідувачів сайту vash-advokat.org. Права користувачів, строки зберігання, контакти для запитів.",
+    termsTitle: "Умови використання сайту — Фундація адвокатів України",
+    termsDescription:
+      "Правила користування сайтом vash-advokat.org: інформаційний характер контенту, обмеження відповідальності, порядок звернень і застереження щодо юридичних консультацій.",
+    cookieTitle: "Політика використання cookie — Фундація адвокатів України",
+    cookieDescription:
+      "Які cookie-файли використовує сайт vash-advokat.org, як керувати налаштуваннями, перелік сторонніх сервісів та тривалість зберігання.",
     titleTemplate: "%s — Фундація адвокатів",
   },
 
@@ -429,6 +438,11 @@ export const uk: Dict = {
       { href: "/blog", label: "Блог" },
       { href: "/kontakty", label: "Контакти" },
     ],
+    legalLinks: [
+      { href: "/polityka-konfidentsijnosti", label: "Політика конфіденційності" },
+      { href: "/umovy-vykorystannya", label: "Умови використання" },
+      { href: "/cookie-polityka", label: "Політика cookie" },
+    ],
     addressLines: <>м. Харків, вул. Римарська, 19</>,
     hoursLines: (
       <>
@@ -442,6 +456,16 @@ export const uk: Dict = {
     ),
     badgeCouncil: "Рада адвокатів",
     badgeOrder: <>Наказ Мін&apos;юсту №1076/5</>,
+  },
+
+  legal: {
+    breadcrumbRoot: "Головна",
+    lastUpdatedLabel: "Останнє оновлення",
+    lastUpdatedDate: "2026-04-21",
+    breadcrumbLabel: "Хлібні крихти",
+    privacyTitle: "Політика конфіденційності",
+    termsTitle: "Умови використання сайту",
+    cookieTitle: "Політика використання cookie",
   },
 
   blogList: {
