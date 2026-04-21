@@ -40,6 +40,21 @@ const LOCALIZED_PATH_OVERRIDES: Record<
 > = {
   "/pro-nas/": { ru: "/ru/o-nas/", priority: 0.9, changeFrequency: "monthly" },
   "/kontakty/": { ru: "/ru/kontakty/", priority: 0.9, changeFrequency: "monthly" },
+  "/polityka-konfidentsijnosti/": {
+    ru: "/ru/politika-konfidencialnosti/",
+    priority: 0.3,
+    changeFrequency: "monthly",
+  },
+  "/umovy-vykorystannya/": {
+    ru: "/ru/usloviya-ispolzovaniya/",
+    priority: 0.3,
+    changeFrequency: "monthly",
+  },
+  "/cookie-polityka/": {
+    ru: "/ru/cookie-politika/",
+    priority: 0.3,
+    changeFrequency: "monthly",
+  },
 };
 
 // Изображения, релевантные для image sitemap (GoogleImages / Discover).
@@ -91,7 +106,15 @@ const faqSitemapEntries = () => {
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["/", "/blog/", "/pro-nas/", "/kontakty/"];
+  const staticPaths = [
+    "/",
+    "/blog/",
+    "/pro-nas/",
+    "/kontakty/",
+    "/polityka-konfidentsijnosti/",
+    "/umovy-vykorystannya/",
+    "/cookie-polityka/",
+  ];
   const articleSlugs = Object.keys(uk.articles);
   const articlePaths = articleSlugs.map((s) => `/blog/${s}/`);
   const allPaths = [...staticPaths, ...articlePaths];

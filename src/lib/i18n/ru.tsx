@@ -21,6 +21,15 @@ export const ru: Dict = {
     aboutDescription:
       "Основатель Сергей Веприцкий: 38 лет адвокатской практики, свидетельство №1114, орден «Выдающийся адвокат Украины». Офисы Харьков, Киев, София.",
     aboutOgTitle: "Сергей Веприцкий — основатель Фундации адвокатов Украины",
+    privacyTitle: "Политика конфиденциальности — Фундация адвокатов Украины",
+    privacyDescription:
+      "Как Фундация адвокатов Украины обрабатывает персональные данные посетителей сайта vash-advokat.org. Права пользователей, сроки хранения, контакты для запросов.",
+    termsTitle: "Условия использования сайта — Фундация адвокатов Украины",
+    termsDescription:
+      "Правила пользования сайтом vash-advokat.org: информационный характер контента, ограничения ответственности, порядок обращений и оговорка о юридических консультациях.",
+    cookieTitle: "Политика использования cookie — Фундация адвокатов Украины",
+    cookieDescription:
+      "Какие cookie-файлы использует сайт vash-advokat.org, как управлять настройками, перечень сторонних сервисов и срок хранения.",
     titleTemplate: "%s — Фундация адвокатов",
   },
 
@@ -429,6 +438,11 @@ export const ru: Dict = {
       { href: "/blog", label: "Блог" },
       { href: "/kontakty", label: "Контакты" },
     ],
+    legalLinks: [
+      { href: "/politika-konfidencialnosti", label: "Политика конфиденциальности" },
+      { href: "/usloviya-ispolzovaniya", label: "Условия использования" },
+      { href: "/cookie-politika", label: "Политика cookie" },
+    ],
     addressLines: <>г. Харьков, ул. Рымарская, 19</>,
     hoursLines: (
       <>
@@ -442,6 +456,16 @@ export const ru: Dict = {
     ),
     badgeCouncil: "Совет адвокатов",
     badgeOrder: <>Приказ Минюста №1076/5</>,
+  },
+
+  legal: {
+    breadcrumbRoot: "Главная",
+    lastUpdatedLabel: "Последнее обновление",
+    lastUpdatedDate: "2026-04-21",
+    breadcrumbLabel: "Хлебные крошки",
+    privacyTitle: "Политика конфиденциальности",
+    termsTitle: "Условия использования сайта",
+    cookieTitle: "Политика использования cookie",
   },
 
   blogList: {
