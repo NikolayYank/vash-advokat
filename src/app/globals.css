@@ -2014,7 +2014,8 @@ h2 { font-size: var(--font-h2); }
   border-left-color: var(--color-accent-warm);
 }
 .callout-warning .callout-title {
-  color: var(--color-accent-warm);
+  /* #9A4408 = accent-warm darkened. On --color-muted-bg → 5.62:1 (AA). */
+  color: #9A4408;
 }
 
 /* Numbered checklist */
