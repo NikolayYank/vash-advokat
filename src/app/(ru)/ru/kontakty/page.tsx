@@ -48,8 +48,8 @@ export default function KontaktyPageRu() {
 
         <h1 style={{ marginTop: "var(--space-md)" }}>Связаться с&nbsp;нами</h1>
         <p
+          className="lead"
           style={{
-            fontSize: "1.125rem",
             color: "var(--color-text-muted)",
             maxWidth: "65ch",
             marginBottom: "var(--space-2xl)",
@@ -83,8 +83,8 @@ export default function KontaktyPageRu() {
               <li style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                 <Phone size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
-                  <div style={{ fontSize: "0.8125rem", color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Телефон</div>
-                  <a href="tel:+380505940785" style={{ fontSize: "1.125rem", fontWeight: 700, color: "var(--color-primary)" }}>
+                  <div className="micro-label micro-label--muted">Телефон</div>
+                  <a href="tel:+380505940785" className="contact-value" style={{ fontWeight: 700, color: "var(--color-primary)" }}>
                     +380 50 594 07 85
                   </a>
                 </div>
@@ -92,8 +92,8 @@ export default function KontaktyPageRu() {
               <li style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                 <Mail size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
-                  <div style={{ fontSize: "0.8125rem", color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Email</div>
-                  <a href="mailto:promo.vashadvokat@gmail.com" style={{ fontSize: "1.0625rem", color: "var(--color-primary)" }}>
+                  <div className="micro-label micro-label--muted">Email</div>
+                  <a href="mailto:promo.vashadvokat@gmail.com" className="contact-value" style={{ color: "var(--color-primary)" }}>
                     promo.vashadvokat@gmail.com
                   </a>
                 </div>
@@ -101,11 +101,11 @@ export default function KontaktyPageRu() {
               <li style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                 <MapPin size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
-                  <div style={{ fontSize: "0.8125rem", color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Офис</div>
-                  <address style={{ fontStyle: "normal", fontSize: "1.0625rem" }}>
+                  <div className="micro-label micro-label--muted">Офис</div>
+                  <address className="contact-value" style={{ fontStyle: "normal" }}>
                     г.&nbsp;Харьков, ул.&nbsp;Римарская,&nbsp;19
                     <br />
-                    <span style={{ color: "var(--color-text-muted)", fontSize: "0.9375rem" }}>
+                    <span className="body-sm" style={{ color: "var(--color-text-muted)" }}>
                       Также офисы в&nbsp;Киеве и&nbsp;Софии (по&nbsp;предварительной записи)
                     </span>
                   </address>
@@ -114,8 +114,8 @@ export default function KontaktyPageRu() {
               <li style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                 <Clock size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
-                  <div style={{ fontSize: "0.8125rem", color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Часы работы</div>
-                  <div style={{ fontSize: "1.0625rem" }}>
+                  <div className="micro-label micro-label--muted">Часы работы</div>
+                  <div className="contact-value">
                     Пн–Пт: 9:00–18:00
                   </div>
                 </div>
@@ -133,8 +133,8 @@ export default function KontaktyPageRu() {
               >
                 <AlertCircle size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
-                  <div style={{ fontSize: "0.8125rem", color: "var(--color-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Экстренная помощь</div>
-                  <div style={{ fontSize: "1.0625rem", fontWeight: 500 }}>
+                  <div className="micro-label micro-label--muted">Экстренная помощь</div>
+                  <div className="contact-value" style={{ fontWeight: 500 }}>
                     Обыск, задержание, ДТП&nbsp;—{" "}
                     <strong>круглосуточно</strong>, включая выходные. Тот же номер телефона.
                   </div>

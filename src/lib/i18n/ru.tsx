@@ -578,7 +578,7 @@ export const ru: Dict = {
     tocLabel: "Содержание",
     backToBlog: "Все материалы",
     authorPrefix: "Автор:",
-    authorCredential: "удостоверение адвоката №1114",
+    authorCredential: "ЕРАУ №1114",
     authorProfilePath: "/ru/o-nas/",
     publishedLabel: "Опубликовано",
     modifiedLabel: "Обновлено",

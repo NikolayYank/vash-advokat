@@ -45,9 +45,8 @@ export default function NotFound() {
         style={{ width: 64, height: 64, marginBottom: "var(--space-xl)" }}
       />
       <h1
+        className="h1-display"
         style={{
-          fontSize: "clamp(2rem, 4vw, 3.5rem)",
-          fontWeight: 700,
           color: "var(--color-primary)",
           marginBottom: "var(--space-md)",
         }}
@@ -55,8 +54,8 @@ export default function NotFound() {
         404
       </h1>
       <p
+        className="lead"
         style={{
-          fontSize: "1.125rem",
           color: "var(--color-text-muted)",
           marginBottom: "var(--space-xl)",
           maxWidth: 520,
@@ -107,12 +106,8 @@ export default function NotFound() {
         }}
       >
         <h2
+          className="micro-label micro-label--muted"
           style={{
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "var(--color-text-muted)",
             marginBottom: "var(--space-lg)",
           }}
         >

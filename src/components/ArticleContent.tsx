@@ -132,13 +132,6 @@ export default function ArticleContent({ article, dict, locale, breadcrumbs, bre
 
           {/* AUTHOR BIO */}
           <aside className="article-author-bio" aria-labelledby="article-author-bio-header">
-            <OptimizedImage
-              src={dict.article.authorImage}
-              alt={dict.article.authorImageAlt}
-              className="article-author-bio-photo"
-              width={120}
-              height={160}
-            />
             <div className="article-author-bio-body">
               <div id="article-author-bio-header" className="article-author-bio-header">
                 {dict.article.authorBioHeader}
