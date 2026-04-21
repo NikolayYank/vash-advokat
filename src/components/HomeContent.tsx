@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   ShieldAlert,
@@ -23,10 +22,10 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Fragment, useEffect, useState } from "react";
-import MuxPlayer from "@mux/mux-player-react";
 import { asset } from "@/lib/asset";
 import type { Dict, Locale } from "@/lib/i18n";
 import ContactForm from "@/components/ContactForm";
+import HeroVideo from "@/components/HeroVideo";
 import OptimizedImage from "@/components/OptimizedImage";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -188,6 +187,15 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
 
   return (
     <>
+      {/* Preload hero video poster (LCP candidate). React 19 hoists <link> to <head>. */}
+      <link
+        rel="preload"
+        as="image"
+        type="image/avif"
+        imageSrcSet={`${asset("/images/hero_poster-400w.avif")} 400w, ${asset("/images/hero_poster-800w.avif")} 800w, ${asset("/images/hero_poster-1200w.avif")} 1200w`}
+        imageSizes="(max-width: 720px) 100vw, 600px"
+        fetchPriority="high"
+      />
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
       {/* ===== HERO ===== */}
@@ -205,12 +213,13 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
           >
             <div className="hero-video-wrap">
-              <MuxPlayer
+              <HeroVideo
                 playbackId="3kWyg0201HO1MAdbmQTlQU81vz9dQOjkZGg4GChJO25Bc"
-                streamType="on-demand"
                 thumbnailTime={56}
                 accentColor="#d4af37"
-                style={{ width: "100%", display: "block", aspectRatio: "16/9" }}
+                posterSrc="/images/hero_poster.jpeg"
+                posterAlt={dict.hero.videoPosterAlt}
+                playLabel={dict.hero.videoPlayLabel}
               />
             </div>
           </div>
@@ -401,10 +410,13 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
                 className={`partner${p.reverse ? " partner--reverse" : ""}`}
               >
                 <div className="partner-photo">
-                  <img
-                    src={asset(p.image)}
+                  <OptimizedImage
+                    src={p.image}
                     alt={p.imageAlt}
+                    width={280}
+                    height={350}
                     className="partner-photo-img"
+                    sizes="(max-width: 720px) 220px, 280px"
                   />
                 </div>
                 <div className="partner-info">

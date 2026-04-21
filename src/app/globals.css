@@ -637,6 +637,50 @@ h2 { font-size: var(--font-h2); }
     0 0 80px rgba(212, 175, 55, 0.08);
 }
 
+/* Hero video facade: static poster + Play button until user clicks (lazy-loads the player). */
+.hero-video-facade {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: #000;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-video-facade-img,
+.hero-video-facade picture,
+.hero-video-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: transform 0.15s ease;
+}
+.hero-video-facade:hover .hero-video-play-btn,
+.hero-video-facade:focus-visible .hero-video-play-btn {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.hero-video-facade:focus-visible {
+  outline: 2px solid var(--color-accent, #d4af37);
+  outline-offset: 2px;
+}
+
 /* ===== TRUST NUMBERS ===== */
 .trust-numbers {
   background: var(--color-surface);

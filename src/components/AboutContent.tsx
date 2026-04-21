@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 import Breadcrumbs, { type BreadcrumbUiItem } from "@/components/Breadcrumbs";
+import OptimizedImage from "@/components/OptimizedImage";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import type { Dict, Locale } from "@/lib/i18n";
@@ -66,10 +67,14 @@ export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabe
           {/* Veprytsky — extended */}
           <article className="partner">
             <div className="partner-photo">
-              <img
-                src={asset(veprytsky.image)}
+              <OptimizedImage
+                src={veprytsky.image}
                 alt={veprytsky.imageAlt}
+                width={280}
+                height={350}
                 className="partner-photo-img"
+                sizes="(max-width: 720px) 220px, 280px"
+                priority
               />
             </div>
             <div className="partner-info">
@@ -100,10 +105,13 @@ export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabe
           {galavan ? (
             <article className={`partner${galavan.reverse ? " partner--reverse" : ""}`}>
               <div className="partner-photo">
-                <img
-                  src={asset(galavan.image)}
+                <OptimizedImage
+                  src={galavan.image}
                   alt={galavan.imageAlt}
+                  width={280}
+                  height={350}
                   className="partner-photo-img"
+                  sizes="(max-width: 720px) 220px, 280px"
                 />
               </div>
               <div className="partner-info">

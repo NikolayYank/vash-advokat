@@ -59,6 +59,8 @@ export const uk: Dict = {
       </>
     ),
     cta: "Отримати консультацію",
+    videoPlayLabel: "Увімкнути відео",
+    videoPosterAlt: "Сергій Веприцький — засновник Фундації адвокатів України",
   },
 
   trust: {
@@ -411,14 +413,14 @@ export const uk: Dict = {
     companyHeader: "Компанія",
     contactsHeader: "Контакти",
     servicesLinks: [
-      { href: "/poslugy/kryminalnyj-zahyst", label: "Кримінальний захист" },
-      { href: "/poslugy/zahyst-biznesu", label: "Захист бізнесу" },
-      { href: "/poslugy/shahrajstvo", label: "Шахрайство" },
-      { href: "/poslugy/vijskove-pravo", label: "Військове право" },
-      { href: "/poslugy/neruhomist", label: "Нерухомість та активи" },
-      { href: "/poslugy/koruptsiyni-spravy", label: "Корупційні справи" },
-      { href: "/poslugy/dtp", label: "ДТП" },
-      { href: "/poslugy/simejne-pravo", label: "Сімейні та спадкові справи" },
+      { href: "/#poslugy", label: "Кримінальний захист" },
+      { href: "/#poslugy", label: "Захист бізнесу" },
+      { href: "/#poslugy", label: "Шахрайство" },
+      { href: "/#poslugy", label: "Військове право" },
+      { href: "/#poslugy", label: "Нерухомість та активи" },
+      { href: "/#poslugy", label: "Корупційні справи" },
+      { href: "/#poslugy", label: "ДТП" },
+      { href: "/#poslugy", label: "Сімейні та спадкові справи" },
     ],
     companyLinks: [
       { href: "/pro-nas", label: "Про нас" },
