@@ -68,6 +68,7 @@ export default function ArticleContent({ article, dict, locale, breadcrumbs, bre
     <>
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
+      <main>
       {/* LAYOUT */}
       <div className="article-layout">
         {/* Sidebar TOC */}
@@ -205,6 +206,7 @@ export default function ArticleContent({ article, dict, locale, breadcrumbs, bre
           </div>
         </article>
       </div>
+      </main>
 
       <SiteFooter dict={dict} locale={locale} />
     </>

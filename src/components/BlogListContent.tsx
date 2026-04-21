@@ -26,6 +26,7 @@ export default function BlogListContent({ dict, locale, breadcrumbs, breadcrumbL
     <>
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
+      <main>
       {/* PAGE TITLE */}
       <section className="page-title">
         <div className="container">
@@ -74,6 +75,7 @@ export default function BlogListContent({ dict, locale, breadcrumbs, breadcrumbL
           </div>
         </div>
       </section>
+      </main>
 
       <SiteFooter dict={dict} locale={locale} />
     </>

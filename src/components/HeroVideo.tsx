@@ -14,7 +14,6 @@ interface Props {
   thumbnailTime: number;
   accentColor?: string;
   posterSrc: string;
-  posterAlt: string;
   playLabel: string;
 }
 
@@ -23,7 +22,6 @@ export default function HeroVideo({
   thumbnailTime,
   accentColor = "#d4af37",
   posterSrc,
-  posterAlt,
   playLabel,
 }: Props) {
   const [started, setStarted] = useState(false);
@@ -50,7 +48,7 @@ export default function HeroVideo({
     >
       <OptimizedImage
         src={posterSrc}
-        alt={posterAlt}
+        alt=""
         width={1200}
         height={675}
         priority

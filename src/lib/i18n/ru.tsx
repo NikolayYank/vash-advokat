@@ -39,7 +39,7 @@ export const ru: Dict = {
     phoneLabel: "+380 50 594 07 85",
     ctaLabel: "Консультация",
     menuLabel: "Меню",
-    langSwitchLabel: "Язык",
+    langSwitchLabel: "RU · Переключить язык на UA",
     otherLangLabel: "RU",
     otherLangCode: "uk",
     backLabel: "На главную",

@@ -56,6 +56,7 @@ export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabe
     <>
       <SiteHeader dict={dict} locale={locale} switchPath={switchPath} />
 
+      <main>
       <article className="article about-page">
         {breadcrumbs && breadcrumbLabel && (
           <Breadcrumbs items={breadcrumbs} ariaLabel={breadcrumbLabel} />
@@ -186,6 +187,7 @@ export default function AboutContent({ dict, locale, breadcrumbs, breadcrumbLabe
           </Link>
         </div>
       </article>
+      </main>
 
       <SiteFooter dict={dict} locale={locale} />
     </>
