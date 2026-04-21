@@ -327,36 +327,18 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
                       }}
                     >
                       <div>
-                        <div
-                          style={{
-                            fontSize: "0.7rem",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.08em",
-                            color: "var(--color-text-muted)",
-                            fontWeight: 700,
-                            marginBottom: 6,
-                          }}
-                        >
+                        <div className="micro-label micro-label--muted" style={{ marginBottom: 6 }}>
                           {dict.services.situationsLabel}
                         </div>
-                        <p style={{ margin: 0, fontSize: "0.9375rem", lineHeight: 1.55 }}>
+                        <p className="body-sm" style={{ margin: 0 }}>
                           {activeService.scenarios}
                         </p>
                       </div>
                       <div>
-                        <div
-                          style={{
-                            fontSize: "0.7rem",
-                            textTransform: "uppercase",
-                            letterSpacing: "0.08em",
-                            color: "var(--color-accent)",
-                            fontWeight: 700,
-                            marginBottom: 6,
-                          }}
-                        >
+                        <div className="micro-label micro-label--accent" style={{ marginBottom: 6 }}>
                           {dict.services.actionLabel}
                         </div>
-                        <p style={{ margin: 0, fontSize: "0.9375rem", lineHeight: 1.55 }}>
+                        <p className="body-sm" style={{ margin: 0 }}>
                           {activeService.action}
                         </p>
                       </div>
@@ -383,29 +365,12 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
                   {i + 1}
                 </div>
                 <h3 style={{ textAlign: "left", marginBottom: 6 }}>{s.title}</h3>
-                <div
-                  style={{
-                    fontSize: "0.75rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.08em",
-                    color: "var(--color-text-muted)",
-                    fontWeight: 700,
-                    marginBottom: 12,
-                  }}
-                >
+                <div className="micro-label micro-label--muted" style={{ marginBottom: 12 }}>
                   {s.note}
                 </div>
                 <p style={{ textAlign: "left" }}>{s.text}</p>
                 {s.hint && (
-                  <p
-                    style={{
-                      textAlign: "left",
-                      marginTop: 8,
-                      fontSize: "0.8125rem",
-                      fontStyle: "italic",
-                      color: "var(--color-text-muted)",
-                    }}
-                  >
+                  <p className="body-italic-note" style={{ textAlign: "left", marginTop: 8 }}>
                     {s.hint}
                   </p>
                 )}
@@ -495,18 +460,10 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             </p>
 
             <div style={{ marginBottom: "var(--space-xl)" }}>
-              <div
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "1.875rem",
-                  fontWeight: 700,
-                  color: "var(--color-accent)",
-                  lineHeight: 1.2,
-                }}
-              >
+              <div className="price-display" style={{ color: "var(--color-accent)", lineHeight: 1.2 }}>
                 {dict.abonement.priceLine}
               </div>
-              <div style={{ color: "var(--text-on-dark-caption)", fontSize: "0.875rem", marginTop: 6 }}>
+              <div className="caption" style={{ color: "var(--text-on-dark-caption)", marginTop: 6 }}>
                 {dict.abonement.priceNote}
               </div>
             </div>
@@ -515,13 +472,12 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
               {dict.abonement.features.map((item, i) => (
                 <li
                   key={i}
+                  className="body-sm"
                   style={{
                     display: "flex",
                     alignItems: "flex-start",
                     gap: 12,
                     color: "var(--text-on-dark)",
-                    fontSize: "0.9375rem",
-                    lineHeight: 1.55,
                   }}
                 >
                   <Check style={{ width: 18, height: 18, color: "var(--color-accent)", flexShrink: 0, marginTop: 3 }} />
@@ -541,11 +497,11 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
           {/* Desktop comparison table */}
           <div className="compare-desktop" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
             <div className="compare-row compare-header">
-              <div style={{ gridColumn: "1 / span 2", padding: "var(--space-md) var(--space-lg)", textAlign: "left", color: "var(--text-on-dark-caption)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", lineHeight: 1.4 }}>
+              <div className="micro-label micro-label--on-dark-muted" style={{ gridColumn: "1 / span 2", padding: "var(--space-md) var(--space-lg)", textAlign: "left" }}>
                 {dict.abonement.compareOnceHeader}
               </div>
               <div style={{ gridColumn: "3 / span 1", padding: "var(--space-md) var(--space-lg)", textAlign: "left", background: "rgba(212,175,55,0.08)", borderLeft: "1px solid rgba(255,255,255,0.06)" }}>
-                <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)", lineHeight: 1.4 }}>
+                <div className="micro-label micro-label--accent">
                   {dict.abonement.compareYearlyHeader}
                 </div>
               </div>
@@ -582,7 +538,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
           {/* Mobile comparison cards */}
           <div className="compare-mobile">
             <div className="compare-card" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-on-dark-caption)", marginBottom: "var(--space-md)", lineHeight: 1.4 }}>
+              <div className="micro-label micro-label--on-dark-muted" style={{ marginBottom: "var(--space-md)" }}>
                 {dict.abonement.compareMobileOnceLabel}
               </div>
               {dict.abonement.compareRows.map((row, i) => {
@@ -615,7 +571,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             </div>
 
             <div className="compare-card" style={{ background: "rgba(212,175,55,0.06)", border: "1px solid rgba(212,175,55,0.2)" }}>
-              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--color-accent)", marginBottom: "var(--space-md)", fontWeight: 700, lineHeight: 1.4 }}>
+              <div className="micro-label micro-label--accent" style={{ marginBottom: "var(--space-md)" }}>
                 {dict.abonement.compareMobileYearlyLabel}
               </div>
               {dict.abonement.compareRows.map((row, i) => {
@@ -697,7 +653,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
                   <h3 style={{ fontSize: "1.125rem", marginBottom: "var(--space-sm)" }}>
                     {card.title}
                   </h3>
-                  <p style={{ color: "var(--color-text-muted)", fontSize: "0.875rem" }}>
+                  <p className="caption">
                     {card.text}
                   </p>
                 </div>
@@ -710,7 +666,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
               const IconMap = { file: FileBadge, scroll: ScrollText, shield: ShieldCheck };
               const Icon = IconMap[badge.icon];
               return (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: "var(--space-sm)", color: "var(--color-text-muted)", fontSize: "0.875rem" }}>
+                <div key={i} className="caption" style={{ display: "flex", alignItems: "center", gap: "var(--space-sm)" }}>
                   <Icon style={{ width: 20, height: 20, color: "var(--color-accent)" }} />
                   <span>{badge.text}</span>
                 </div>
@@ -779,7 +735,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
             <Link href={localizeHref("/blog", locale)} className="btn btn-primary btn-section">
               {dict.blogPreview.allButton} <ArrowRight style={{ width: 18, height: 18 }} />
             </Link>
-            <div style={{ marginTop: 14, color: "var(--color-text-muted)", fontSize: "0.875rem", fontStyle: "italic" }}>
+            <div className="caption" style={{ marginTop: 14, fontStyle: "italic" }}>
               {dict.blogPreview.subscribeNote}
             </div>
           </div>

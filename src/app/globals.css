@@ -44,11 +44,52 @@
   --text-on-dark: rgba(255, 255, 255, 0.95);
   --text-on-dark-muted: rgba(255, 255, 255, 0.75);
   --text-on-dark-caption: rgba(255, 255, 255, 0.65);
-  --font-h1: clamp(2rem, 2vw + 1rem, 2.75rem);
-  --font-h2: clamp(1.75rem, 2vw + 0.5rem, 2.5rem);
+
+  /* ===== Typography canonical scale (Stage 2, 2026-04-21) ===== */
+  /* Size tokens — major-third 1.25, anchor 16px */
+  --text-2xs:     0.6875rem;  /* 11px  legal, fine print */
+  --text-xs:      0.75rem;    /* 12px  badges, eyebrows */
+  --text-sm:      0.875rem;   /* 14px  caption, meta */
+  --text-base:    1rem;       /* 16px  form inputs (iOS anti-zoom!) */
+  --text-body:    clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
+  --text-lead:    1.25rem;    /* 20px  lead paragraph */
+  --text-xl:      1.5rem;     /* 24px  H3, price */
+  --text-2xl:     1.875rem;   /* 30px  H2 mobile, hero numbers */
+  --text-3xl:     2.25rem;    /* 36px  H2 desktop */
+  --text-4xl:     3rem;       /* 48px  H1 desktop */
+  --text-display: clamp(2rem, 5vw + 1rem, 4.5rem);
+
+  /* Backwards-compat aliases (used by older rules — point to canonical scale) */
+  --font-h1:      clamp(2rem, 2vw + 1rem, 2.75rem);
+  --font-h2:      clamp(1.75rem, 2vw + 0.5rem, 2.5rem);
   --font-display: clamp(3rem, 5vw, 4.5rem);
-  --lh-heading: 1.3;
-  --lh-body: 1.6;
+
+  /* Weights — only Inter variable axes actually loaded */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line heights */
+  --lh-tight:   1.1;   /* hero, display */
+  --lh-heading: 1.3;   /* H1-H2 (legacy) */
+  --lh-snug:    1.35;  /* H3-H4 */
+  --lh-body:    1.6;   /* parаграфы */
+  --lh-loose:   1.75;  /* long quotes */
+
+  /* Tracking (letter-spacing) */
+  --tracking-display: -0.045em; /* hero H1 */
+  --tracking-heading: -0.035em; /* H2 */
+  --tracking-tight:   -0.02em;  /* H3, subhead */
+  --tracking-normal:   0;
+  --tracking-wide:     0.05em;
+  --tracking-wider:    0.1em;   /* uppercase eyebrows */
+  --tracking-widest:   0.15em;  /* uppercase decorative */
+
+  /* OpenType feature presets */
+  --font-features-heading: "kern" 1, "liga" 1, "calt" 1;
+  --font-features-body:    "kern" 1, "liga" 1, "onum" 1;
+  --font-features-nums:    "tnum" 1, "lnum" 1;
 
   --space-xs: 4px;
   --space-sm: 8px;
@@ -82,6 +123,8 @@ body {
   color: var(--color-text);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+  font-feature-settings: var(--font-features-body);
   overflow-x: clip; /* prevents horizontal scroll without BFC side-effects */
 }
 
@@ -104,19 +147,27 @@ a:hover { color: var(--color-accent-warm); }
 /* Restore browser-default bold that Tailwind Preflight strips with font-weight:inherit */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   line-height: var(--lh-heading);
   color: var(--color-text);
-  letter-spacing: -0.035em;
+  letter-spacing: var(--tracking-heading);
+  font-feature-settings: var(--font-features-heading);
+  font-optical-sizing: auto;
   text-wrap: balance;
 }
-h1 { letter-spacing: -0.045em; }
-h2 { letter-spacing: -0.038em; }
+h1 { letter-spacing: var(--tracking-display); }
+h2 { letter-spacing: var(--tracking-heading); }
 h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.35;
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-snug);
+}
+h4 {
+  font-size: var(--text-lead);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-snug);
 }
 
 /* Avoid widows in long text */
@@ -178,6 +229,94 @@ button {
 
 h1 { font-size: var(--font-h1); }
 h2 { font-size: var(--font-h2); }
+
+/* ===== Typography utility classes (Stage 2) =====
+   Token-first. Use вместо inline fontSize/fontWeight.
+   Base rules without color — цвет задаётся контекстом. */
+.h1-display {
+  font-family: var(--font-heading);
+  font-size: var(--text-display);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--weight-bold);
+  font-feature-settings: var(--font-features-heading);
+  font-optical-sizing: auto;
+  text-wrap: balance;
+}
+.label-uppercase {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  line-height: 1.4;
+}
+.caption {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+.body-sm {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+.body-base {
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+.lead {
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  max-width: 60ch;
+}
+.nums-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: var(--font-features-nums);
+}
+.price-display {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.table-header {
+  font-family: var(--font-heading);
+  font-size: var(--text-body);
+  font-weight: var(--weight-bold);
+  line-height: 1.3;
+}
+.contact-value {
+  font-size: var(--text-body);
+  line-height: 1.5;
+}
+.faq-card-title {
+  font-size: var(--text-lead);
+  font-weight: var(--weight-semibold);
+  line-height: 1.3;
+}
+
+/* --- Contextual uppercase labels (компактные, под inline-замены) --- */
+.micro-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  line-height: 1.4;
+}
+.micro-label--muted  { color: var(--color-text-muted); }
+.micro-label--accent { color: var(--color-accent); }
+.micro-label--on-dark-muted { color: var(--text-on-dark-caption); }
+
+/* --- Body paragraph variants --- */
+.body-italic-note {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
 
 .container {
   max-width: 1200px;
@@ -1475,41 +1614,6 @@ h2 { font-size: var(--font-h2); }
    BLOG LIST PAGE CSS (from blog.html prototype)
    ========================================================================== */
 
-/* Minimal header for blog */
-.header-minimal {
-  padding: var(--space-lg) 0;
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
-}
-.header-minimal .container {
-  max-width: 1000px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.header-minimal .header-logo img {
-  height: 40px;
-}
-.header-minimal .header-logo-text {
-  font-size: 1rem;
-}
-.header-minimal .header-logo-text small {
-  font-size: 0.7rem;
-}
-.header-back {
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--color-text-muted);
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-.header-back:hover { color: var(--color-primary); }
-.header-back svg {
-  width: 16px;
-  height: 16px;
-}
-
 /* Page title */
 .page-title {
   padding: var(--space-3xl) 0 var(--space-2xl);
@@ -1617,59 +1721,9 @@ h2 { font-size: var(--font-h2); }
   opacity: 0.5;
 }
 
-/* Minimal footer */
-.footer-minimal {
-  border-top: 1px solid var(--color-border);
-  padding: var(--space-xl) 0;
-  text-align: center;
-}
-.footer-minimal p {
-  font-size: 0.8125rem;
-  color: var(--color-text-muted);
-}
-.footer-minimal a {
-  color: var(--color-text-muted);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.footer-minimal a:hover { color: var(--color-primary); }
-
 /* ==========================================================================
    BLOG ARTICLE PAGE CSS (from blog-article.html prototype)
    ========================================================================== */
-
-/* Sticky header for article */
-.header-article {
-  padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-.header-article .container {
-  max-width: 1100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.header-article .header-logo img {
-  height: 36px;
-}
-.header-article .header-logo-text {
-  font-size: 0.9375rem;
-}
-.header-article .header-logo-text small {
-  font-size: 0.6875rem;
-}
-.header-article .header-back {
-  font-size: 0.8125rem;
-  gap: 6px;
-}
-.header-article .header-back svg {
-  width: 14px;
-  height: 14px;
-}
 
 /* Article layout */
 .article-layout {
@@ -1744,18 +1798,6 @@ h2 { font-size: var(--font-h2); }
   gap: var(--space-4xl);
 }
 
-/* About — portrait cover (overrides article-cover 16:9 crop) */
-.about-cover {
-  display: block;
-  width: 100%;
-  max-width: 480px;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  border-radius: var(--radius-lg);
-  margin: 0 auto var(--space-2xl);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08), 0 18px 40px rgba(15, 23, 42, 0.16);
-}
-
 /* About — lead paragraph under H1 (before first H2) */
 .about-lead {
   font-size: 1.125rem;
@@ -1783,35 +1825,6 @@ h2 { font-size: var(--font-h2); }
   line-height: 1.7;
   max-width: 62ch;
   margin-bottom: var(--space-md);
-}
-
-/* About — credentials list (icon + fact) */
-.about-credentials {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 var(--space-2xl);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-.about-credentials li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--color-border);
-  font-size: 1rem;
-  line-height: 1.55;
-}
-.about-credentials li:last-child {
-  border-bottom: none;
-}
-.about-credential-icon {
-  flex-shrink: 0;
-  font-size: 1.25rem;
-  line-height: 1;
-  color: var(--color-accent-warm);
-  padding-top: 2px;
 }
 
 /* About — practice / media points (bulleted list, compact) */
@@ -1897,17 +1910,32 @@ h2 { font-size: var(--font-h2); }
 .article-meta {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
-  font-size: 0.875rem;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  font-size: var(--text-xs);
+  line-height: 1.5;
   color: var(--color-text-muted);
-  padding-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
   border-bottom: 1px solid var(--color-border);
   margin-bottom: var(--space-2xl);
 }
-.article-meta span {
-  display: flex;
+.article-meta > span {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+}
+.article-meta > span > span {
+  display: inline;
+}
+.article-meta time {
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  .article-meta {
+    line-height: 1.35;
+    gap: 6px var(--space-md);
+  }
 }
 .article-meta svg {
   width: 15px;
@@ -2094,22 +2122,11 @@ h2 { font-size: var(--font-h2); }
 
 /* Article author bio — end-of-article E-E-A-T block */
 .article-author-bio {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: var(--space-xl);
   margin-top: var(--space-3xl);
   padding: var(--space-xl);
   background: rgba(30,58,138,0.03);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  align-items: start;
-}
-.article-author-bio-photo {
-  width: 120px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  display: block;
 }
 .article-author-bio-header {
   font-size: 0.75rem;
@@ -2165,17 +2182,7 @@ h2 { font-size: var(--font-h2); }
 }
 @media (max-width: 720px) {
   .article-author-bio {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-    text-align: center;
-  }
-  .article-author-bio-photo {
-    width: 96px;
-    height: 128px;
-    margin: 0 auto;
-  }
-  .article-author-bio-lines {
-    text-align: left;
+    padding: var(--space-lg);
   }
 }
 
@@ -2649,9 +2656,9 @@ h2 { font-size: var(--font-h2); }
   display: inline-block;
   color: var(--color-accent-warm);
   font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
   margin-bottom: 10px;
   line-height: 1;
@@ -2802,9 +2809,273 @@ h2 { font-size: var(--font-h2); }
   .eyebrow { font-size: 0.6875rem; letter-spacing: 0.12em; }
 }
 
+/* ==========================================================================
+   STAGE 6 — Premium decorations (optional)
+   ========================================================================== */
+
+/* 6.1 Буквица — opt-in через .article-body.with-dropcap (избежать в YMYL-статьях по дефолту) */
+.article-body.with-dropcap > p:first-of-type::first-letter {
+  font-family: var(--font-heading);
+  font-size: 3.5em;
+  font-weight: var(--weight-semibold);
+  float: left;
+  line-height: 0.9;
+  margin-right: 0.1em;
+  margin-top: 0.1em;
+  color: var(--color-primary);
+  font-feature-settings: var(--font-features-heading);
+}
+@media (max-width: 640px) {
+  .article-body.with-dropcap > p:first-of-type::first-letter {
+    all: unset;
+  }
+}
+
+/* 6.2 Hanging punctuation — первый/последний символ выносится за baseline (Safari only сейчас) */
+.article-body,
+blockquote,
+.hero-quote,
+.founder-quote,
+.partner-quote {
+  hanging-punctuation: first last;
+}
+
+/* 6.3 Форма цитаты — персонаж (для интервью, цитат клиентов) */
+.quote-person {
+  border-left: 3px solid var(--color-accent);
+  padding: 0 0 0 var(--space-lg);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: var(--text-lead);
+  color: var(--color-text);
+  line-height: 1.5;
+  max-width: 58ch;
+  margin: 2em 0;
+}
+.quote-person cite {
+  display: block;
+  margin-top: var(--space-md);
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.quote-person cite::before {
+  content: "— ";
+  color: var(--color-accent);
+}
+
+/* 6.3 Правовой callout (для статей — выделение закона/процедуры) */
+.callout-legal {
+  background: var(--color-muted-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  gap: var(--space-md);
+  margin: 2em 0;
+  font-size: var(--text-body);
+  line-height: 1.6;
+}
+.callout-legal-icon {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  margin-top: 2px;
+}
+.callout-legal-body {
+  flex: 1;
+}
+.callout-legal strong {
+  color: var(--color-primary-dark);
+  font-weight: var(--weight-bold);
+}
+
+/* ==========================================================================
+   STAGE 5 — Mobile typography & touch zones
+   ========================================================================== */
+
+/* iOS anti-zoom: inputs must be ≥ 16px on mobile (иначе Safari зумит при фокусе) */
+@media (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
+/* Touch zone sizing — min 44x44px для nav-links, 48x48px для primary CTA */
+@media (max-width: 768px) {
+  /* Lang switch — увеличенный тач-зона */
+  .lang-switch,
+  .lang-switch-mobile {
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+  /* Header CTA — primary 48px */
+  .btn-header-cta {
+    min-height: 48px;
+  }
+  /* Mobile menu links — 44px high hit area */
+  .mobile-menu-link {
+    min-height: 44px;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+  }
+  /* Header phone link — 48px tap zone */
+  .header-phone,
+  .mobile-menu-phone {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* FAQ mobile hierarchy — consistent с основным сайтом */
+@media (max-width: 640px) {
+  .faq-scope .faq-h-display { font-size: 2rem; }
+  .faq-scope .faq-h-1 { font-size: 1.75rem; }
+  .faq-scope .faq-h-2 { font-size: 1.375rem; }
+  .faq-scope .faq-h-3 { font-size: 1.125rem; }
+  .faq-scope .faq-lead { font-size: 1.0625rem; line-height: 1.6; }
+  .faq-scope .toc-link,
+  .faq-scope .faq-breadcrumbs,
+  .faq-scope .faq-meta {
+    font-size: var(--text-sm);
+  }
+}
+
+/* Article mobile — `.lead` respected (if explicit), иначе auto first-of-type */
+@media (max-width: 640px) {
+  .article-body > p.lead,
+  .article-body .lead {
+    font-size: 1.125rem;
+  }
+}
+
+/* ==========================================================================
+   STAGE 4 — Language-specific microtypography (:lang() hooks)
+   ========================================================================== */
+
+/* Кириллица часто требует чуть бо́льший line-height для воздуха */
+:lang(uk) .article-body p,
+:lang(ru) .article-body p,
+:lang(uk) .article-body li,
+:lang(ru) .article-body li {
+  line-height: 1.65;
+}
+:lang(en) .article-body p,
+:lang(en) .article-body li {
+  line-height: 1.6;
+}
+
+/* <q> autogenerated quotes — «ёлочки» для UA/RU, english curly для EN */
+:lang(uk), :lang(ru) {
+  quotes: "\00AB" "\00BB" "\201E" "\201C";
+}
+:lang(en) {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+q::before { content: open-quote; }
+q::after  { content: close-quote; }
+
+/* ==========================================================================
+   STAGE 3 — Микротипографика премиум-класса
+   ========================================================================== */
+
+/* 3.1 Tabular-nums в счётчиках, ценах, таблицах */
+.trust-number,
+.breaker-stat,
+.price-display,
+.article-meta,
+.faq-scope .toc-link .num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: var(--font-features-nums);
+}
+
+/* 3.4 Underline skip-ink для всех ссылок (выносные р/ц/щ/д/у не пересекаются) */
+a {
+  text-decoration-skip-ink: auto;
+}
+
+/* 3.5 Fallback для браузеров без text-wrap: pretty (Safari <17) */
+@supports not (text-wrap: pretty) {
+  p, li { orphans: 3; widows: 3; }
+}
+
+/* 3.6 Max-width для hero-subtitle (.article-body p уже max-width: 65ch) */
+.hero-subtitle { max-width: 55ch; }
+.article-body ul,
+.article-body ol { max-width: 65ch; }
+
+/* 3.7 Lead paragraph — opt-in через .article-body.with-lead (чтобы не ломать существующие статьи, где первый абзац — не lead) */
+.article-body.with-lead > p:first-of-type,
+.article-body .lead {
+  font-size: var(--text-lead);
+  line-height: 1.5;
+  color: var(--color-text);
+  max-width: 60ch;
+  margin-bottom: 1.5em;
+}
+
+/* 3.8 strong / em внутри статей — semibold (мягче чем 700), italic */
+.article-body strong,
+.prose strong {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+.article-body em,
+.prose em {
+  font-style: italic;
+}
+
+/* 3.9 Маркеры списков — золотые/серифные (base padding/margin уже заданы выше) */
+.article-body ul > li::marker {
+  color: var(--color-accent);
+}
+.article-body ol > li::marker {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 3.9 figcaption — подписи к изображениям */
+figure {
+  margin: 2em 0;
+}
+figcaption {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 0.75em;
+  font-style: italic;
+}
+
+/* 3.9 horizontal rule — тонкая золотая линия */
+.article-body hr,
+.prose hr {
+  border: none;
+  margin: 3em auto;
+  width: 4em;
+  height: 1px;
+  background: var(--color-accent);
+  opacity: 0.6;
+}
+
+/* 3.10 prefers-reduced-motion — отключение анимаций для пользователей с вестибулярными чувствительностями (a11y) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ===== Print ===== */
 @media print {
-  .header, .header-minimal, .header-article, .toc, .footer, .footer-minimal { display: none; }
+  .header, .toc, .footer { display: none; }
   .article-layout { display: block; }
   .article {
     max-width: 100%;

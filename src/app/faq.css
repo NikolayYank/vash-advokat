@@ -3,12 +3,14 @@
    Classic CSS classes (matches site convention from globals.css)
    ========================================================================== */
 
+/* FAQ scope tokens — thin aliases над canonical scale из globals.css.
+   Размеры специально подобраны под informational pages; веса — всегда canonical. */
 .faq-scope {
   --font-display-faq: clamp(2.25rem, 4vw + 0.5rem, 4rem);
-  --font-h1-faq: clamp(2rem, 2vw + 1rem, 2.75rem);
-  --font-h2-faq: clamp(1.5rem, 1.6vw + 0.5rem, 2.25rem);
-  --font-h3-faq: clamp(1.125rem, 0.6vw + 0.85rem, 1.375rem);
-  --font-body-faq: clamp(1.0625rem, 0.3vw + 0.95rem, 1.125rem);
+  --font-h1-faq:      clamp(2rem, 2vw + 1rem, 2.75rem);
+  --font-h2-faq:      clamp(1.5rem, 1.6vw + 0.5rem, 2.25rem);
+  --font-h3-faq:      clamp(1.125rem, 0.6vw + 0.85rem, 1.375rem);
+  --font-body-faq:    clamp(1.0625rem, 0.3vw + 0.95rem, 1.125rem);
 
   --shadow-card: 0 2px 4px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.06);
   --shadow-card-hover: 0 4px 6px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -18,6 +20,8 @@
   font-size: var(--font-body-faq);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+  font-feature-settings: var(--font-features-body);
 }
 
 /* ---------- Containers (match site convention with .container) ---------- */
@@ -63,44 +67,56 @@
 .faq-scope .faq-h-display {
   font-family: var(--font-heading);
   font-size: var(--font-display-faq);
-  line-height: 1.05;
-  letter-spacing: -0.045em;
-  font-weight: 500;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--weight-bold);
+  font-feature-settings: var(--font-features-heading);
+  font-optical-sizing: auto;
   color: var(--color-primary-dark);
   hyphens: auto;
   -webkit-hyphens: auto;
   max-width: 18ch;
   margin-top: var(--space-lg);
+  text-wrap: balance;
 }
 .faq-scope .faq-h-1 {
   font-family: var(--font-heading);
   font-size: var(--font-h1-faq);
-  line-height: 1.1;
-  letter-spacing: -0.042em;
-  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--weight-bold);
+  font-feature-settings: var(--font-features-heading);
+  font-optical-sizing: auto;
   color: var(--color-primary-dark);
   max-width: 22ch;
   margin-top: var(--space-lg);
   margin-bottom: var(--space-lg);
+  text-wrap: balance;
 }
 .faq-scope .faq-h-2 {
   font-family: var(--font-heading);
   font-size: var(--font-h2-faq);
-  line-height: 1.15;
-  letter-spacing: -0.038em;
-  font-weight: 500;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking-heading);
+  font-weight: var(--weight-bold);
+  font-feature-settings: var(--font-features-heading);
+  font-optical-sizing: auto;
   color: var(--color-primary-dark);
+  text-wrap: balance;
 }
 .faq-scope .faq-h-3 {
   font-family: var(--font-heading);
   font-size: var(--font-h3-faq);
-  line-height: 1.35;
-  letter-spacing: -0.022em;
-  font-weight: 500;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
+  font-feature-settings: var(--font-features-heading);
+  font-optical-sizing: auto;
   color: var(--color-primary);
   hyphens: auto;
   -webkit-hyphens: auto;
   margin-bottom: var(--space-md);
+  text-wrap: balance;
 }
 @media (max-width: 639px) {
   .faq-scope .faq-h-display {
@@ -276,11 +292,11 @@
 }
 .faq-scope .cat-card-title {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
-  line-height: 1.2;
+  font-size: var(--text-xl);
+  line-height: var(--lh-snug);
   color: var(--color-primary);
-  letter-spacing: -0.025em;
-  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-semibold);
   padding-right: 40px;
 }
 .faq-scope .cat-card-desc {

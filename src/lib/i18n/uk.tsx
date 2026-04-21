@@ -8,7 +8,7 @@ export const uk: Dict = {
   meta: {
     homeTitle: "Фундація адвокатів України — Захист та надійність",
     homeDescription:
-      "Адвокатське об'єднання «Фундація адвокатів України». Захист та надійність з 2010 року. Безкоштовна перша консультація.",
+      "Адвокатське обʼєднання «Фундація адвокатів України». Захист та надійність з 2010 року. Безкоштовна перша консультація.",
     homeOgTitle: "Фундація адвокатів України — Захист та надійність",
     homeOgDescription:
       "Адвокатське об\u2019єднання з\u00A038-річним досвідом. 11\u00A0500+ справ. Безкоштовна перша консультація.",
@@ -307,7 +307,7 @@ export const uk: Dict = {
       },
     ],
     compareMobileOnceLabel: "Коли шукають адвоката у момент проблеми",
-    compareMobileYearlyLabel: "Коли адвокат вже на зв'язку",
+    compareMobileYearlyLabel: "Коли адвокат вже на звʼязку",
     compareMobileLabels: {
       cost: "Вартість",
       history: "Історія",
@@ -387,14 +387,14 @@ export const uk: Dict = {
     lead: (
       <>Адвокат зателефонує за&nbsp;2&nbsp;години, вислухає і&nbsp;скаже: чи&nbsp;беремось, з&nbsp;якими ризиками, скільки коштуватиме. Без&nbsp;зобов&apos;язань.</>
     ),
-    nameInput: "Ваше ім'я",
+    nameInput: "Ваше імʼя",
     phoneInput: "Телефон",
     submit: "Отримати консультацію",
     submitSending: "Відправляємо…",
     noteSecret: "Адвокатська таємниця",
     noteTime: "Передзвонимо за 2 години",
     noteCommitment: "Без вашого підпису нічого не починаємо",
-    errorNameRequired: "Вкажіть ваше ім'я",
+    errorNameRequired: "Вкажіть ваше імʼя",
     errorPhoneRequired: "Вкажіть номер телефону",
     errorPhoneFormat: "Невірний формат. Приклад: +380 93 976 03 63",
     errorPhoneOperator: "Вкажіть український мобільний номер",
@@ -578,7 +578,7 @@ export const uk: Dict = {
     tocLabel: "Зміст",
     backToBlog: "Усі матеріали",
     authorPrefix: "Автор:",
-    authorCredential: "свідоцтво адвоката №1114",
+    authorCredential: "ЄРАУ №1114",
     authorProfilePath: "/pro-nas/",
     publishedLabel: "Опубліковано",
     modifiedLabel: "Оновлено",
