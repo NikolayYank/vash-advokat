@@ -30,6 +30,7 @@ export const uk: Dict = {
     logoSubtitle: "Захист та надійність",
     nav: [
       { href: "#poslugy", label: "Послуги" },
+      { href: "/shcho-robyty", label: "Що робити" },
       { href: "#pro-nas", label: "Про нас" },
       { href: "#abonement", label: "Абонентський договір" },
       { href: "/blog", label: "Блог" },
@@ -422,6 +423,7 @@ export const uk: Dict = {
     companyLinks: [
       { href: "/pro-nas", label: "Про нас" },
       { href: "/abonement", label: "Абонентський договір" },
+      { href: "/shcho-robyty", label: "Що робити — FAQ" },
       { href: "/blog", label: "Блог" },
       { href: "/kontakty", label: "Контакти" },
     ],

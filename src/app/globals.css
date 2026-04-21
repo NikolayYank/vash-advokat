@@ -1664,6 +1664,14 @@ h2 { font-size: var(--font-h2); }
   padding: var(--space-2xl) 0 var(--space-4xl);
 }
 
+/* About page (/pro-nas, /ru/o-nas) — .article used standalone without .article-layout wrapper,
+   so it needs its own centering and side padding. */
+.article.about-page {
+  margin: 0 auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
 /* Unified font family inside articles — only size & weight vary */
 .article,
 .article h1,

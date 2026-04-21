@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { uk } from "@/lib/i18n";
+import { getAllClusters } from "@/lib/faq";
 
 export const dynamic = "force-static";
 
@@ -71,13 +72,31 @@ const imagesFor = (path: string): string[] => {
   return [];
 };
 
+// FAQ entries have independent uk/ru slugs — generated from faq_clusters.json.
+const faqSitemapEntries = () => {
+  const clusters = getAllClusters();
+  const hubEntry = {
+    ukUrl: `${BASE}/shcho-robyty/`,
+    ruUrl: `${BASE}/ru/chto-delat/`,
+    priority: 0.9,
+    changeFrequency: "weekly" as const,
+  };
+  const clusterEntries = clusters.map((cl) => ({
+    ukUrl: `${BASE}/shcho-robyty/${cl.slug_uk}/`,
+    ruUrl: `${BASE}/ru/chto-delat/${cl.slug_ru}/`,
+    priority: 0.7,
+    changeFrequency: "monthly" as const,
+  }));
+  return [hubEntry, ...clusterEntries];
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = ["/", "/blog/", "/pro-nas/", "/kontakty/"];
   const articleSlugs = Object.keys(uk.articles);
   const articlePaths = articleSlugs.map((s) => `/blog/${s}/`);
   const allPaths = [...staticPaths, ...articlePaths];
 
-  return allPaths.flatMap((path) => {
+  const baseRecords = allPaths.flatMap((path) => {
     const normalizedPath = withTrailingSlash(path);
     const override = LOCALIZED_PATH_OVERRIDES[normalizedPath];
     const ukUrl = normalizedPath === "/" ? BASE : `${BASE}${normalizedPath}`;
@@ -126,4 +145,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     ];
   });
+
+  // FAQ Hub + 20 cluster pages × 2 locales = 42 URLs with independent uk/ru slugs.
+  const faqRecords = faqSitemapEntries().flatMap((entry) => {
+    const alternates = {
+      languages: {
+        "uk-UA": entry.ukUrl,
+        "ru-UA": entry.ruUrl,
+        "x-default": entry.ukUrl,
+      },
+    };
+    return [
+      {
+        url: entry.ukUrl,
+        lastModified: new Date(STATIC_LAST_MOD),
+        changeFrequency: entry.changeFrequency,
+        priority: entry.priority,
+        alternates,
+      },
+      {
+        url: entry.ruUrl,
+        lastModified: new Date(STATIC_LAST_MOD),
+        changeFrequency: entry.changeFrequency,
+        priority: entry.priority,
+        alternates,
+      },
+    ];
+  });
+
+  return [...baseRecords, ...faqRecords];
 }
