@@ -11,13 +11,14 @@ import {
 import { asset } from "@/lib/asset";
 
 const services = [
-  { href: "/poslugy/shahrajstvo", label: "Шахрайство" },
   { href: "/poslugy/kryminalnyj-zahyst", label: "Кримінальний захист" },
-  { href: "/poslugy/vijskove-pravo", label: "Військове право" },
-  { href: "/poslugy/neruhomist", label: "Нерухомість" },
-  { href: "/poslugy/simejne-pravo", label: "Сімейне право" },
-  { href: "/poslugy/dtp", label: "ДТП" },
   { href: "/poslugy/zahyst-biznesu", label: "Захист бізнесу" },
+  { href: "/poslugy/shahrajstvo", label: "Шахрайство" },
+  { href: "/poslugy/vijskove-pravo", label: "Військове право" },
+  { href: "/poslugy/neruhomist", label: "Нерухомість та активи" },
+  { href: "/poslugy/koruptsiyni-spravy", label: "Корупційні справи" },
+  { href: "/poslugy/dtp", label: "ДТП" },
+  { href: "/poslugy/simejne-pravo", label: "Сімейні та спадкові справи" },
 ];
 
 const company = [
