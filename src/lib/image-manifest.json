@@ -25,7 +25,34 @@
       2400
     ]
   },
+  "/images/blog_dbr_nabu.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/blog_dopyt.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
   "/images/blog_fraud.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/blog_pidozra.jpeg": {
     "srcWidth": 2752,
     "widths": [
       400,
@@ -44,6 +71,15 @@
     ]
   },
   "/images/blog_search.jpeg": {
+    "srcWidth": 2752,
+    "widths": [
+      400,
+      800,
+      1200,
+      2400
+    ]
+  },
+  "/images/blog_zatrymannya.jpeg": {
     "srcWidth": 2752,
     "widths": [
       400,
