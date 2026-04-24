@@ -576,6 +576,7 @@ export const uk: Dict = {
         { id: "documents", label: "Документи і фейкові договори" },
         { id: "what-to-do", label: "6 кроків для жертви" },
         { id: "prevention", label: "Як захиститися заздалегідь" },
+        { id: "faq", label: "Часті питання" },
       ],
       body: ukArticleBodies["7-oznak-shahrajstva"],
       endBlock: {
