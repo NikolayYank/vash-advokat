@@ -103,8 +103,8 @@ export default function SiteFooter({ dict, locale }: SiteFooterProps) {
             <div className="footer-contact-item">
               <Mail style={{ width: 16, height: 16 }} />
               <div>
-                <a href="mailto:promo.vashadvokat@gmail.com" style={{ color: "var(--text-on-dark-muted)" }}>
-                  promo.vashadvokat@gmail.com
+                <a href="mailto:info@vash-advokat.org" style={{ color: "var(--text-on-dark-muted)" }}>
+                  info@vash-advokat.org
                 </a>
               </div>
             </div>

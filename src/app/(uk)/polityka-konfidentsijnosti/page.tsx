@@ -71,7 +71,7 @@ export default function PrivacyPageUk() {
           <br />
           м.&nbsp;Харків, вул.&nbsp;Римарська, 19
           <br />
-          Email: <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>
+          Email: <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>
           <br />
           Телефон: <a href="tel:+380505940785">+380 50 594 07 85</a>
         </address>
@@ -232,7 +232,7 @@ export default function PrivacyPageUk() {
         </p>
         <p>
           Для запиту напишіть на{" "}
-          <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a> із&nbsp;темою
+          <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a> із&nbsp;темою
           «Запит щодо персональних даних» або зателефонуйте за контактним номером.
         </p>
 
@@ -272,7 +272,7 @@ export default function PrivacyPageUk() {
         <address>
           <strong>Фундація адвокатів України</strong>
           <br />
-          Email: <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>
+          Email: <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>
           <br />
           Телефон: <a href="tel:+380505940785">+380 50 594 07 85</a>
           <br />

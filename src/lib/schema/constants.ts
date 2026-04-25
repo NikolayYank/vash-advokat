@@ -8,7 +8,7 @@ export const SCHEMA_IDS = {
 
 export const ORG_NAME_UK = "Адвокатське об'єднання «Фундація адвокатів України»";
 export const ORG_NAME_RU = "Адвокатское объединение «Фундация адвокатов Украины»";
-export const ORG_EMAIL = "promo.vashadvokat@gmail.com";
+export const ORG_EMAIL = "info@vash-advokat.org";
 export const ORG_PHONE = "+380505940785";
 export const ORG_FOUNDING_DATE = "2010-05-19";
 export const ORG_AREA_SERVED = "UA";

@@ -216,7 +216,7 @@ export default function TermsPageUk() {
           до&nbsp;законодавства України. Територіальна юрисдикція&nbsp;— суди України
           за&nbsp;місцезнаходженням Фундації (Харків). До&nbsp;звернення в&nbsp;суд сторони
           зобов&apos;язуються спробувати врегулювання шляхом переговорів&nbsp;— напишіть нам
-          на&nbsp;<a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>.
+          на&nbsp;<a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>.
         </p>
 
         <h2>11. Зміни умов</h2>
@@ -234,7 +234,7 @@ export default function TermsPageUk() {
           <br />
           м.&nbsp;Харків, вул.&nbsp;Римарська, 19
           <br />
-          Email: <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>
+          Email: <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>
           <br />
           Телефон: <a href="tel:+380505940785">+380 50 594 07 85</a>
         </address>

@@ -71,7 +71,7 @@ export default function PrivacyPageRu() {
           <br />
           г.&nbsp;Харьков, ул.&nbsp;Рымарская, 19
           <br />
-          Email: <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>
+          Email: <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>
           <br />
           Телефон: <a href="tel:+380505940785">+380 50 594 07 85</a>
         </address>
@@ -237,7 +237,7 @@ export default function PrivacyPageRu() {
         </p>
         <p>
           Для&nbsp;запроса напишите на{" "}
-          <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a> с&nbsp;темой
+          <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a> с&nbsp;темой
           «Запрос по&nbsp;персональным данным» или&nbsp;позвоните по&nbsp;контактному номеру.
         </p>
 
@@ -279,7 +279,7 @@ export default function PrivacyPageRu() {
         <address>
           <strong>Фундация адвокатов Украины</strong>
           <br />
-          Email: <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>
+          Email: <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>
           <br />
           Телефон: <a href="tel:+380505940785">+380 50 594 07 85</a>
           <br />

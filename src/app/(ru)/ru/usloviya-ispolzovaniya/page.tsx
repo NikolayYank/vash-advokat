@@ -216,7 +216,7 @@ export default function TermsPageRu() {
           с&nbsp;законодательством Украины. Территориальная юрисдикция&nbsp;— суды Украины
           по&nbsp;местонахождению Фундации (Харьков). До&nbsp;обращения в&nbsp;суд стороны
           обязуются попытаться урегулировать спор путём переговоров&nbsp;— напишите нам на{" "}
-          <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>.
+          <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>.
         </p>
 
         <h2>11. Изменения условий</h2>
@@ -234,7 +234,7 @@ export default function TermsPageRu() {
           <br />
           г.&nbsp;Харьков, ул.&nbsp;Рымарская, 19
           <br />
-          Email: <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a>
+          Email: <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a>
           <br />
           Телефон: <a href="tel:+380505940785">+380 50 594 07 85</a>
         </address>
