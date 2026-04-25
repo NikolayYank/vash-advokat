@@ -3,6 +3,9 @@ import { EB_Garamond, Inter } from "next/font/google";
 import "../globals.css";
 import { asset } from "@/lib/asset";
 import JsonLd from "@/components/JsonLd";
+import Analytics from "@/components/Analytics";
+import CookieConsent from "@/components/CookieConsent";
+import { ru } from "@/lib/i18n";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getWebSiteSchema } from "@/lib/schema/website";
 
@@ -73,9 +76,13 @@ export default function RootLayoutRu({
 }>) {
   return (
     <html lang="ru" className={`${ebGaramond.variable} ${inter.variable}`}>
+      <head>
+        <Analytics />
+      </head>
       <body>
         <JsonLd data={[getOrganizationSchema("ru"), getWebSiteSchema()]} id="site-schema" />
         {children}
+        <CookieConsent dict={ru.cookieBanner} />
       </body>
     </html>
   );

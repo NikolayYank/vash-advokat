@@ -3,6 +3,9 @@ import { EB_Garamond, Inter } from "next/font/google";
 import "../globals.css";
 import { asset } from "@/lib/asset";
 import JsonLd from "@/components/JsonLd";
+import Analytics from "@/components/Analytics";
+import CookieConsent from "@/components/CookieConsent";
+import { uk } from "@/lib/i18n";
 import { getOrganizationSchema } from "@/lib/schema/organization";
 import { getWebSiteSchema } from "@/lib/schema/website";
 
@@ -73,9 +76,13 @@ export default function RootLayoutUk({
 }>) {
   return (
     <html lang="uk" className={`${ebGaramond.variable} ${inter.variable}`}>
+      <head>
+        <Analytics />
+      </head>
       <body>
         <JsonLd data={[getOrganizationSchema("uk"), getWebSiteSchema()]} id="site-schema" />
         {children}
+        <CookieConsent dict={uk.cookieBanner} />
       </body>
     </html>
   );

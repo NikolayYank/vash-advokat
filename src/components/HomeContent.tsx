@@ -765,7 +765,7 @@ export default function HomeContent({ dict, locale }: { dict: Dict; locale: Loca
           <h2>{dict.ctaFinal.h2}</h2>
           <p>{dict.ctaFinal.lead}</p>
 
-          <ContactForm dict={dict.ctaFinal} />
+          <ContactForm dict={dict.ctaFinal} locale={locale} />
         </div>
       </section>
 
