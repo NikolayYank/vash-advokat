@@ -93,8 +93,8 @@ export default function KontaktyPage() {
                 <Mail size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
                   <div className="micro-label micro-label--muted">Email</div>
-                  <a href="mailto:promo.vashadvokat@gmail.com" className="contact-value" style={{ color: "var(--color-primary)" }}>
-                    promo.vashadvokat@gmail.com
+                  <a href="mailto:info@vash-advokat.org" className="contact-value" style={{ color: "var(--color-primary)" }}>
+                    info@vash-advokat.org
                   </a>
                 </div>
               </li>

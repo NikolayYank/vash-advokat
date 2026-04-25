@@ -239,8 +239,8 @@ export default function CookiePageUk() {
 
         <h2>7. Контакти</h2>
         <p>
-          Питання про&nbsp;cookie&nbsp;— на&nbsp;<a href="mailto:promo.vashadvokat@gmail.com">
-            promo.vashadvokat@gmail.com
+          Питання про&nbsp;cookie&nbsp;— на&nbsp;<a href="mailto:info@vash-advokat.org">
+            info@vash-advokat.org
           </a>{" "}
           із&nbsp;темою «Cookie».
         </p>

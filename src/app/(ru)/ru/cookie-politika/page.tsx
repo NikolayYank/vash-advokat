@@ -246,7 +246,7 @@ export default function CookiePageRu() {
         <h2>7. Контакты</h2>
         <p>
           Вопросы о&nbsp;cookie&nbsp;— на{" "}
-          <a href="mailto:promo.vashadvokat@gmail.com">promo.vashadvokat@gmail.com</a> с&nbsp;темой
+          <a href="mailto:info@vash-advokat.org">info@vash-advokat.org</a> с&nbsp;темой
           «Cookie».
         </p>
         <p>
