@@ -40,12 +40,11 @@ export default function ThankYouPageUk() {
             <p className="thank-you-social-lead">{dict.socialLead}</p>
 
             <a
-              href="#"
-              className="thank-you-social-card thank-you-social-card--placeholder"
-              aria-disabled="true"
-              tabIndex={-1}
+              href="https://www.instagram.com/advokat.veprytskyi/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="thank-you-social-card"
               data-contact="instagram"
-              title={dict.placeholderHint}
             >
               <span className="thank-you-social-icon" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -63,12 +62,11 @@ export default function ThankYouPageUk() {
             </a>
 
             <a
-              href="#"
-              className="thank-you-social-card thank-you-social-card--placeholder"
-              aria-disabled="true"
-              tabIndex={-1}
+              href="https://t.me/advokat_veprytskyi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="thank-you-social-card"
               data-contact="telegram"
-              title={dict.placeholderHint}
             >
               <span className="thank-you-social-icon" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
