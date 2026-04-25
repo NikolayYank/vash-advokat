@@ -73,7 +73,7 @@ export default function CookieConsent({ dict }: { dict: Dict["cookieBanner"] }) 
         <div className="cookie-consent-actions">
           <button
             type="button"
-            className="btn btn-outline cookie-consent-btn-secondary"
+            className="cookie-consent-btn-secondary"
             onClick={() => decide("denied")}
           >
             {dict.essentialsOnly}
