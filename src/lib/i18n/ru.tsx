@@ -864,10 +864,10 @@ export const ru: Dict = {
       <>Каждый день публикуем полезное о&nbsp;ваших правах, типичных ситуациях и&nbsp;что&nbsp;с&nbsp;ними делать.</>
     ),
     instagramLabel: "Instagram",
-    instagramHandle: "@vash_advokat",
+    instagramHandle: "@advokat.veprytskyi",
     instagramCta: "Подписаться",
     telegramLabel: "Telegram",
-    telegramHandle: "@vash_advokat",
+    telegramHandle: "@advokat_veprytskyi",
     telegramCta: "Перейти в канал",
     placeholderHint: "Скоро откроем",
     contactsHeader: "Если нужно связаться раньше",

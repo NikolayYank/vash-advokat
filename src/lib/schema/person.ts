@@ -47,8 +47,13 @@ export const getPersonSchema = (locale: Locale = "uk") => {
         ? "Орден «Видатний адвокат України» (2013, Рада адвокатів України)"
         : "Орден «Выдающийся адвокат Украины» (2013, Совет адвокатов Украины)",
     ],
-    // sameAs — пока пусто, соцсети у фирмы не зарегистрированы.
-    // После запуска соцсетей (Sprint 11+) сюда добавляются ссылки на профили Веприцкого.
+    sameAs: [
+      "https://www.instagram.com/advokat.veprytskyi/",
+      "https://www.threads.net/@advokat.veprytskyi",
+      "https://www.tiktok.com/@advokat.veprytskyi",
+      "https://www.youtube.com/@advokat.veprytskyi",
+      "https://t.me/advokat_veprytskyi",
+    ],
   };
 };
 

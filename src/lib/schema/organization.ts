@@ -52,4 +52,7 @@ export const getOrganizationSchema = (locale: Locale = "uk") => ({
   },
   knowsLanguage: ["uk", "ru"],
   priceRange: "₴₴",
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=1124189754102416",
+  ],
 });

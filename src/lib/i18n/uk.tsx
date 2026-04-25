@@ -864,10 +864,10 @@ export const uk: Dict = {
       <>Щодня публікуємо корисне про&nbsp;ваші права, типові ситуації і&nbsp;що&nbsp;з&nbsp;ними робити.</>
     ),
     instagramLabel: "Instagram",
-    instagramHandle: "@vash_advokat",
+    instagramHandle: "@advokat.veprytskyi",
     instagramCta: "Підписатися",
     telegramLabel: "Telegram",
-    telegramHandle: "@vash_advokat",
+    telegramHandle: "@advokat_veprytskyi",
     telegramCta: "Перейти в канал",
     placeholderHint: "Скоро відкриємо",
     contactsHeader: "Якщо потрібно зв'язатися раніше",
