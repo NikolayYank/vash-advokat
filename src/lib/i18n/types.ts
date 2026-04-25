@@ -310,4 +310,32 @@ export interface Dict {
     bodyText: ReactNode;
     homeLink: ReactNode;
   };
+
+  thankYou: {
+    metaTitle: string;
+    metaDescription: string;
+    h1: string;
+    lead: ReactNode;
+    socialHeader: string;
+    socialLead: ReactNode;
+    instagramLabel: string;
+    instagramHandle: string;
+    instagramCta: string;
+    telegramLabel: string;
+    telegramHandle: string;
+    telegramCta: string;
+    placeholderHint: string;
+    contactsHeader: string;
+    backHomeLabel: string;
+  };
+
+  cookieBanner: {
+    title: string;
+    body: ReactNode;
+    acceptAll: string;
+    essentialsOnly: string;
+    learnMoreLabel: string;
+    learnMoreHref: string;
+    ariaLabel: string;
+  };
 }

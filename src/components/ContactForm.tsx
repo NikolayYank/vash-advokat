@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Lock, Clock, Check } from "lucide-react";
 import { validateUaPhone } from "@/lib/phone-ua";
 import { captureUtm, readUtm } from "@/lib/utm";
-import type { Dict } from "@/lib/i18n";
+import type { Dict, Locale } from "@/lib/i18n";
 
 const WEBHOOK_URL = "https://n8n-defo.space/webhook/advokat-contact";
 const COOLDOWN_MS = 30_000;
@@ -12,7 +12,18 @@ const COOLDOWN_KEY = "va_form_last_submit";
 
 type State = "idle" | "sending" | "success" | "error";
 
-export default function ContactForm({ dict }: { dict: Dict["ctaFinal"] }) {
+const THANK_YOU_PATH: Record<Locale, string> = {
+  uk: "/thank-you/",
+  ru: "/ru/thank-you/",
+};
+
+export default function ContactForm({
+  dict,
+  locale,
+}: {
+  dict: Dict["ctaFinal"];
+  locale: Locale;
+}) {
   const [state, setState] = useState<State>("idle");
   const [nameError, setNameError] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
@@ -61,6 +72,14 @@ export default function ContactForm({ dict }: { dict: Dict["ctaFinal"] }) {
 
     setState("sending");
 
+    function redirectToThankYou() {
+      try {
+        window.location.assign(THANK_YOU_PATH[locale]);
+      } catch {
+        setState("success");
+      }
+    }
+
     const payload = {
       name,
       phone: phoneCheck.valid ? phoneCheck.e164 : phoneRaw,
@@ -84,8 +103,8 @@ export default function ContactForm({ dict }: { dict: Dict["ctaFinal"] }) {
       } catch {
         // ignore
       }
-      setState("success");
       form.reset();
+      redirectToThankYou();
     } catch {
       setState("error");
     }

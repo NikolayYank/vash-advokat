@@ -61,7 +61,7 @@ export default function SiteHeader({ dict, locale, switchPath }: SiteHeaderProps
           >
             {dict.header.otherLangLabel}
           </Link>
-          <a href="tel:+380505940785" className="header-phone">
+          <a href="tel:+380505940785" className="header-phone" data-contact="phone">
             {dict.header.phoneLabel}
           </a>
           <Link
@@ -108,7 +108,7 @@ export default function SiteHeader({ dict, locale, switchPath }: SiteHeaderProps
             ))}
           </nav>
           <div className="mobile-menu-cta">
-            <a href="tel:+380505940785" className="mobile-menu-phone">
+            <a href="tel:+380505940785" className="mobile-menu-phone" data-contact="phone">
               {dict.header.phoneLabel}
             </a>
             <Link

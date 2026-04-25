@@ -84,7 +84,12 @@ export default function KontaktyPage() {
                 <Phone size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
                   <div className="micro-label micro-label--muted">Телефон</div>
-                  <a href="tel:+380505940785" className="contact-value" style={{ fontWeight: 700, color: "var(--color-primary)" }}>
+                  <a
+                    href="tel:+380505940785"
+                    className="contact-value"
+                    data-contact="phone"
+                    style={{ fontWeight: 700, color: "var(--color-primary)" }}
+                  >
                     +380 50 594 07 85
                   </a>
                 </div>
@@ -93,7 +98,12 @@ export default function KontaktyPage() {
                 <Mail size={20} style={{ color: "var(--color-accent-warm)", flexShrink: 0, marginTop: 4 }} />
                 <div>
                   <div className="micro-label micro-label--muted">Email</div>
-                  <a href="mailto:info@vash-advokat.org" className="contact-value" style={{ color: "var(--color-primary)" }}>
+                  <a
+                    href="mailto:info@vash-advokat.org"
+                    className="contact-value"
+                    data-contact="email"
+                    style={{ color: "var(--color-primary)" }}
+                  >
                     info@vash-advokat.org
                   </a>
                 </div>
@@ -202,7 +212,7 @@ export default function KontaktyPage() {
             <p style={{ color: "var(--color-text-muted)", marginBottom: "var(--space-lg)" }}>
               Залиште ім&apos;я і&nbsp;телефон&nbsp;— адвокат зателефонує протягом робочого дня.
             </p>
-            <ContactForm dict={uk.ctaFinal} />
+            <ContactForm dict={uk.ctaFinal} locale="uk" />
           </section>
         </div>
       </main>

@@ -848,4 +848,43 @@ export const uk: Dict = {
     ),
     homeLink: <>На&nbsp;головну</>,
   },
+
+  thankYou: {
+    metaTitle: "Дякуємо! Заявку отримано — Фундація адвокатів України",
+    metaDescription:
+      "Дякуємо за звернення. Адвокат зв'яжеться з вами протягом 2 годин у робочий час.",
+    h1: "Дякуємо!",
+    lead: (
+      <>
+        Заявку отримано. Адвокат зв&apos;яжеться з&nbsp;вами протягом&nbsp;<strong>2&nbsp;годин у&nbsp;робочий час</strong>.
+      </>
+    ),
+    socialHeader: "Слідкуйте за нами",
+    socialLead: (
+      <>Щодня публікуємо корисне про&nbsp;ваші права, типові ситуації і&nbsp;що&nbsp;з&nbsp;ними робити.</>
+    ),
+    instagramLabel: "Instagram",
+    instagramHandle: "@vash_advokat",
+    instagramCta: "Підписатися",
+    telegramLabel: "Telegram",
+    telegramHandle: "@vash_advokat",
+    telegramCta: "Перейти в канал",
+    placeholderHint: "Скоро відкриємо",
+    contactsHeader: "Якщо потрібно зв'язатися раніше",
+    backHomeLabel: "На головну",
+  },
+
+  cookieBanner: {
+    title: "Cookie на сайті",
+    body: (
+      <>
+        Ми&nbsp;використовуємо технічно необхідні cookie завжди, а&nbsp;аналітичні&nbsp;— лише з&nbsp;вашої згоди. Це&nbsp;допомагає нам розуміти, які матеріали корисні відвідувачам.
+      </>
+    ),
+    acceptAll: "Прийняти все",
+    essentialsOnly: "Тільки необхідні",
+    learnMoreLabel: "Детальніше",
+    learnMoreHref: "/cookie-polityka/",
+    ariaLabel: "Налаштування cookie",
+  },
 };
